@@ -2481,42 +2481,6 @@
 													"model": {
 														"$ref": "AAAAAAF4roWbST+a7c8="
 													},
-													"subViews": [
-														{
-															"_type": "UMLEnumerationLiteralView",
-															"_id": "AAAAAAF4rqulmBstUoM=",
-															"_parent": {
-																"$ref": "AAAAAAF4rqulhRsHDDg="
-															},
-															"model": {
-																"$ref": "AAAAAAF4rpsoFdzG9HM="
-															},
-															"font": "Arial;13;0",
-															"left": 1317,
-															"top": 298,
-															"width": 111.0205078125,
-															"height": 13,
-															"text": "AMERICA",
-															"horizontalAlignment": 0
-														},
-														{
-															"_type": "UMLEnumerationLiteralView",
-															"_id": "AAAAAAF4rqulmRswaaQ=",
-															"_parent": {
-																"$ref": "AAAAAAF4rqulhRsHDDg="
-															},
-															"model": {
-																"$ref": "AAAAAAF4rpszGt20Eh4="
-															},
-															"font": "Arial;13;0",
-															"left": 1317,
-															"top": 313,
-															"width": 111.0205078125,
-															"height": 13,
-															"text": "OCEANIA",
-															"horizontalAlignment": 0
-														}
-													],
 													"visible": false,
 													"font": "Arial;13;0",
 													"left": 1312,
@@ -56994,16 +56958,33 @@
 									"subViews": [
 										{
 											"_type": "UMLEnumerationLiteralView",
-											"_id": "AAAAAAF4rpsoKNzJOQ0=",
+											"_id": "AAAAAAF5Xw1xTz5befk=",
 											"_parent": {
 												"$ref": "AAAAAAF4roWbSj+m5kE="
 											},
 											"model": {
-												"$ref": "AAAAAAF4rpsoFdzG9HM="
+												"$ref": "AAAAAAF5Xw1xNz5Y4vA="
 											},
 											"font": "Arial;13;0",
 											"left": 1173,
 											"top": 555,
+											"width": 86.72802734375,
+											"height": 13,
+											"text": "AFRICA",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLEnumerationLiteralView",
+											"_id": "AAAAAAF5Xw2Epj9eqWY=",
+											"_parent": {
+												"$ref": "AAAAAAF4roWbSj+m5kE="
+											},
+											"model": {
+												"$ref": "AAAAAAF5Xw2EmT9bG/o="
+											},
+											"font": "Arial;13;0",
+											"left": 1173,
+											"top": 570,
 											"width": 86.72802734375,
 											"height": 13,
 											"text": "AMERICA",
@@ -57011,16 +56992,67 @@
 										},
 										{
 											"_type": "UMLEnumerationLiteralView",
-											"_id": "AAAAAAF4rpszJN23Hg8=",
+											"_id": "AAAAAAF5Xw2iOUBhO8A=",
 											"_parent": {
 												"$ref": "AAAAAAF4roWbSj+m5kE="
 											},
 											"model": {
-												"$ref": "AAAAAAF4rpszGt20Eh4="
+												"$ref": "AAAAAAF5Xw2iMEBe6DU="
 											},
 											"font": "Arial;13;0",
 											"left": 1173,
-											"top": 570,
+											"top": 585,
+											"width": 86.72802734375,
+											"height": 13,
+											"text": "ANTARTIDA",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLEnumerationLiteralView",
+											"_id": "AAAAAAF5Xw22PUFkXPQ=",
+											"_parent": {
+												"$ref": "AAAAAAF4roWbSj+m5kE="
+											},
+											"model": {
+												"$ref": "AAAAAAF5Xw22L0FhSRc="
+											},
+											"font": "Arial;13;0",
+											"left": 1173,
+											"top": 600,
+											"width": 86.72802734375,
+											"height": 13,
+											"text": "ASIA",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLEnumerationLiteralView",
+											"_id": "AAAAAAF5Xw3A30JnCvo=",
+											"_parent": {
+												"$ref": "AAAAAAF4roWbSj+m5kE="
+											},
+											"model": {
+												"$ref": "AAAAAAF5Xw3A10JkYH8="
+											},
+											"font": "Arial;13;0",
+											"left": 1173,
+											"top": 615,
+											"width": 86.72802734375,
+											"height": 13,
+											"text": "EUROPA",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLEnumerationLiteralView",
+											"_id": "AAAAAAF5Xw3S60NqlxI=",
+											"_parent": {
+												"$ref": "AAAAAAF4roWbSj+m5kE="
+											},
+											"model": {
+												"$ref": "AAAAAAF5Xw3S30NnYbc="
+											},
+											"font": "Arial;13;0",
+											"left": 1173,
+											"top": 630,
 											"width": 86.72802734375,
 											"height": 13,
 											"text": "OCEANIA",
@@ -57031,7 +57063,7 @@
 									"left": 1168,
 									"top": 550,
 									"width": 96.72802734375,
-									"height": 38
+									"height": 98
 								}
 							],
 							"font": "Arial;13;0",
@@ -57039,7 +57071,7 @@
 							"left": 1168,
 							"top": 512,
 							"width": 96.72802734375,
-							"height": 121,
+							"height": 136,
 							"showProperty": false,
 							"nameCompartment": {
 								"$ref": "AAAAAAF4roWbST+dAOc="
@@ -62331,7 +62363,15 @@
 					"literals": [
 						{
 							"_type": "UMLEnumerationLiteral",
-							"_id": "AAAAAAF4rpsoFdzG9HM=",
+							"_id": "AAAAAAF5Xw1xNz5Y4vA=",
+							"_parent": {
+								"$ref": "AAAAAAF4roWbST+a7c8="
+							},
+							"name": "AFRICA"
+						},
+						{
+							"_type": "UMLEnumerationLiteral",
+							"_id": "AAAAAAF5Xw2EmT9bG/o=",
 							"_parent": {
 								"$ref": "AAAAAAF4roWbST+a7c8="
 							},
@@ -62339,7 +62379,31 @@
 						},
 						{
 							"_type": "UMLEnumerationLiteral",
-							"_id": "AAAAAAF4rpszGt20Eh4=",
+							"_id": "AAAAAAF5Xw2iMEBe6DU=",
+							"_parent": {
+								"$ref": "AAAAAAF4roWbST+a7c8="
+							},
+							"name": "ANTARTIDA"
+						},
+						{
+							"_type": "UMLEnumerationLiteral",
+							"_id": "AAAAAAF5Xw22L0FhSRc=",
+							"_parent": {
+								"$ref": "AAAAAAF4roWbST+a7c8="
+							},
+							"name": "ASIA"
+						},
+						{
+							"_type": "UMLEnumerationLiteral",
+							"_id": "AAAAAAF5Xw3A10JkYH8=",
+							"_parent": {
+								"$ref": "AAAAAAF4roWbST+a7c8="
+							},
+							"name": "EUROPA"
+						},
+						{
+							"_type": "UMLEnumerationLiteral",
+							"_id": "AAAAAAF5Xw3S30NnYbc=",
 							"_parent": {
 								"$ref": "AAAAAAF4roWbST+a7c8="
 							},
