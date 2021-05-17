@@ -5,10 +5,26 @@
  */
 package reglas_negocio;
 
+import datos.FabricaDatos;
+import datos.iDatos;
+import exceptions.DAOException;
+import java.util.List;
+import objetonegocio.Cuidador;
+
 /**
  *
  * @author fernando
  */
 public class CtrlCuidador {
+    iDatos iDatos;
+    
+    
+    public CtrlCuidador() {
+        iDatos = FabricaDatos.crearDatos();
+    }
+    
+    public List<Cuidador> buscarCuidadores() throws DAOException{
+        return iDatos.buscarCuidador();
+    }
     
 }

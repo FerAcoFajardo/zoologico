@@ -49,7 +49,7 @@ public class Habitat {
      */
     @Override
     public String toString() {
-        return "Habitat{" + "nombre=" + nombre + ", clima=" + clima + ", vegetacion=" + vegetacion + ", continentes=" + continentes +/* ", especies=" + especies + */'}';
+        return nombre;
     }
 
     /**

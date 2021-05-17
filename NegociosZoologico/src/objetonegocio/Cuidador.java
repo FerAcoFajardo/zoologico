@@ -55,7 +55,7 @@ public class Cuidador extends Empleado {
      */
     @Override
     public String toString() {
-        return "Cuidador{" + super.toString() + '}';
+        return super.toString();
     }
 
 }

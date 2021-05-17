@@ -8,7 +8,6 @@ package presentacion;
 import java.util.List;
 import javax.swing.JOptionPane;
 import reglas_negocio.FabricaNegocios;
-import reglas_negocio.FachadaRN;
 import reglas_negocio.iNegocios;
 
 /**
@@ -40,6 +39,7 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,21 +50,35 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Registrar/Actualizar Especie");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clkMostrarRegistrarEspecie(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(300, 300, 300)
-                .addComponent(jButton1)
-                .addContainerGap(406, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jButton2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(jButton1)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(162, 162, 162)
+                .addGap(34, 34, 34)
                 .addComponent(jButton1)
-                .addContainerGap(231, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addContainerGap(318, Short.MAX_VALUE))
         );
 
         pack();
@@ -73,30 +87,30 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
     private void clkBotonMostrarRegistroHabitat(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clkBotonMostrarRegistroHabitat
         
         try{
-            listaDatos = iNegocios.recuperarDatos();
-            iNegocios negocios = FabricaNegocios.crearNegocios();
-            iNegocios negocioss = new FachadaRN();
-//            for (Object listaDato : listaDatos) {
-//                System.out.println(listaDato);
-//            }
+            listaDatos = iNegocios.recuperarDatosFormHabitat();
             FrmPantallaRegistrarHabitat frmPantallaRegistrarHabitat = FrmPantallaRegistrarHabitat.getInstance(this);
             frmPantallaRegistrarHabitat.despliegaInformacion(listaDatos);
-            frmPantallaRegistrarHabitat.setLocationRelativeTo(null);
         }catch(Exception e){
             muestraMsjError(e.getMessage());
         }
         
     }//GEN-LAST:event_clkBotonMostrarRegistroHabitat
 
+    private void clkMostrarRegistrarEspecie(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clkMostrarRegistrarEspecie
+        try{
+            listaDatos = iNegocios.recuperarDatosFormEspecie();
+            FrmPantallaRegistroEspecie frmPantallaRegistroEspecie = FrmPantallaRegistroEspecie.getInstance(this);
+            frmPantallaRegistroEspecie.despliegaInformacion(listaDatos);
+        }catch(Exception e){
+            muestraMsjError(e.getMessage());
+        }
+    }//GEN-LAST:event_clkMostrarRegistrarEspecie
+
     
     public void muestraMsjError(String mensaje){
         JOptionPane.showMessageDialog(this, mensaje, "Error",JOptionPane.ERROR_MESSAGE);
     }
 
-    
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -120,7 +134,6 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FrmPantallaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -129,8 +142,10 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
             }
         });
     }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     // End of variables declaration//GEN-END:variables
 }

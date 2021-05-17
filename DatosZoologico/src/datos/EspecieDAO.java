@@ -10,9 +10,8 @@ import com.mongodb.client.model.Filters;
 import exceptions.DAOException;
 import java.util.ArrayList;
 import java.util.List;
-import objetonegocio.Continente;
+import objetonegocio.Animal;
 import objetonegocio.Especie;
-import objetonegocio.Habitat;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -20,25 +19,25 @@ import org.bson.types.ObjectId;
  *
  * @author fernando
  */
-public class EspecieDAO extends BaseDAO<Habitat> {
+public class EspecieDAO extends BaseDAO<Especie> {
 
     @Override
-    public Habitat buscar(ObjectId id) throws DAOException {
+    public Especie buscar(ObjectId id) throws DAOException {
         try {
-           MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
-            Habitat habitat = coleccionHabitat.find(
+            MongoCollection<Especie> coleccionEspecie = this.getColeccion();
+            Especie especie = coleccionEspecie.find(
                     Filters.eq("_id", id)).first();
-            if(habitat == null){
-                throw new DAOException("Error: El habitat no existe");
+            if (especie == null) {
+                throw new DAOException("Error: La especie no existe");
             }
-            return habitat;
+            return especie;
         } catch (Exception ex) {
             throw new DAOException(ex.getMessage(), ex);
         }
     }
 
     @Override
-    public Habitat buscar(String id) throws DAOException {
+    public Especie buscar(String id) throws DAOException {
         try {
             return this.buscar(new ObjectId(id));
         } catch (Exception ex) {
@@ -46,23 +45,40 @@ public class EspecieDAO extends BaseDAO<Habitat> {
         }
     }
 
-    @Override
-    public void actualizar(Habitat habitat) throws DAOException {
+    public Especie buscarNombre(String nombreComun) throws DAOException {
         try {
-            MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
-            Habitat habitatActualizado = coleccionHabitat.find(
-                    Filters.eq("_id", habitat.getId())).first();
+            MongoCollection<Especie> coleccionEspecie = this.getColeccion();
+            Especie especie = coleccionEspecie.find(
+                    Filters.eq("nombreNormal", nombreComun)).first();
+            if (especie == null) {
+                throw new DAOException("Error: La especie no existe");
+            }
+            return especie;
+        } catch (Exception ex) {
+            throw new DAOException(ex.getMessage(), ex);
+        }
+    }
 
-            habitatActualizado.setNombre(habitat.getNombre());
-            habitatActualizado.setClima(habitat.getClima());
-            habitatActualizado.setContinentes(habitat.getContinentes());
-           // if (!habitatActualizado.getEspecies().isEmpty()) {
+    @Override
+    public void actualizar(Especie especie) throws DAOException {
+        try {
+            MongoCollection<Especie> coleccionEspecie = this.getColeccion();
+            Especie especieActualizado = coleccionEspecie.find(
+                    Filters.eq("_id", especie.getId())).first();
+
+            especieActualizado.setDescripcion(especie.getDescripcion());
+            especieActualizado.setHabitat(especie.getHabitat());
+            especieActualizado.setListaAnimales(especie.getListaAnimales());
+            especieActualizado.setNombreCientifico(especie.getNombreCientifico());
+            especieActualizado.setNombreNormal(especie.getNombreNormal());
+            especieActualizado.setListaCuidadoresEspecie(especie.getListaCuidadoresEspecie());
+            // if (!habitatActualizado.getEspecies().isEmpty()) {
             //    habitatActualizado.setEspecies(habitat.getEspecies());
             //}
 
-            coleccionHabitat.findOneAndReplace(
-                    Filters.eq("_id", habitat.getId()),
-                    habitatActualizado);
+            coleccionEspecie.findOneAndReplace(
+                    Filters.eq("_id", especie.getId()),
+                    especieActualizado);
         } catch (Exception ex) {
             throw new DAOException(ex.getMessage(), ex);
         }
@@ -71,10 +87,11 @@ public class EspecieDAO extends BaseDAO<Habitat> {
     @Override
     public void eliminar(ObjectId id) throws DAOException {
         try {
-            MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
-            Habitat habitat = coleccionHabitat.findOneAndDelete(Filters.eq("_id", id));
-            if(habitat == null)
+            MongoCollection<Especie> coleccionEspecie = this.getColeccion();
+            Especie especie = coleccionEspecie.findOneAndDelete(Filters.eq("_id", id));
+            if (especie == null) {
                 throw new DAOException("Error: El habitat no existe");
+            }
         } catch (Exception ex) {
             throw new DAOException(ex.getMessage(), ex);
         }
@@ -90,19 +107,19 @@ public class EspecieDAO extends BaseDAO<Habitat> {
     }
 
     @Override
-    protected MongoCollection<Habitat> getColeccion() throws DAOException {
-        MongoCollection<Habitat> colecionHabitat
-                = this.generarConexion().getCollection("habitats", Habitat.class);
-        return colecionHabitat;
+    protected MongoCollection<Especie> getColeccion() throws DAOException {
+        MongoCollection<Especie> colecionEspecie
+                = this.generarConexion().getCollection("especies", Especie.class);
+        return colecionEspecie;
     }
 
     @Override
-    public List<Habitat> buscar() throws DAOException {
+    public List<Especie> buscar() throws DAOException {
         try {
-            MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
-            List<Habitat> habitats = new ArrayList<>();
-            coleccionHabitat.find().into(habitats);
-            return habitats;
+            MongoCollection<Especie> coleccionEspecie = this.getColeccion();
+            List<Especie> especies = new ArrayList<>();
+            coleccionEspecie.find().into(especies);
+            return especies;
         } catch (Exception ex) {
             throw new DAOException(ex.getMessage(), ex);
         }
@@ -110,51 +127,54 @@ public class EspecieDAO extends BaseDAO<Habitat> {
     }
 
     @Override
-    public void guardar(Habitat entidad) throws DAOException {
+    public void guardar(Especie entidad) throws DAOException {
         try {
-            MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
-            coleccionHabitat.insertOne(entidad);
+            MongoCollection<Especie> coleccionEspecie = this.getColeccion();
+            coleccionEspecie.insertOne(entidad);
         } catch (Exception ex) {
             throw new DAOException(ex.getMessage(), ex);
         }
     }
 
-    public void agregarContinente(ObjectId id, List<Continente> continentes) throws DAOException {
+    public void agregarAnimal(ObjectId idEspecie, List<Animal> animales) throws DAOException {
         try {
-            MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
-            coleccionHabitat.updateOne(Filters.eq("_id", id),
-                    new Document("$push", new Document()
-                            .append("continentes", continentes)
-                    )
-            );
-        } catch (Exception ex) {
-            throw new DAOException(ex.getMessage(), ex);
-        }
-
-    }
-
-    public void agregarEspecies(ObjectId idHabitat, List<Especie> especies) throws DAOException {
-         try {
-            MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
-            coleccionHabitat.updateOne(Filters.eq("_id", idHabitat),
-                    new Document("$push", new Document()
-                            .append("especies", especies)
+            MongoCollection<Especie> coleccionEspecie = this.getColeccion();
+            coleccionEspecie.updateOne(Filters.eq("_id", idEspecie),
+                    new Document("$set", new Document()
+                            .append("animales", animales)
                     )
             );
         } catch (Exception ex) {
             throw new DAOException(ex.getMessage(), ex);
         }
     }
-    
-    
-    public void eliminarEspecies(ObjectId idHabitat, ObjectId idEspecies) throws DAOException {
-         try {
-            MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
-            coleccionHabitat.updateOne(Filters.eq("_id", idHabitat),
+
+    public void eliminarEspecies(ObjectId idEspecie, String nombreAnimal) throws DAOException {
+        try {
+            MongoCollection<Especie> coleccionEspecie = this.getColeccion();
+            coleccionEspecie.updateOne(Filters.eq("_id", idEspecie),
                     new Document("$pull", new Document()
-                            .append("especies", Filters.eq("_id",idEspecies))
+                            .append("animales", Filters.eq("_id", nombreAnimal))
                     )
             );
+        } catch (Exception ex) {
+            throw new DAOException(ex.getMessage(), ex);
+        }
+    }
+
+    public List<Animal> buscarAnimal(ObjectId idEspecie) throws DAOException {
+        try {
+            if (idEspecie == null) {
+                return new ArrayList<>();
+            } else {
+                return null;
+            }
+//            MongoCollection<Especie> coleccionEspecie = this.getColeccion();
+//            coleccionEspecie.updateOne(Filters.eq("_id", idEspecie),
+//                    new Document("$pull", new Document()
+//                            .append("animales", Filters.eq("_id",nombreAnimal))
+//                    )
+//            );
         } catch (Exception ex) {
             throw new DAOException(ex.getMessage(), ex);
         }

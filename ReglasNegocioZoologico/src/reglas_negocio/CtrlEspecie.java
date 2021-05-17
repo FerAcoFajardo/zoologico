@@ -5,10 +5,43 @@
  */
 package reglas_negocio;
 
+import datos.FabricaDatos;
+import datos.iDatos;
+import exceptions.DAOException;
+import java.util.List;
+import objetonegocio.Animal;
+import objetonegocio.Especie;
+import org.bson.types.ObjectId;
+
 /**
  *
  * @author fernando
  */
 public class CtrlEspecie {
+    
+    iDatos iDatos;
+    
+    
+    public CtrlEspecie() {
+        iDatos = FabricaDatos.crearDatos();
+    }
+    
+    public List<Especie> buscarEspecie() throws DAOException{
+        return iDatos.buscarEspecie();
+    }
+    
+    public List<Animal> buscarAnimales(ObjectId idEspecie) throws DAOException{
+        return iDatos.buscarAnimal(idEspecie);
+    }
+    
+    public void guardarEspecie(Especie especie) throws DAOException{
+        iDatos.guardarEspecie(especie);
+    }
+    
+    public Especie buscarEspecie(String nombreComun) throws DAOException{
+        return iDatos.buscarEspecie(nombreComun);
+    }
+    
+    
     
 }

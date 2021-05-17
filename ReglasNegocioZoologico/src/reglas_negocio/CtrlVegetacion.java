@@ -7,6 +7,7 @@ package reglas_negocio;
 
 import datos.FabricaDatos;
 import datos.iDatos;
+import exceptions.DAOException;
 import java.util.List;
 import objetonegocio.Vegetacion;
 
@@ -23,7 +24,7 @@ public class CtrlVegetacion {
         iDatos = FabricaDatos.crearDatos();
     }
     
-    public List<Vegetacion> recuperarVegetacion(){
+    public List<Vegetacion> recuperarVegetacion() throws DAOException{
         return iDatos.buscarVegetacion();
     }
     

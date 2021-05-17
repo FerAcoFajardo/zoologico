@@ -129,7 +129,7 @@ public class Empleado {
     
     @Override
     public String toString() {
-        return "nombre=" + nombre + ", direccion=" + direccion + ", telefono=" + telefono + ", fecha=" + fecha;
+        return nombre;
     }
     
     

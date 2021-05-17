@@ -4,6 +4,7 @@
  */
 package objetonegocio;
 
+import exceptions.BusinessException;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.types.ObjectId;
@@ -15,7 +16,7 @@ import org.bson.types.ObjectId;
 public class Especie {
     private ObjectId id;
     private Habitat habitat;
-    private List<Animal> listaAnimales;
+    private List<Animal> animales;
     private String            nombreNormal;
     private String            nombreCientifico;
     private String            descripcion;
@@ -29,7 +30,7 @@ public class Especie {
 
     public Especie(ObjectId id, ArrayList<Animal> listaAnimales, String nombreNormal, String nombreCientifico, String descripcion, ArrayList<CuidadorEspecie> listaCuidadoresEspecie) {
         this.id = id;
-        this.listaAnimales = listaAnimales;
+        this.animales = listaAnimales;
         this.nombreNormal = nombreNormal;
         this.nombreCientifico = nombreCientifico;
         this.descripcion = descripcion;
@@ -39,7 +40,7 @@ public class Especie {
     
     
     public Especie(ArrayList<Animal> listaAnimales, String nombreNormal, String nombreCientifico, String descripcion, ArrayList<CuidadorEspecie> listaCuidadoresEspecie) {
-        this.listaAnimales = listaAnimales;
+        this.animales = listaAnimales;
         this.nombreNormal = nombreNormal;
         this.nombreCientifico = nombreCientifico;
         this.descripcion = descripcion;
@@ -60,7 +61,7 @@ public class Especie {
      * @param descripcion Descripción de la especie
      */
     public Especie(List<Animal> listaAnimales, String nombreNormal, String nombreCientifico, String descripcion) {
-        this.listaAnimales    = listaAnimales;
+        this.animales    = listaAnimales;
         this.nombreNormal     = nombreNormal;
         this.nombreCientifico = nombreCientifico;
         this.descripcion      = descripcion;
@@ -96,15 +97,15 @@ public class Especie {
      * @return Regresa la lista de animales de la especie
      */
     public List<Animal> getListaAnimales() {
-        return listaAnimales;
+        return animales;
     }
 
     /**
      * Esablece la lista de animales de la especie
      * @param listaAnimales Lista de animales de la especie
      */
-    public void setListaAnimales(ArrayList<Animal> listaAnimales) {
-        this.listaAnimales = listaAnimales;
+    public void setListaAnimales(List<Animal> listaAnimales) {
+        this.animales = listaAnimales;
     }
 
     /**
@@ -152,7 +153,7 @@ public class Especie {
         return listaCuidadoresEspecie;
     }
 
-    public void setListaCuidadoresEspecie(ArrayList<CuidadorEspecie> listaCuidadoresEspecie) {
+    public void setListaCuidadoresEspecie(List<CuidadorEspecie> listaCuidadoresEspecie) {
         this.listaCuidadoresEspecie = listaCuidadoresEspecie;
     }
 
@@ -160,6 +161,18 @@ public class Especie {
     public String toString() {
         
         return "Especie{" + "nombreNormal=" + nombreNormal + ", nombreCientifico=" + nombreCientifico + ", descripcion=" + descripcion + '}';
+    }
+    
+    public void verificarCampos() throws BusinessException{
+        if(this.nombreNormal == null){
+            throw new BusinessException("Error: Por favor introduzca un nombre a la especie");
+        } else if(this.descripcion == null){
+            throw new BusinessException("Error: Por favor introduzca una descripcion a la especie");
+        }else if(this.habitat == null){
+            throw new BusinessException("Error: Por favor introduzca habitat para la especie");
+        }else if(this.nombreCientifico == null){
+            throw new BusinessException("Error: Por favor introduzca nombre cientifico para la especie");
+        }
     }
 
     
