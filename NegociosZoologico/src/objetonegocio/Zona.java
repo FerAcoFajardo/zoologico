@@ -5,13 +5,14 @@
 package objetonegocio;
 
 import java.util.ArrayList;
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author fernando
  */
 public class Zona {
-    private ArrayList<Recorrido> recorridos;
+    private ObjectId id;
     private ArrayList<Especie> especies;
     private String             nombre;
     private float              extension;
@@ -24,18 +25,18 @@ public class Zona {
      * @param nombre Nombre de la zona
      * @param extension Extension de la zona
      */
-    public Zona(ArrayList<Recorrido> recorridos, String nombre, float extension) {
-        this.recorridos = recorridos;
+    public Zona(String nombre, float extension) {
         this.nombre       = nombre;
         this.extension    = extension;
     }
 
-    public Zona(String nombre, float extension) {
+    public Zona(ObjectId id, ArrayList<Especie> especies, String nombre, float extension) {
+        this.id = id;
+        this.especies = especies;
         this.nombre = nombre;
         this.extension = extension;
     }
-    
-    
+
 
     /**
      * Escribe todos los atributos de la zona
@@ -62,21 +63,6 @@ public class Zona {
         this.extension = extension;
     }
 
-    /**
-     * Método que regresa la lista de recorridos
-     * @return Regresa la lista de recorridos
-     */
-    public ArrayList<Recorrido> getRecorridos() {
-        return recorridos;
-    }
-
-    /**
-     * Método que establece la lista de recorridos
-     * @param recorridos Lista de recorridos
-     */
-    public void setListaEspecie(ArrayList<Recorrido> recorridos) {
-        this.recorridos = recorridos;
-    }
 
     /**
      * Método que regresa el nombre
@@ -101,10 +87,16 @@ public class Zona {
     public void setEspecies(ArrayList<Especie> especies) {
         this.especies = especies;
     }
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
     
     
     
 }
 
-
-//~ Formatted by Jindent --- http://www.jindent.com

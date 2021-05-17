@@ -7,22 +7,28 @@ package objetonegocio;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author fernando
  */
 public class Itinerario {
+    private ObjectId id;
+    private String nombre;
     private List<Queja> listaQuejas;
     private List<Recorrido> recorridos;
     private int             maxVisitantes;
     private Guia            guia;
-    private Calendar fecha;
+    private Date fecha;
 
     public Itinerario() {}
 
-    public Itinerario(List<Queja> listaQuejas, List<Recorrido> recorridos, int maxVisitantes, Guia guia, Calendar fecha) {
+    public Itinerario(ObjectId id, String nombre, List<Queja> listaQuejas, List<Recorrido> recorridos, int maxVisitantes, Guia guia, Date fecha) {
+        this.id = id;
+        this.nombre = nombre;
         this.listaQuejas = listaQuejas;
         this.recorridos = recorridos;
         this.maxVisitantes = maxVisitantes;
@@ -30,18 +36,37 @@ public class Itinerario {
         this.fecha = fecha;
     }
 
-    public Itinerario(int maxVisitantes, Guia guia, Calendar fecha) {
-        this.maxVisitantes = maxVisitantes;
-        this.guia = guia;
-        this.fecha = fecha;
-    }
-
-    public Itinerario(List<Recorrido> recorridos, int maxVisitantes, Guia guia, Calendar fecha) {
+    public Itinerario(String nombre, List<Queja> listaQuejas, List<Recorrido> recorridos, int maxVisitantes, Guia guia, Date fecha) {
+        this.nombre = nombre;
+        this.listaQuejas = listaQuejas;
         this.recorridos = recorridos;
         this.maxVisitantes = maxVisitantes;
         this.guia = guia;
         this.fecha = fecha;
     }
+
+    public Itinerario(ObjectId id) {
+        this.id = id;
+    }
+
+    public Itinerario(ObjectId id, String nombre, List<Recorrido> recorridos, int maxVisitantes, Guia guia, Date fecha) {
+        this.id = id;
+        this.nombre = nombre;
+        this.recorridos = recorridos;
+        this.maxVisitantes = maxVisitantes;
+        this.guia = guia;
+        this.fecha = fecha;
+    }
+
+    public Itinerario(String nombre, List<Recorrido> recorridos, int maxVisitantes, Guia guia, Date fecha) {
+        this.nombre = nombre;
+        this.recorridos = recorridos;
+        this.maxVisitantes = maxVisitantes;
+        this.guia = guia;
+        this.fecha = fecha;
+    }
+    
+    
 
     /**
      *
@@ -91,21 +116,35 @@ public class Itinerario {
         this.recorridos = recorridos;
     }
 
-    public Calendar getFecha() {
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(Calendar fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
     @Override
     public String toString() {
-        SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        form.setCalendar(fecha);
-        String formated1 = form.format(fecha.getTime());
-        return "Itinerario{" + "maxVisitantes=" + maxVisitantes + ", guia=" + guia + ", fecha itinerario=" + formated1 + '}';
+        return "Itinerario{" + "id=" + id + ", nombre=" + nombre + ", listaQuejas=" + listaQuejas + ", recorridos=" + recorridos + ", maxVisitantes=" + maxVisitantes + ", guia=" + guia + ", fecha=" + fecha + '}';
     }
+
     
     
 

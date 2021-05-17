@@ -5,7 +5,9 @@
 package objetonegocio;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 
 /**
@@ -13,7 +15,8 @@ import java.util.List;
  * @author fernando
  */
 public class Guia extends Empleado {
-    private List<Itinerario> listaItinerarios;
+    
+    private List<Itinerario> listaItinerario;
     
     public Guia() {}
     
@@ -24,26 +27,28 @@ public class Guia extends Empleado {
      * @param telefono Telefono del guia
      * @param fecha Fecha de registro del guia
      */
-    public Guia(String nombre, String direccion, String telefono, Calendar fecha) {
+    public Guia(String nombre, String direccion, String telefono, Date fecha) {
         super(nombre, direccion, telefono, fecha);
     }
 
-    public Guia(List<Itinerario> listaItinerarios) {
-        this.listaItinerarios = listaItinerarios;
+    public Guia(ObjectId id) {
+        super(id);
     }
 
-    public Guia(List<Itinerario> listaItinerarios, String nombre, String direccion, String telefono, Calendar fecha) {
-        super(nombre, direccion, telefono, fecha);
-        this.listaItinerarios = listaItinerarios;
+    public Guia(ObjectId id, String nombre, String direccion, String telefono, Date fecha) {
+        super(id, nombre, direccion, telefono, fecha);
     }
 
-    public List<Itinerario> getListaItinerarios() {
-        return listaItinerarios;
+    public List<Itinerario> getListaItinerario() {
+        return listaItinerario;
     }
 
-    public void setListaItinerarios(List<Itinerario> listaItinerarios) {
-        this.listaItinerarios = listaItinerarios;
+    public void setListaItinerario(List<Itinerario> listaItinerario) {
+        this.listaItinerario = listaItinerario;
     }
+
+    
+    
         
     /**
      * Método que regresa todos los datos del guia

@@ -3,13 +3,16 @@
  */
 package objetonegocio;
 
+import org.bson.types.ObjectId;
+
 /**
  *
  * @author paulb
  */
 public class Recorrido {
-    private Itinerario itinerario;
+    private ObjectId id;
     private Zona zona;
+    private Itinerario itinerario;
     private int duracion;
     private int longitud;
     private int numEspecies;
@@ -17,12 +20,28 @@ public class Recorrido {
     public Recorrido() {
     }
 
-    public Recorrido(Itinerario itinerario, Zona zona, int duracion, int longitud, int numEspecies) {
-        this.itinerario = itinerario;
+    public Recorrido(ObjectId id) {
+        this.id = id;
+    }
+
+    public Recorrido(ObjectId id, Zona zona, int duracion, int longitud, int numEspecies) {
+        this.id = id;
         this.zona = zona;
         this.duracion = duracion;
         this.longitud = longitud;
         this.numEspecies = numEspecies;
+    }
+
+    
+    public Recorrido(Zona zona, int duracion, int longitud, int numEspecies) {
+        this.zona = zona;
+        this.duracion = duracion;
+        this.longitud = longitud;
+        this.numEspecies = numEspecies;
+    }
+
+    public Zona getZona() {
+        return zona;
     }
 
     public Itinerario getItinerario() {
@@ -33,10 +52,8 @@ public class Recorrido {
         this.itinerario = itinerario;
     }
 
-    public Zona getZona() {
-        return zona;
-    }
-
+    
+    
     public void setZona(Zona zona) {
         this.zona = zona;
     }
@@ -65,10 +82,21 @@ public class Recorrido {
         this.numEspecies = numEspecies;
     }
 
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
+    
     @Override
     public String toString() {
-        return "Recorrido{" + "itinerario=" + itinerario + ", zona=" + zona + ", duracion=" + duracion + ", longitud=" + longitud + ", numEspecies=" + numEspecies + '}';
+        return "Recorrido{" + "zona=" + zona + ", duracion=" + duracion + ", longitud=" + longitud + ", numEspecies=" + numEspecies + '}';
     }
+
+    
 
     
 }

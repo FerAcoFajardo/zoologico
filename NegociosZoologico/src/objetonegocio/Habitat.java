@@ -6,6 +6,7 @@ package objetonegocio;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -13,15 +14,16 @@ import java.util.List;
  */
 public class Habitat {
 
+    private ObjectId id;
     private String nombre;
     private Clima clima;
     private Vegetacion vegetacion;
     private List<Continente> continentes;
-    private List<Especie> especies;
+//    private List<Especie> especies;
 
     public Habitat() {
         this.continentes = new ArrayList<>();
-        this.especies = new ArrayList<>();
+//        this.especies = new ArrayList<>();
 
     }
 
@@ -47,7 +49,7 @@ public class Habitat {
      */
     @Override
     public String toString() {
-        return "Habitat{" + "nombre=" + nombre + ", clima=" + clima + ", vegetacion=" + vegetacion + ", continentes=" + continentes + ", especies=" + especies + '}';
+        return "Habitat{" + "nombre=" + nombre + ", clima=" + clima + ", vegetacion=" + vegetacion + ", continentes=" + continentes +/* ", especies=" + especies + */'}';
     }
 
     /**
@@ -58,6 +60,15 @@ public class Habitat {
     public Clima getClima() {
         return clima;
     }
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+    
 
     /**
      * Método que establece el clima del habitat
@@ -82,7 +93,7 @@ public class Habitat {
      *
      * @param continentes Continentes del habitat
      */
-    public void setContinentes(ArrayList<Continente> continentes) {
+    public void setContinentes(List<Continente> continentes) {
         this.continentes = continentes;
     }
 
@@ -122,13 +133,13 @@ public class Habitat {
         this.nombre = nombre;
     }
 
-    public List<Especie> getEspecies() {
-        return especies;
-    }
-
-    public void setEspecies(ArrayList<Especie> especies) {
-        this.especies = especies;
-    }
+//    public List<Especie> getEspecies() {
+//        return especies;
+//    }
+//
+//    public void setEspecies(List<Especie> especies) {
+//        this.especies = especies;
+//    }
 
     public void agregarContinente(Continente continente) {
         if (continente != null) {
@@ -141,6 +152,17 @@ public class Habitat {
             this.continentes.remove(continente);
         }
     }
+//    public void agregarEspecie(Especie especie) {
+//        if (especie != null) {
+//            this.especies.add(especie);
+//        }
+//    }
+//    
+//    public void eliminarEspecie(Especie especie) {
+//        if (especie != null) {
+//            this.especies.remove(especie);
+//        }
+//    }
 
     public void verificaCampos() throws Exception {
         if (this.continentes.isEmpty()) {

@@ -6,16 +6,19 @@ package objetonegocio;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author fernando
  */
 public class Empleado {
+    private ObjectId id;
     private String nombre;
     private String direccion;
     private String telefono;
-    private Calendar fecha;
+    private Date fecha;
 
     /**
      *
@@ -29,25 +32,26 @@ public class Empleado {
      * @param telefono Telefono del empleado
      * @param fecha Fecha de registro del empleado
      */
-    public Empleado(String nombre, String direccion, String telefono, Calendar fecha) {
+    public Empleado(String nombre, String direccion, String telefono, Date fecha) {
         this.nombre    = nombre;
         this.direccion = direccion;
         this.telefono  = telefono;
         this.fecha     = fecha;
     }
 
-    /**
-     * Regresa todos los datos del empleado
-     * @return Regresa datos del empleado
-     */
-    @Override
-    public String toString() {
-        SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        form.setCalendar(fecha);
-        String formated1 = form.format(fecha.getTime());
-        return "Empleado{" + "nombre=" + nombre + ", direccion=" + direccion + ", telefono=" + telefono + ", fecha empleado="
-               + formated1 + '}';
+    public Empleado(ObjectId id) {
+        this.id = id;
     }
+
+    public Empleado(ObjectId id, String nombre, String direccion, String telefono, Date fecha) {
+        this.id = id;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.fecha = fecha;
+    }
+
+    
 
     /**
      * Método que regresa la direccion del empleado
@@ -69,7 +73,7 @@ public class Empleado {
      * Método que regresa la fecha de registro del empleado
      * @return Regresa la fecha de registro
      */
-    public Calendar getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
@@ -77,7 +81,7 @@ public class Empleado {
      * Método que establece la fecha de regitro del empleado
      * @param fecha Fecha de registro del empleado
      */
-    public void setFecha(Calendar fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
@@ -112,6 +116,23 @@ public class Empleado {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
+    
+    
+    @Override
+    public String toString() {
+        return "nombre=" + nombre + ", direccion=" + direccion + ", telefono=" + telefono + ", fecha=" + fecha;
+    }
+    
+    
 }
 
 

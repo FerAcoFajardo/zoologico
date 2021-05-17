@@ -74,6 +74,8 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
         
         try{
             listaDatos = iNegocios.recuperarDatos();
+            iNegocios negocios = FabricaNegocios.crearNegocios();
+            iNegocios negocioss = new FachadaRN();
 //            for (Object listaDato : listaDatos) {
 //                System.out.println(listaDato);
 //            }

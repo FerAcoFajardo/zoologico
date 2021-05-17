@@ -5,14 +5,17 @@ package objetonegocio;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author paulb
  */
 public class Queja {
+    private ObjectId id;
     private Itinerario itinerario;
-    private Calendar fecha;
+    private Date fecha;
     private String telefono;
     private String correo;
     private String nombreCompleto;
@@ -20,7 +23,22 @@ public class Queja {
     public Queja() {
     }
 
-    public Queja(Itinerario itinerario, Calendar fecha, String telefono, String correo, String nombreCompleto) {
+    public Queja(ObjectId id) {
+        this.id = id;
+    }
+
+    public Queja(ObjectId id, Itinerario itinerario, Date fecha, String telefono, String correo, String nombreCompleto) {
+        this.id = id;
+        this.itinerario = itinerario;
+        this.fecha = fecha;
+        this.telefono = telefono;
+        this.correo = correo;
+        this.nombreCompleto = nombreCompleto;
+    }
+
+    
+    
+    public Queja(Itinerario itinerario, Date fecha, String telefono, String correo, String nombreCompleto) {
         this.itinerario = itinerario;
         this.fecha = fecha;
         this.telefono = telefono;
@@ -42,11 +60,20 @@ public class Queja {
         this.itinerario = itinerario;
     }
 
-    public Calendar getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(Calendar fecha) {
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
+    
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
@@ -76,12 +103,10 @@ public class Queja {
 
     @Override
     public String toString() {
-        SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        form.setCalendar(fecha);
-        String formated1 = form.format(fecha.getTime());
-        return "Queja{" + "itinerario=" + itinerario + ", fecha queja=" + formated1 + ", telefono=" + telefono + ", correo=" + correo + ", nombreCompleto=" + nombreCompleto + '}';
+        return "Queja{" + "itinerario=" + itinerario + ", fecha=" + fecha + ", telefono=" + telefono + ", correo=" + correo + ", nombreCompleto=" + nombreCompleto + '}';
     }
-    
+
+        
     
 
     

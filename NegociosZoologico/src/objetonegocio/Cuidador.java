@@ -4,45 +4,53 @@
  */
 package objetonegocio;
 
-import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author fernando
  */
 public class Cuidador extends Empleado {
-    private ArrayList<CuidadorEspecie> listaCuidadorEspecies;
 
-    public Cuidador() {}
+    private List<CuidadorEspecie> listaCuidadorEspecie;
+    
+    public Cuidador() {
+    }
 
     /**
      * Contruye una instancia de cuidador
-     * @param listaEspecies Lista de especies que cuida el cuidador
+     *
      * @param nombre Nombre del cuidador
      * @param direccion Dirección del cuidador
      * @param telefono Telefono del cuidador
      * @param fecha Fecha de registro del cuidador
      */
-    public Cuidador(String nombre, String direccion, String telefono, Calendar fecha) {
+    public Cuidador(String nombre, String direccion, String telefono, Date fecha) {
         super(nombre, direccion, telefono, fecha);
     }
+
+    public Cuidador(ObjectId id) {
+        super(id);
+    }
+
+    public Cuidador(ObjectId id, String nombre, String direccion, String telefono, Date fecha) {
+        super(id, nombre, direccion, telefono, fecha);
+    }
+
+    public List<CuidadorEspecie> getListaCuidadorEspecie() {
+        return listaCuidadorEspecie;
+    }
+
+    public void setListaCuidadorEspecie(List<CuidadorEspecie> listaCuidadorEspecie) {
+        this.listaCuidadorEspecie = listaCuidadorEspecie;
+    }
+
     
     /**
-     * Contruye una instancia de cuidador
-     * @param listaEspecies Lista de especies que cuida el cuidador
-     * @param nombre Nombre del cuidador
-     * @param direccion Dirección del cuidador
-     * @param telefono Telefono del cuidador
-     * @param fecha Fecha de registro del cuidador
-     */
-    public Cuidador(ArrayList<CuidadorEspecie> listaEspecies, String nombre, String direccion, String telefono, Calendar fecha) {
-        super(nombre, direccion, telefono, fecha);
-        this.listaCuidadorEspecies = listaEspecies;
-    }
-
-    /**
      * Regresa todos los atributos del cuidador
+     *
      * @return Regresa todos los atributos del cuidador
      */
     @Override
@@ -50,21 +58,4 @@ public class Cuidador extends Empleado {
         return "Cuidador{" + super.toString() + '}';
     }
 
-    /**
-     * @return Regresa la lista de CuidadorEspecie
-     */
-    public ArrayList<CuidadorEspecie> getListaCuidadorEspecie() {
-        return listaCuidadorEspecies;
-    }
-
-    /**
-     * Método que establece la lista CuidadorEspecie
-     * @param listaCuidadorEspecies Lista de CuidadorEspecie
-     */
-    public void setListaCuidadorEspecie(ArrayList<CuidadorEspecie> listaCuidadorEspecies) {
-        this.listaCuidadorEspecies = listaCuidadorEspecies;
-    }
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com

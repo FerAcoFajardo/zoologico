@@ -5,6 +5,7 @@
  */
 package datos;
 
+import exceptions.DAOException;
 import java.util.List;
 import objetonegocio.Habitat;
 import objetonegocio.Vegetacion;
@@ -15,17 +16,17 @@ import objetonegocio.Vegetacion;
  */
 public interface iDatos {
     
-    List<Habitat> buscarHabitat();
+    List<Habitat> buscarHabitat() throws DAOException;
     
-    public void guardarHabitat(Habitat habitat);
+    public void guardarHabitat(Habitat habitat) throws DAOException;
     
     /**
      *
      * @return
      */
-    public List<Vegetacion> buscarVegetacion();
+    public List<Vegetacion> buscarVegetacion() throws DAOException;
     
-    void guardarVegetacion(Vegetacion vegetacion);
+    void guardarVegetacion(Vegetacion vegetacion) throws DAOException;
     
     
 }

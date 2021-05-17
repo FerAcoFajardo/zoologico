@@ -5,38 +5,51 @@
 package objetonegocio;
 
 import java.util.ArrayList;
+import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author fernando
  */
 public class Especie {
-    private ArrayList<Animal> listaAnimales;
+    private ObjectId id;
+    private Habitat habitat;
+    private List<Animal> listaAnimales;
     private String            nombreNormal;
     private String            nombreCientifico;
     private String            descripcion;
-    private ArrayList<CuidadorEspecie> listaCuidadoresEspecie;
-    private Zona zona;
-    private Habitat habitat;
+    private List<CuidadorEspecie> listaCuidadoresEspecie;
     
     public Especie() {}
 
-    public Especie(ArrayList<Animal> listaAnimales, String nombreNormal, String nombreCientifico, String descripcion, ArrayList<CuidadorEspecie> listaCuidadoresEspecie, Zona zona, Habitat habitat) {
+    public Especie(ObjectId id) {
+        this.id = id;
+    }
+
+    public Especie(ObjectId id, ArrayList<Animal> listaAnimales, String nombreNormal, String nombreCientifico, String descripcion, ArrayList<CuidadorEspecie> listaCuidadoresEspecie) {
+        this.id = id;
         this.listaAnimales = listaAnimales;
         this.nombreNormal = nombreNormal;
         this.nombreCientifico = nombreCientifico;
         this.descripcion = descripcion;
         this.listaCuidadoresEspecie = listaCuidadoresEspecie;
-        this.zona = zona;
-        this.habitat = habitat;
     }
 
-    public Especie(String nombreNormal, String nombreCientifico, String descripcion, Zona zona, Habitat habitat) {
+    
+    
+    public Especie(ArrayList<Animal> listaAnimales, String nombreNormal, String nombreCientifico, String descripcion, ArrayList<CuidadorEspecie> listaCuidadoresEspecie) {
+        this.listaAnimales = listaAnimales;
         this.nombreNormal = nombreNormal;
         this.nombreCientifico = nombreCientifico;
         this.descripcion = descripcion;
-        this.zona = zona;
-        this.habitat = habitat;
+        this.listaCuidadoresEspecie = listaCuidadoresEspecie;
+    }
+
+    public Especie(String nombreNormal, String nombreCientifico, String descripcion) {
+        this.nombreNormal = nombreNormal;
+        this.nombreCientifico = nombreCientifico;
+        this.descripcion = descripcion;
     }
 
     /**
@@ -46,7 +59,7 @@ public class Especie {
      * @param nombreCientifico Nombre cientifico de la especie
      * @param descripcion Descripción de la especie
      */
-    public Especie(ArrayList<Animal> listaAnimales, String nombreNormal, String nombreCientifico, String descripcion) {
+    public Especie(List<Animal> listaAnimales, String nombreNormal, String nombreCientifico, String descripcion) {
         this.listaAnimales    = listaAnimales;
         this.nombreNormal     = nombreNormal;
         this.nombreCientifico = nombreCientifico;
@@ -61,6 +74,15 @@ public class Especie {
         return descripcion;
     }
 
+    public Habitat getHabitat() {
+        return habitat;
+    }
+
+    public void setHabitat(Habitat habitat) {
+        this.habitat = habitat;
+    }
+    
+
     /**
      * Establece la descripción de la especia
      * @param descripcion Descripción de la especie
@@ -73,7 +95,7 @@ public class Especie {
      *
      * @return Regresa la lista de animales de la especie
      */
-    public ArrayList<Animal> getListaAnimales() {
+    public List<Animal> getListaAnimales() {
         return listaAnimales;
     }
 
@@ -101,6 +123,15 @@ public class Especie {
         this.nombreCientifico = nombreCientifico;
     }
 
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
+    
     /**
      *
      * @return Regresa el nombre normal de la especie
@@ -117,7 +148,7 @@ public class Especie {
         this.nombreNormal = nombreNormal;
     }
 
-    public ArrayList<CuidadorEspecie> getListaCuidadoresEspecie() {
+    public List<CuidadorEspecie> getListaCuidadoresEspecie() {
         return listaCuidadoresEspecie;
     }
 
@@ -125,30 +156,13 @@ public class Especie {
         this.listaCuidadoresEspecie = listaCuidadoresEspecie;
     }
 
-    public Zona getZona() {
-        return zona;
-    }
-
-    public void setZona(Zona zona) {
-        this.zona = zona;
-    }
-
-    public Habitat getHabitat() {
-        return habitat;
-    }
-
-    public void setHabitat(Habitat habitat) {
-        this.habitat = habitat;
-    }
-
     @Override
     public String toString() {
         
-        return "Especie{" + "nombreNormal=" + nombreNormal + ", nombreCientifico=" + nombreCientifico + ", descripcion=" + descripcion + ", zona=" + zona + ", habitat=" + habitat + '}';
+        return "Especie{" + "nombreNormal=" + nombreNormal + ", nombreCientifico=" + nombreCientifico + ", descripcion=" + descripcion + '}';
     }
 
     
 }
 
 
-//~ Formatted by Jindent --- http://www.jindent.com

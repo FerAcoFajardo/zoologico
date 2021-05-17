@@ -5,6 +5,7 @@
  */
 package datos;
 
+import exceptions.DAOException;
 import java.util.List;
 import objetonegocio.Habitat;
 import objetonegocio.Vegetacion;
@@ -27,22 +28,22 @@ public class FachadaDatos implements iDatos{
 
     
     @Override
-    public List<Habitat> buscarHabitat() {
+    public List<Habitat> buscarHabitat() throws DAOException{
         return habitatDAO.buscar();
     }
 
     @Override
-    public void guardarHabitat(Habitat habitat) {
+    public void guardarHabitat(Habitat habitat) throws DAOException {
         habitatDAO.guardar(habitat);
     }
 
     @Override
-    public List<Vegetacion> buscarVegetacion() {
+    public List<Vegetacion> buscarVegetacion() throws DAOException {
         return vegetacionDAO.buscar();
     }
 
     @Override
-    public void guardarVegetacion(Vegetacion vegetacion) {
+    public void guardarVegetacion(Vegetacion vegetacion) throws DAOException {
         vegetacionDAO.guardar(vegetacion);
     }
     
