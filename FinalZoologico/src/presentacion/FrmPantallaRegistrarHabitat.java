@@ -5,6 +5,7 @@
  */
 package presentacion;
 
+import exceptions.DAOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -244,8 +245,12 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void clkBotonVerificarExistencia(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clkBotonVerificarExistencia
-        // TODO add your handling code here:
-        verificarExistenciaHabitat();
+        try {
+            // TODO add your handling code here:
+            verificarExistenciaHabitat();
+        } catch (DAOException ex) {
+           muestraMsjError(ex.getMessage());
+        }
     }//GEN-LAST:event_clkBotonVerificarExistencia
 
     private void clkBotonAgregarContinente(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clkBotonAgregarContinente
@@ -278,7 +283,7 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
     
     
     
-    public void verificarExistenciaHabitat() {
+    public void verificarExistenciaHabitat() throws DAOException {
         String nombre = this.txtNombreHabitat.getText();
 
         for (Habitat habitatNuevo : iNegocios.buscaHabitat()) {
@@ -353,47 +358,6 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
         this.btnGuardar.setEnabled(true);
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmPantallaRegistrarHabitat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmPantallaRegistrarHabitat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmPantallaRegistrarHabitat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmPantallaRegistrarHabitat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                FrmPantallaRegistrarHabitat dialog = new FrmPantallaRegistrarHabitat(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;

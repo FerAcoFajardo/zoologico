@@ -5,15 +5,16 @@
 package objetonegocio;
 
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author fernando
  */
 public class Vegetacion {
+    private ObjectId id;
     private String nombre;
     private String nombreCientifico;
-    private List<Habitat> habitat;
     
     public Vegetacion() {}
 
@@ -27,11 +28,6 @@ public class Vegetacion {
         this.nombreCientifico = nombreCientifico;
     }
 
-    public Vegetacion(String nombre, String nombreCientifico, List<Habitat> habitat) {
-        this.nombre = nombre;
-        this.nombreCientifico = nombreCientifico;
-        this.habitat = habitat;
-    }
 
     /**
      * Método que regresa todos los atributos de la vegetación
@@ -74,12 +70,13 @@ public class Vegetacion {
         this.nombreCientifico = nombreCientifico;
     }
 
-    public List<Habitat> getHabitat() {
-        return habitat;
+
+    public ObjectId getId() {
+        return id;
     }
 
-    public void setHabitat(List<Habitat> habitat) {
-        this.habitat = habitat;
+    public void setId(ObjectId id) {
+        this.id = id;
     }
     
     

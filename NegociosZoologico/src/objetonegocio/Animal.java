@@ -4,6 +4,8 @@
  */
 package objetonegocio;
 
+import exceptions.BusinessException;
+
 /**
  *
  * @author Fernando A.
@@ -24,6 +26,12 @@ public class Animal {
         this.nombre = nombre;
         this.edad = edad;
         this.especie = especie;
+        this.sexo = sexo;
+    }
+
+    public Animal(String nombre, int edad, Sexo sexo) {
+        this.nombre = nombre;
+        this.edad = edad;
         this.sexo = sexo;
     }
     
@@ -94,6 +102,17 @@ public class Animal {
 
     public void setEspecie(Especie especie) {
         this.especie = especie;
+    }
+    
+    
+    public void verificar() throws BusinessException{
+        if(this.edad < 0 || this.edad > 150){
+            throw new BusinessException("Error: Edad fuera de los limites");
+        } else if (this.sexo == null){
+            throw new BusinessException("Error: Falta indicar el sexo del animal");
+        } else if (this.nombre == null || "".equals(this.nombre)){
+            throw new BusinessException("Error: Falta indicar el nombre del animal");
+        }
     }
 }
 

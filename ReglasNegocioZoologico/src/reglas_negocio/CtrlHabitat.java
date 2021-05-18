@@ -7,6 +7,8 @@ package reglas_negocio;
 
 import datos.FabricaDatos;
 import datos.FachadaDatos;
+import datos.iDatos;
+import exceptions.DAOException;
 import java.util.List;
 import objetonegocio.Habitat;
 
@@ -16,20 +18,20 @@ import objetonegocio.Habitat;
  */
 public class CtrlHabitat {
     
-    FachadaDatos fachada;
+    iDatos iDatos;
     
     
     public CtrlHabitat() {
-        fachada = (FachadaDatos) FabricaDatos.crearDatos();
+        iDatos = FabricaDatos.crearDatos();
     }
     
     
-    public List<Habitat> buscarHabitat(){
-       return fachada.buscarHabitat();
+    public List<Habitat> buscarHabitat() throws DAOException{
+       return iDatos.buscarHabitat();
     }
     
-    public void guardarHabitat(Habitat habitat){
-        fachada.guardarHabitat(habitat);
+    public void guardarHabitat(Habitat habitat) throws DAOException{
+        iDatos.guardarHabitat(habitat);
     }
 
 
