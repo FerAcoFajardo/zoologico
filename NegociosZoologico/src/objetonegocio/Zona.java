@@ -5,6 +5,7 @@
 package objetonegocio;
 
 import java.util.ArrayList;
+import java.util.List;
 import org.bson.types.ObjectId;
 
 /**
@@ -13,12 +14,20 @@ import org.bson.types.ObjectId;
  */
 public class Zona {
     private ObjectId id;
-    private ArrayList<Especie> especies;
+    private List<ObjectId> especies;
     private String             nombre;
     private float              extension;
 
     public Zona() {}
 
+    public Zona(List<ObjectId> especies, String nombre, float extension) {
+        this.especies = especies;
+        this.nombre = nombre;
+        this.extension = extension;
+    }
+
+    
+    
     /**
      * Contructor con todos los datos de la zona
      * @param recorridos Lista de recorridos de la zona
@@ -30,7 +39,7 @@ public class Zona {
         this.extension    = extension;
     }
 
-    public Zona(ObjectId id, ArrayList<Especie> especies, String nombre, float extension) {
+    public Zona(ObjectId id, List<ObjectId> especies, String nombre, float extension) {
         this.id = id;
         this.especies = especies;
         this.nombre = nombre;
@@ -80,11 +89,11 @@ public class Zona {
         this.nombre = nombre;
     }
 
-    public ArrayList<Especie> getEspecies() {
+    public List<ObjectId> getEspecies() {
         return especies;
     }
 
-    public void setEspecies(ArrayList<Especie> especies) {
+    public void setEspecies(List<ObjectId> especies) {
         this.especies = especies;
     }
 

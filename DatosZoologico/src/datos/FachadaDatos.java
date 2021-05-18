@@ -25,12 +25,14 @@ public class FachadaDatos implements iDatos{
     private final VegetacionDAO vegetacionDAO;
     private final HabitatDAO habitatDAO;
     private final EspecieDAO espcieDAO;
+    private final AnimalesDAO animalDAO;
     private final CuidadorDAO cuidadorDAO;
 
     public FachadaDatos() {
         habitatDAO = new HabitatDAO();
         vegetacionDAO = new VegetacionDAO();
         espcieDAO = new EspecieDAO();
+        animalDAO = new AnimalesDAO();
         cuidadorDAO = new CuidadorDAO();
     }
 
@@ -62,7 +64,7 @@ public class FachadaDatos implements iDatos{
 
     @Override
     public List<Animal> buscarAnimal(ObjectId idEspecie) throws DAOException {
-        return espcieDAO.buscarAnimal(idEspecie);
+        return animalDAO.buscarAnimal(idEspecie);
     }
 
     @Override

@@ -40,7 +40,7 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
         
     }
 
-    private static FrmPantallaRegistroEspecie getInstance(java.awt.Frame parent) {
+    public static FrmPantallaRegistroEspecie getInstance(java.awt.Frame parent) {
         if (instancia == null) {
             instancia = new FrmPantallaRegistroEspecie(parent, true);
             especie = new Especie();

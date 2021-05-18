@@ -28,6 +28,12 @@ public class Animal {
         this.especie = especie;
         this.sexo = sexo;
     }
+
+    public Animal(String nombre, int edad, Sexo sexo) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.sexo = sexo;
+    }
     
     
 

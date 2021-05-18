@@ -68,13 +68,13 @@ public class EspecieDAO extends BaseDAO<Especie> {
 
             especieActualizado.setDescripcion(especie.getDescripcion());
             especieActualizado.setHabitat(especie.getHabitat());
-            especieActualizado.setListaAnimales(especie.getListaAnimales());
+            especieActualizado.setAnimales(especie.getAnimales());
             especieActualizado.setNombreCientifico(especie.getNombreCientifico());
             especieActualizado.setNombreNormal(especie.getNombreNormal());
             especieActualizado.setListaCuidadoresEspecie(especie.getListaCuidadoresEspecie());
-            // if (!habitatActualizado.getEspecies().isEmpty()) {
-            //    habitatActualizado.setEspecies(habitat.getEspecies());
-            //}
+             if (!especieActualizado.getAnimales().isEmpty()) {
+                especieActualizado.setAnimales(especie.getAnimales());
+            }
 
             coleccionEspecie.findOneAndReplace(
                     Filters.eq("_id", especie.getId()),
@@ -136,48 +136,8 @@ public class EspecieDAO extends BaseDAO<Especie> {
         }
     }
 
-    public void agregarAnimal(ObjectId idEspecie, List<Animal> animales) throws DAOException {
-        try {
-            MongoCollection<Especie> coleccionEspecie = this.getColeccion();
-            coleccionEspecie.updateOne(Filters.eq("_id", idEspecie),
-                    new Document("$set", new Document()
-                            .append("animales", animales)
-                    )
-            );
-        } catch (Exception ex) {
-            throw new DAOException(ex.getMessage(), ex);
-        }
-    }
+    
 
-    public void eliminarEspecies(ObjectId idEspecie, String nombreAnimal) throws DAOException {
-        try {
-            MongoCollection<Especie> coleccionEspecie = this.getColeccion();
-            coleccionEspecie.updateOne(Filters.eq("_id", idEspecie),
-                    new Document("$pull", new Document()
-                            .append("animales", Filters.eq("_id", nombreAnimal))
-                    )
-            );
-        } catch (Exception ex) {
-            throw new DAOException(ex.getMessage(), ex);
-        }
-    }
-
-    public List<Animal> buscarAnimal(ObjectId idEspecie) throws DAOException {
-        try {
-            if (idEspecie == null) {
-                return new ArrayList<>();
-            } else {
-                return null;
-            }
-//            MongoCollection<Especie> coleccionEspecie = this.getColeccion();
-//            coleccionEspecie.updateOne(Filters.eq("_id", idEspecie),
-//                    new Document("$pull", new Document()
-//                            .append("animales", Filters.eq("_id",nombreAnimal))
-//                    )
-//            );
-        } catch (Exception ex) {
-            throw new DAOException(ex.getMessage(), ex);
-        }
-    }
+    
 
 }

@@ -16,29 +16,38 @@ import org.bson.types.ObjectId;
  * @author fernando
  */
 public class Itinerario {
+
     private ObjectId id;
     private String nombre;
-    private List<Queja> listaQuejas;
+    private List<ObjectId> quejas;
     private List<Recorrido> recorridos;
-    private int             maxVisitantes;
-    private Guia            guia;
+    private int maxVisitantes;
+    private ObjectId guia;
     private Date fecha;
 
-    public Itinerario() {}
+    public Itinerario() {
+    }
 
-    public Itinerario(ObjectId id, String nombre, List<Queja> listaQuejas, List<Recorrido> recorridos, int maxVisitantes, Guia guia, Date fecha) {
+    public Itinerario(ObjectId id, String nombre, List<ObjectId> quejas, List<Recorrido> recorridos, int maxVisitantes, ObjectId guia, Date fecha) {
         this.id = id;
         this.nombre = nombre;
-        this.listaQuejas = listaQuejas;
+        this.quejas = quejas;
         this.recorridos = recorridos;
         this.maxVisitantes = maxVisitantes;
         this.guia = guia;
         this.fecha = fecha;
     }
 
-    public Itinerario(String nombre, List<Queja> listaQuejas, List<Recorrido> recorridos, int maxVisitantes, Guia guia, Date fecha) {
+    public Itinerario(String nombre, int maxVisitantes, ObjectId guia, Date fecha) {
         this.nombre = nombre;
-        this.listaQuejas = listaQuejas;
+        this.maxVisitantes = maxVisitantes;
+        this.guia = guia;
+        this.fecha = fecha;
+    }
+
+    public Itinerario(String nombre, List<ObjectId> quejas, List<Recorrido> recorridos, int maxVisitantes, ObjectId guia, Date fecha) {
+        this.nombre = nombre;
+        this.quejas = quejas;
         this.recorridos = recorridos;
         this.maxVisitantes = maxVisitantes;
         this.guia = guia;
@@ -49,7 +58,7 @@ public class Itinerario {
         this.id = id;
     }
 
-    public Itinerario(ObjectId id, String nombre, List<Recorrido> recorridos, int maxVisitantes, Guia guia, Date fecha) {
+    public Itinerario(ObjectId id, String nombre, List<Recorrido> recorridos, int maxVisitantes, ObjectId guia, Date fecha) {
         this.id = id;
         this.nombre = nombre;
         this.recorridos = recorridos;
@@ -58,34 +67,38 @@ public class Itinerario {
         this.fecha = fecha;
     }
 
-    public Itinerario(String nombre, List<Recorrido> recorridos, int maxVisitantes, Guia guia, Date fecha) {
+    public Itinerario(String nombre, List<Recorrido> recorridos, int maxVisitantes, ObjectId guia, Date fecha) {
         this.nombre = nombre;
         this.recorridos = recorridos;
         this.maxVisitantes = maxVisitantes;
         this.guia = guia;
         this.fecha = fecha;
     }
-    
-    
+
+    public void setQuejas(List<ObjectId> quejas) {
+        this.quejas = quejas;
+    }
 
     /**
      *
      * @return Regresa el guia del itinerario
      */
-    public Guia getGuia() {
+    public ObjectId getGuia() {
         return guia;
     }
 
     /**
      * Establece el guia del itinerario
+     *
      * @param guia Guia del itinerario
      */
-    public void setGuia(Guia guia) {
+    public void setGuia(ObjectId guia) {
         this.guia = guia;
     }
 
     /**
      * Método que regresa el maximo números de visitantes
+     *
      * @return Regresa el máximo números de visitantes
      */
     public int getMaxVisitantes() {
@@ -94,18 +107,15 @@ public class Itinerario {
 
     /**
      * Método que establece el maximo número de visitantes
+     *
      * @param maxVisitantes Maximo número de visitantes
      */
     public void setMaxVisitantes(int maxVisitantes) {
         this.maxVisitantes = maxVisitantes;
     }
 
-    public List<Queja> getListaQuejas() {
-        return listaQuejas;
-    }
-
-    public void setListaQuejas(List<Queja> listaQuejas) {
-        this.listaQuejas = listaQuejas;
+    public List<ObjectId> getQuejas() {
+        return quejas;
     }
 
     public List<Recorrido> getRecorridos() {
@@ -142,14 +152,9 @@ public class Itinerario {
 
     @Override
     public String toString() {
-        return "Itinerario{" + "id=" + id + ", nombre=" + nombre + ", listaQuejas=" + listaQuejas + ", recorridos=" + recorridos + ", maxVisitantes=" + maxVisitantes + ", guia=" + guia + ", fecha=" + fecha + '}';
+        return "Itinerario{" + "id=" + id + ", nombre=" + nombre + ", listaQuejas=" + quejas + ", recorridos=" + recorridos + ", maxVisitantes=" + maxVisitantes + ", guia=" + guia + ", fecha=" + fecha + '}';
     }
-
-    
-    
-
 
 }
 
 
-//~ Formatted by Jindent --- http://www.jindent.com

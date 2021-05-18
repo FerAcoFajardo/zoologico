@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import objetonegocio.Continente;
 import objetonegocio.Especie;
-import objetonegocio.Habitat;
+import objetonegocio.Zona;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -20,25 +20,25 @@ import org.bson.types.ObjectId;
  *
  * @author fernando
  */
-public class ZonasDAO extends BaseDAO<Habitat> {
+public class ZonasDAO extends BaseDAO<Zona> {
 
     @Override
-    public Habitat buscar(ObjectId id) throws DAOException {
+    public Zona buscar(ObjectId id) throws DAOException {
         try {
-           MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
-            Habitat habitat = coleccionHabitat.find(
+           MongoCollection<Zona> coleccionHabitat = this.getColeccion();
+            Zona zona = coleccionHabitat.find(
                     Filters.eq("_id", id)).first();
-            if(habitat == null){
-                throw new DAOException("Error: El habitat no existe");
+            if(zona == null){
+                throw new DAOException("Error: El zona no existe");
             }
-            return habitat;
+            return zona;
         } catch (Exception ex) {
             throw new DAOException(ex.getMessage(), ex);
         }
     }
 
     @Override
-    public Habitat buscar(String id) throws DAOException {
+    public Zona buscar(String id) throws DAOException {
         try {
             return this.buscar(new ObjectId(id));
         } catch (Exception ex) {
@@ -47,22 +47,22 @@ public class ZonasDAO extends BaseDAO<Habitat> {
     }
 
     @Override
-    public void actualizar(Habitat habitat) throws DAOException {
+    public void actualizar(Zona zona) throws DAOException {
         try {
-            MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
-            Habitat habitatActualizado = coleccionHabitat.find(
-                    Filters.eq("_id", habitat.getId())).first();
+            MongoCollection<Zona> coleccionHabitat = this.getColeccion();
+            Zona zonaActualizado = coleccionHabitat.find(
+                    Filters.eq("_id", zona.getId())).first();
 
-            habitatActualizado.setNombre(habitat.getNombre());
-            habitatActualizado.setClima(habitat.getClima());
-            habitatActualizado.setContinentes(habitat.getContinentes());
-         //   if (!habitatActualizado.getEspecies().isEmpty()) {
-           //     habitatActualizado.setEspecies(habitat.getEspecies());
+            zonaActualizado.setNombre(zona.getNombre());
+            zonaActualizado.setEspecies(zona.getEspecies());
+            zonaActualizado.setExtension(zona.getExtension());
+         //   if (!zonaActualizado.getEspecies().isEmpty()) {
+           //     zonaActualizado.setEspecies(zona.getEspecies());
             //}
 
             coleccionHabitat.findOneAndReplace(
-                    Filters.eq("_id", habitat.getId()),
-                    habitatActualizado);
+                    Filters.eq("_id", zona.getId()),
+                    zonaActualizado);
         } catch (Exception ex) {
             throw new DAOException(ex.getMessage(), ex);
         }
@@ -71,10 +71,10 @@ public class ZonasDAO extends BaseDAO<Habitat> {
     @Override
     public void eliminar(ObjectId id) throws DAOException {
         try {
-            MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
-            Habitat habitat = coleccionHabitat.findOneAndDelete(Filters.eq("_id", id));
-            if(habitat == null)
-                throw new DAOException("Error: El habitat no existe");
+            MongoCollection<Zona> coleccionHabitat = this.getColeccion();
+            Zona zona = coleccionHabitat.findOneAndDelete(Filters.eq("_id", id));
+            if(zona == null)
+                throw new DAOException("Error: El zona no existe");
         } catch (Exception ex) {
             throw new DAOException(ex.getMessage(), ex);
         }
@@ -90,19 +90,19 @@ public class ZonasDAO extends BaseDAO<Habitat> {
     }
 
     @Override
-    protected MongoCollection<Habitat> getColeccion() throws DAOException {
-        MongoCollection<Habitat> colecionHabitat
-                = this.generarConexion().getCollection("habitats", Habitat.class);
+    protected MongoCollection<Zona> getColeccion() throws DAOException {
+        MongoCollection<Zona> colecionHabitat
+                = this.generarConexion().getCollection("zonas", Zona.class);
         return colecionHabitat;
     }
 
     @Override
-    public List<Habitat> buscar() throws DAOException {
+    public List<Zona> buscar() throws DAOException {
         try {
-            MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
-            List<Habitat> habitats = new ArrayList<>();
-            coleccionHabitat.find().into(habitats);
-            return habitats;
+            MongoCollection<Zona> coleccionHabitat = this.getColeccion();
+            List<Zona> zonas = new ArrayList<>();
+            coleccionHabitat.find().into(zonas);
+            return zonas;
         } catch (Exception ex) {
             throw new DAOException(ex.getMessage(), ex);
         }
@@ -110,9 +110,9 @@ public class ZonasDAO extends BaseDAO<Habitat> {
     }
 
     @Override
-    public void guardar(Habitat entidad) throws DAOException {
+    public void guardar(Zona entidad) throws DAOException {
         try {
-            MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
+            MongoCollection<Zona> coleccionHabitat = this.getColeccion();
             coleccionHabitat.insertOne(entidad);
         } catch (Exception ex) {
             throw new DAOException(ex.getMessage(), ex);
@@ -121,7 +121,7 @@ public class ZonasDAO extends BaseDAO<Habitat> {
 
     public void agregarContinente(ObjectId id, List<Continente> continentes) throws DAOException {
         try {
-            MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
+            MongoCollection<Zona> coleccionHabitat = this.getColeccion();
             coleccionHabitat.updateOne(Filters.eq("_id", id),
                     new Document("$push", new Document()
                             .append("continentes", continentes)
@@ -135,7 +135,7 @@ public class ZonasDAO extends BaseDAO<Habitat> {
 
     public void agregarEspecies(ObjectId idHabitat, List<Especie> especies) throws DAOException {
          try {
-            MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
+            MongoCollection<Zona> coleccionHabitat = this.getColeccion();
             coleccionHabitat.updateOne(Filters.eq("_id", idHabitat),
                     new Document("$push", new Document()
                             .append("especies", especies)
@@ -149,7 +149,7 @@ public class ZonasDAO extends BaseDAO<Habitat> {
     
     public void eliminarEspecies(ObjectId idHabitat, ObjectId idEspecies) throws DAOException {
          try {
-            MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
+            MongoCollection<Zona> coleccionHabitat = this.getColeccion();
             coleccionHabitat.updateOne(Filters.eq("_id", idHabitat),
                     new Document("$pull", new Document()
                             .append("especies", Filters.eq("_id",idEspecies))

@@ -207,7 +207,7 @@ public class FrmEditarAnimales extends javax.swing.JDialog {
             Animal animal = new Animal(nombre, edad, especie, sexo);
             listaAnimales.add(animal);
         }
-        especie.setListaAnimales(listaAnimales);
+        especie.setAnimales(listaAnimales);
         ((FrmPantallaRegistroEspecie)super.getParent()).setEspecie(especie);
         ((FrmPantallaRegistroEspecie)super.getParent()).actualizarNumAnimales(listaAnimales.size());
         dispose();

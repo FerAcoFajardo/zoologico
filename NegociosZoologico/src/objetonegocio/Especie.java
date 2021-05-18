@@ -15,7 +15,7 @@ import org.bson.types.ObjectId;
  */
 public class Especie {
     private ObjectId id;
-    private Habitat habitat;
+    private List<ObjectId> habitat;
     private List<Animal> animales;
     private String            nombreNormal;
     private String            nombreCientifico;
@@ -28,9 +28,9 @@ public class Especie {
         this.id = id;
     }
 
-    public Especie(ObjectId id, ArrayList<Animal> listaAnimales, String nombreNormal, String nombreCientifico, String descripcion, ArrayList<CuidadorEspecie> listaCuidadoresEspecie) {
+    public Especie(ObjectId id, List<Animal> animales, String nombreNormal, String nombreCientifico, String descripcion, ArrayList<CuidadorEspecie> listaCuidadoresEspecie) {
         this.id = id;
-        this.animales = listaAnimales;
+        this.animales = animales;
         this.nombreNormal = nombreNormal;
         this.nombreCientifico = nombreCientifico;
         this.descripcion = descripcion;
@@ -39,8 +39,8 @@ public class Especie {
 
     
     
-    public Especie(ArrayList<Animal> listaAnimales, String nombreNormal, String nombreCientifico, String descripcion, ArrayList<CuidadorEspecie> listaCuidadoresEspecie) {
-        this.animales = listaAnimales;
+    public Especie(List<Animal> animales, String nombreNormal, String nombreCientifico, String descripcion, ArrayList<CuidadorEspecie> listaCuidadoresEspecie) {
+        this.animales = animales;
         this.nombreNormal = nombreNormal;
         this.nombreCientifico = nombreCientifico;
         this.descripcion = descripcion;
@@ -55,13 +55,13 @@ public class Especie {
 
     /**
      * Contruye una instancia de especie de animal
-     * @param listaAnimales Lista de animales que pertenecen a la especie
+     * @param animales Lista de animales que pertenecen a la especie
      * @param nombreNormal Nombre normal de la especie
      * @param nombreCientifico Nombre cientifico de la especie
      * @param descripcion Descripción de la especie
      */
-    public Especie(List<Animal> listaAnimales, String nombreNormal, String nombreCientifico, String descripcion) {
-        this.animales    = listaAnimales;
+    public Especie(List<Animal> animales, String nombreNormal, String nombreCientifico, String descripcion) {
+        this.animales    = animales;
         this.nombreNormal     = nombreNormal;
         this.nombreCientifico = nombreCientifico;
         this.descripcion      = descripcion;
@@ -75,11 +75,11 @@ public class Especie {
         return descripcion;
     }
 
-    public Habitat getHabitat() {
+    public List<ObjectId> getHabitat() {
         return habitat;
     }
 
-    public void setHabitat(Habitat habitat) {
+    public void setHabitat(List<ObjectId> habitat) {
         this.habitat = habitat;
     }
     
@@ -96,16 +96,16 @@ public class Especie {
      *
      * @return Regresa la lista de animales de la especie
      */
-    public List<Animal> getListaAnimales() {
+    public List<Animal> getAnimales() {
         return animales;
     }
 
     /**
      * Esablece la lista de animales de la especie
-     * @param listaAnimales Lista de animales de la especie
+     * @param animales Lista de animales de la especie
      */
-    public void setListaAnimales(List<Animal> listaAnimales) {
-        this.animales = listaAnimales;
+    public void setAnimales(List<Animal> animales) {
+        this.animales = animales;
     }
 
     /**
@@ -159,9 +159,10 @@ public class Especie {
 
     @Override
     public String toString() {
-        
-        return "Especie{" + "nombreNormal=" + nombreNormal + ", nombreCientifico=" + nombreCientifico + ", descripcion=" + descripcion + '}';
+        return "Especie{" + "id=" + id + ", habitat=" + habitat + ", animales=" + animales + ", nombreNormal=" + nombreNormal + ", nombreCientifico=" + nombreCientifico + ", descripcion=" + descripcion + '}';
     }
+
+    
     
     public void verificarCampos() throws BusinessException{
         if(this.nombreNormal == null){

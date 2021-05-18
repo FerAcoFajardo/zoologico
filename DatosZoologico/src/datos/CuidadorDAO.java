@@ -10,11 +10,7 @@ import com.mongodb.client.model.Filters;
 import exceptions.DAOException;
 import java.util.ArrayList;
 import java.util.List;
-import objetonegocio.Continente;
 import objetonegocio.Cuidador;
-import objetonegocio.Especie;
-import objetonegocio.Habitat;
-import org.bson.Document;
 import org.bson.types.ObjectId;
 
 /**
@@ -48,37 +44,34 @@ public class CuidadorDAO extends BaseDAO<Cuidador> {
     }
 
     @Override
-    public void actualizar(Cuidador habitat) throws DAOException {
-//        try {
-//            MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
-//            Habitat habitatActualizado = coleccionHabitat.find(
-//                    Filters.eq("_id", habitat.getId())).first();
-//
-//            habitatActualizado.setNombre(habitat.getNombre());
-//            habitatActualizado.setClima(habitat.getClima());
-//            habitatActualizado.setContinentes(habitat.getContinentes());
-//          //  if (!habitatActualizado.getEspecies().isEmpty()) {
-//           //     habitatActualizado.setEspecies(habitat.getEspecies());
-//            //}
-//
-//            coleccionHabitat.findOneAndReplace(
-//                    Filters.eq("_id", habitat.getId()),
-//                    habitatActualizado);
-//        } catch (Exception ex) {
-//            throw new DAOException(ex.getMessage(), ex);
-//        }
+    public void actualizar(Cuidador cuidador) throws DAOException {
+        try {
+            MongoCollection<Cuidador> coleccionCuidador = this.getColeccion();
+            Cuidador cuidadorActualizado = coleccionCuidador.find(
+                    Filters.eq("_id", cuidador.getId())).first();
+
+            cuidadorActualizado.setNombre(cuidador.getNombre());
+            cuidadorActualizado.setDireccion(cuidador.getDireccion());
+            cuidadorActualizado.setTelefono(cuidador.getTelefono());
+            cuidadorActualizado.setFecha(cuidador.getFecha());
+            coleccionCuidador.findOneAndReplace(
+                    Filters.eq("_id", cuidador.getId()),
+                    cuidadorActualizado);
+        } catch (Exception ex) {
+            throw new DAOException(ex.getMessage(), ex);
+        }
     }
 
     @Override
     public void eliminar(ObjectId id) throws DAOException {
-//        try {
-//            MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
-//            Habitat habitat = coleccionHabitat.findOneAndDelete(Filters.eq("_id", id));
-//            if(habitat == null)
-//                throw new DAOException("Error: El habitat no existe");
-//        } catch (Exception ex) {
-//            throw new DAOException(ex.getMessage(), ex);
-//        }
+        try {
+            MongoCollection<Cuidador> coleccionCuidador = this.getColeccion();
+            Cuidador cuidador = coleccionCuidador.findOneAndDelete(Filters.eq("_id", id));
+            if(cuidador == null)
+                throw new DAOException("Error: El cuidador no existe");
+        } catch (Exception ex) {
+            throw new DAOException(ex.getMessage(), ex);
+        }
     }
 
     @Override
@@ -119,46 +112,5 @@ public class CuidadorDAO extends BaseDAO<Cuidador> {
             throw new DAOException(ex.getMessage(), ex);
         }
     }
-//
-//    public void agregarContinente(ObjectId id, List<Continente> continentes) throws DAOException {
-//        try {
-//            MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
-//            coleccionHabitat.updateOne(Filters.eq("_id", id),
-//                    new Document("$push", new Document()
-//                            .append("continentes", continentes)
-//                    )
-//            );
-//        } catch (Exception ex) {
-//            throw new DAOException(ex.getMessage(), ex);
-//        }
-//
-//    }
-
-//    public void agregarEspecies(ObjectId idHabitat, List<Especie> especies) throws DAOException {
-//         try {
-//            MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
-//            coleccionHabitat.updateOne(Filters.eq("_id", idHabitat),
-//                    new Document("$push", new Document()
-//                            .append("especies", especies)
-//                    )
-//            );
-//        } catch (Exception ex) {
-//            throw new DAOException(ex.getMessage(), ex);
-//        }
-//    }
-//    
-//    
-//    public void eliminarEspecies(ObjectId idHabitat, ObjectId idEspecies) throws DAOException {
-//         try {
-//            MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
-//            coleccionHabitat.updateOne(Filters.eq("_id", idHabitat),
-//                    new Document("$pull", new Document()
-//                            .append("especies", Filters.eq("_id",idEspecies))
-//                    )
-//            );
-//        } catch (Exception ex) {
-//            throw new DAOException(ex.getMessage(), ex);
-//        }
-//    }
 
 }

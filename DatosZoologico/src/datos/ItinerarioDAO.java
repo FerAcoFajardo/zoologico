@@ -7,12 +7,11 @@ package datos;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
 import exceptions.DAOException;
 import java.util.ArrayList;
 import java.util.List;
-import objetonegocio.Continente;
-import objetonegocio.Especie;
-import objetonegocio.Habitat;
+import objetonegocio.Itinerario;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -20,25 +19,25 @@ import org.bson.types.ObjectId;
  *
  * @author fernando
  */
-public class ItinerarioDAO extends BaseDAO<Habitat> {
+public class ItinerarioDAO extends BaseDAO<Itinerario> {
 
     @Override
-    public Habitat buscar(ObjectId id) throws DAOException {
+    public Itinerario buscar(ObjectId id) throws DAOException {
         try {
-           MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
-            Habitat habitat = coleccionHabitat.find(
+           MongoCollection<Itinerario> coleccionItinerario = this.getColeccion();
+            Itinerario itinerario = coleccionItinerario.find(
                     Filters.eq("_id", id)).first();
-            if(habitat == null){
-                throw new DAOException("Error: El habitat no existe");
+            if(itinerario == null){
+                throw new DAOException("Error: El itinerario no existe");
             }
-            return habitat;
+            return itinerario;
         } catch (Exception ex) {
             throw new DAOException(ex.getMessage(), ex);
         }
     }
 
     @Override
-    public Habitat buscar(String id) throws DAOException {
+    public Itinerario buscar(String id) throws DAOException {
         try {
             return this.buscar(new ObjectId(id));
         } catch (Exception ex) {
@@ -47,22 +46,20 @@ public class ItinerarioDAO extends BaseDAO<Habitat> {
     }
 
     @Override
-    public void actualizar(Habitat habitat) throws DAOException {
+    public void actualizar(Itinerario itinerario) throws DAOException {
         try {
-            MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
-            Habitat habitatActualizado = coleccionHabitat.find(
-                    Filters.eq("_id", habitat.getId())).first();
+            MongoCollection<Itinerario> coleccionItinerario = this.getColeccion();
+            Itinerario itinerarioActualizado = coleccionItinerario.find(
+                    Filters.eq("_id", itinerario.getId())).first();
 
-            habitatActualizado.setNombre(habitat.getNombre());
-            habitatActualizado.setClima(habitat.getClima());
-            habitatActualizado.setContinentes(habitat.getContinentes());
-           // if (!habitatActualizado.getEspecies().isEmpty()) {
-            //    habitatActualizado.setEspecies(habitat.getEspecies());
-            //}
-
-            coleccionHabitat.findOneAndReplace(
-                    Filters.eq("_id", habitat.getId()),
-                    habitatActualizado);
+            itinerarioActualizado.setFecha(itinerario.getFecha());
+            itinerarioActualizado.setGuia(itinerario.getGuia());
+            itinerarioActualizado.setQuejas(itinerario.getQuejas());
+            itinerarioActualizado.setNombre(itinerario.getNombre());
+            itinerarioActualizado.setMaxVisitantes(itinerario.getMaxVisitantes());
+            coleccionItinerario.findOneAndReplace(
+                    Filters.eq("_id", itinerario.getId()),
+                    itinerarioActualizado);
         } catch (Exception ex) {
             throw new DAOException(ex.getMessage(), ex);
         }
@@ -71,10 +68,10 @@ public class ItinerarioDAO extends BaseDAO<Habitat> {
     @Override
     public void eliminar(ObjectId id) throws DAOException {
         try {
-            MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
-            Habitat habitat = coleccionHabitat.findOneAndDelete(Filters.eq("_id", id));
-            if(habitat == null)
-                throw new DAOException("Error: El habitat no existe");
+            MongoCollection<Itinerario> coleccionItinerario = this.getColeccion();
+            Itinerario itinerario = coleccionItinerario.findOneAndDelete(Filters.eq("_id", id));
+            if(itinerario == null)
+                throw new DAOException("Error: El itinerario no existe");
         } catch (Exception ex) {
             throw new DAOException(ex.getMessage(), ex);
         }
@@ -90,19 +87,19 @@ public class ItinerarioDAO extends BaseDAO<Habitat> {
     }
 
     @Override
-    protected MongoCollection<Habitat> getColeccion() throws DAOException {
-        MongoCollection<Habitat> colecionHabitat
-                = this.generarConexion().getCollection("habitats", Habitat.class);
-        return colecionHabitat;
+    protected MongoCollection<Itinerario> getColeccion() throws DAOException {
+        MongoCollection<Itinerario> colecionItinerario
+                = this.generarConexion().getCollection("itinerarios", Itinerario.class);
+        return colecionItinerario;
     }
 
     @Override
-    public List<Habitat> buscar() throws DAOException {
+    public List<Itinerario> buscar() throws DAOException {
         try {
-            MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
-            List<Habitat> habitats = new ArrayList<>();
-            coleccionHabitat.find().into(habitats);
-            return habitats;
+            MongoCollection<Itinerario> coleccionItinerario = this.getColeccion();
+            List<Itinerario> itinerarios = new ArrayList<>();
+            coleccionItinerario.find().into(itinerarios);
+            return itinerarios;
         } catch (Exception ex) {
             throw new DAOException(ex.getMessage(), ex);
         }
@@ -110,35 +107,22 @@ public class ItinerarioDAO extends BaseDAO<Habitat> {
     }
 
     @Override
-    public void guardar(Habitat entidad) throws DAOException {
+    public void guardar(Itinerario entidad) throws DAOException {
         try {
-            MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
-            coleccionHabitat.insertOne(entidad);
+            MongoCollection<Itinerario> coleccionItinerario = this.getColeccion();
+            coleccionItinerario.insertOne(entidad);
         } catch (Exception ex) {
             throw new DAOException(ex.getMessage(), ex);
         }
     }
 
-    public void agregarContinente(ObjectId id, List<Continente> continentes) throws DAOException {
-        try {
-            MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
-            coleccionHabitat.updateOne(Filters.eq("_id", id),
-                    new Document("$push", new Document()
-                            .append("continentes", continentes)
-                    )
-            );
-        } catch (Exception ex) {
-            throw new DAOException(ex.getMessage(), ex);
-        }
 
-    }
-
-    public void agregarEspecies(ObjectId idHabitat, List<Especie> especies) throws DAOException {
+    public void agregarQueja(ObjectId idItinerario, ObjectId queja) throws DAOException {
          try {
-            MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
-            coleccionHabitat.updateOne(Filters.eq("_id", idHabitat),
+            MongoCollection<Itinerario> coleccionItinerario = this.getColeccion();
+            coleccionItinerario.updateOne(Filters.eq("_id", idItinerario),
                     new Document("$push", new Document()
-                            .append("especies", especies)
+                            .append("queja", queja)
                     )
             );
         } catch (Exception ex) {
@@ -147,14 +131,11 @@ public class ItinerarioDAO extends BaseDAO<Habitat> {
     }
     
     
-    public void eliminarEspecies(ObjectId idHabitat, ObjectId idEspecies) throws DAOException {
+    public void eliminarQueja(ObjectId idItinerario, ObjectId idQueja) throws DAOException {
          try {
-            MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
-            coleccionHabitat.updateOne(Filters.eq("_id", idHabitat),
-                    new Document("$pull", new Document()
-                            .append("especies", Filters.eq("_id",idEspecies))
-                    )
-            );
+            MongoCollection<Itinerario> coleccionItinerario = getColeccion();
+            coleccionItinerario.updateOne(Filters.eq("_id", idItinerario), 
+                    Updates.pull("quejas", Filters.eq("_id", idQueja)));
         } catch (Exception ex) {
             throw new DAOException(ex.getMessage(), ex);
         }

@@ -11,7 +11,7 @@ import org.bson.types.ObjectId;
  */
 public class Recorrido {
     private ObjectId id;
-    private Zona zona;
+    private ObjectId zona;
     private Itinerario itinerario;
     private int duracion;
     private int longitud;
@@ -24,7 +24,7 @@ public class Recorrido {
         this.id = id;
     }
 
-    public Recorrido(ObjectId id, Zona zona, int duracion, int longitud, int numEspecies) {
+    public Recorrido(ObjectId id, ObjectId zona, int duracion, int longitud, int numEspecies) {
         this.id = id;
         this.zona = zona;
         this.duracion = duracion;
@@ -33,14 +33,14 @@ public class Recorrido {
     }
 
     
-    public Recorrido(Zona zona, int duracion, int longitud, int numEspecies) {
+    public Recorrido(ObjectId zona, int duracion, int longitud, int numEspecies) {
         this.zona = zona;
         this.duracion = duracion;
         this.longitud = longitud;
         this.numEspecies = numEspecies;
     }
 
-    public Zona getZona() {
+    public ObjectId getZona() {
         return zona;
     }
 
@@ -54,7 +54,7 @@ public class Recorrido {
 
     
     
-    public void setZona(Zona zona) {
+    public void setZona(ObjectId zona) {
         this.zona = zona;
     }
 
@@ -81,6 +81,8 @@ public class Recorrido {
     public void setNumEspecies(int numEspecies) {
         this.numEspecies = numEspecies;
     }
+    
+    
 
     public ObjectId getId() {
         return id;
