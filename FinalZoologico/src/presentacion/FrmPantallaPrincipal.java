@@ -87,6 +87,9 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
         btnRegistroEspecies.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_pets_64px.png"))); // NOI18N
         btnRegistroEspecies.setText("Registro de especies");
         btnRegistroEspecies.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegistroEspeciesMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnRegistroEspeciesMouseEntered(evt);
             }
@@ -159,9 +162,9 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
 
     private void btnMostrarRegistroHabitatclkBotonMostrarRegistroHabitat(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMostrarRegistroHabitatclkBotonMostrarRegistroHabitat
         try{
-            listaDatos = iNegocios.recuperarDatosFormEspecie();
-            FrmPantallaRegistroEspecie frmPantallaRegistroEspecie = FrmPantallaRegistroEspecie.getInstance(this);
-            frmPantallaRegistroEspecie.despliegaInformacion(listaDatos);
+            listaDatos = iNegocios.recuperarDatosFormHabitat();
+            FrmPantallaRegistrarHabitat frmPantallaRegistrarHabitat = FrmPantallaRegistrarHabitat.getInstance(this);
+            frmPantallaRegistrarHabitat.despliegaInformacion(listaDatos);
         }catch(Exception e){
             muestraMsjError(e.getMessage());
         }
@@ -177,9 +180,9 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
 
     private void btnRegistroEspeciesclkMostrarRegistrarEspecie(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroEspeciesclkMostrarRegistrarEspecie
         try{
-            listaDatos = iNegocios.recuperarDatosFormHabitat();
-            FrmPantallaRegistrarHabitat frmPantallaRegistrarHabitat = FrmPantallaRegistrarHabitat.getInstance(this);
-            frmPantallaRegistrarHabitat.despliegaInformacion(listaDatos);
+            listaDatos = iNegocios.recuperarDatosFormEspecie();
+            FrmPantallaRegistroEspecie frmPantallaRegistroEspecie = FrmPantallaRegistroEspecie.getInstance(this);
+            frmPantallaRegistroEspecie.despliegaInformacion(listaDatos);
         }catch(Exception e){
             muestraMsjError(e.getMessage());
         }
@@ -208,6 +211,10 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
     private void btnRegistrarQuejaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarQuejaMouseReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegistrarQuejaMouseReleased
+
+    private void btnRegistroEspeciesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroEspeciesMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistroEspeciesMouseClicked
 
     
     public void muestraMsjError(String mensaje){

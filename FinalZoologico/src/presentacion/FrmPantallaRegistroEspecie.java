@@ -7,11 +7,10 @@ package presentacion;
 
 import exceptions.BusinessException;
 import exceptions.DAOException;
+import java.awt.HeadlessException;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import objetonegocio.Animal;
-import objetonegocio.Cuidador;
 import objetonegocio.Especie;
 import objetonegocio.Habitat;
 import reglas_negocio.FabricaNegocios;
@@ -36,6 +35,14 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        this.txtADescripcion.setEnabled(false);
+        this.txtNombreCientifico.setEnabled(false);
+        this.txtNumAnimales.setEnabled(false);
+        //this.cmbCuidador.setEnabled(false);
+        this.cmbHabitat.setEnabled(false);
+        this.btnEditarAnimal.setEnabled(false);
+        this.btnRegistrarActualizar.setEnabled(false);
  
         
     }
@@ -86,6 +93,11 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -194,7 +206,6 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
 
         jLabel5.setBackground(new java.awt.Color(0, 0, 0));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Cuidadores disponibles");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -225,7 +236,6 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
 
         jLabel8.setBackground(new java.awt.Color(0, 0, 0));
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Cuidadores seleccionados");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -245,7 +255,7 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jScrollPane2)
                             .addComponent(jScrollPane3))))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,13 +291,14 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Codigo inutil
     private void btnEditarAnimalclkBotonVerificarExistencia(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarAnimalclkBotonVerificarExistencia
         // TODO add your handling code here:
 
         try {
-            Especie especie = verificaExistencia();
-            if (especie != null) {
-                llenaCamposInfo(especie);
+            Especie especiee = verificaExistencia();
+            if (especiee != null) {
+                llenaCamposInfo(especiee);
                 throw new BusinessException("La especie ya existe");
             } else {
                 activaCampos();
@@ -301,17 +312,50 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
     }//GEN-LAST:event_btnEditarAnimalclkBotonVerificarExistencia
 
     private void btnRegistrarActualizarclkBotonVerificarExistencia(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActualizarclkBotonVerificarExistencia
-        // TODO add your handling code here:
+   
+        try{
+            Especie especiee = new Especie();
+            especiee.setNombreNormal(this.txtNombreNormal.getText());
+            especiee.setNombreCientifico(this.txtNombreCientifico.getText());
+            especiee.setDescripcion(this.txtADescripcion.getText());
+            especiee.setHabitat( ((Habitat) this.cmbHabitat.getSelectedItem()) );
+            if(exist)
+                iNegocios.guadarEspecie(especiee);
+            else
+                iNegocios.guadarEspecie(especiee);
+            JOptionPane.showMessageDialog(this, especiee,"Creado exitosamente", JOptionPane.INFORMATION_MESSAGE);
+        }catch(DAOException | HeadlessException e){
+            muestraMsjError(e.getMessage(), JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnRegistrarActualizarclkBotonVerificarExistencia
-
+    
+    //Codigo para verificar existencia
     private void btnVerificarExistenciaclkBotonVerificarExistencia(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarExistenciaclkBotonVerificarExistencia
-        // TODO add your handling code here:
+        try {
+            Especie especie = verificaExistencia();
+            if (especie != null) {
+                this.exist = true;
+                llenaCamposInfo(especie);
+                throw new BusinessException("La especie ya existe");
+            }
+
+        } catch (DAOException ex) {
+            System.out.println("pito");
+            activaCampos();
+            muestraMsjError(ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+        } catch (BusinessException ex) {
+            muestraMsjError(ex.getMessage(), JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnVerificarExistenciaclkBotonVerificarExistencia
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        this.instancia = null;
+    }//GEN-LAST:event_formWindowClosed
 
     public void activaCampos(){
         this.txtADescripcion.setEnabled(true);
         this.txtNombreCientifico.setEnabled(true);
-        this.txtNombreNormal.setEnabled(true);
+        this.txtNumAnimales.setEnabled(true);
         //this.cmbCuidador.setEnabled(true);
         this.cmbHabitat.setEnabled(true);
         this.btnEditarAnimal.setEnabled(true);
@@ -410,4 +454,6 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
     private javax.swing.JTextField txtNombreNormal;
     private javax.swing.JTextField txtNumAnimales;
     // End of variables declaration//GEN-END:variables
+    private boolean exist = false;
+    
 }

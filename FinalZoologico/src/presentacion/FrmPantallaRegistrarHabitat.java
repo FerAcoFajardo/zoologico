@@ -153,7 +153,7 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
                 btnVerificarclkBotonVerificarExistencia(evt);
             }
         });
-        jPanel2.add(btnVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, -1, -1));
+        jPanel2.add(btnVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, -1, -1));
 
         cmbVegetacion.setBackground(new java.awt.Color(204, 204, 204));
         cmbVegetacion.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -202,7 +202,7 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
         jPanel4.setForeground(new java.awt.Color(204, 204, 204));
 
         pnlContinentes.setBackground(new java.awt.Color(204, 204, 204));
-        pnlContinentes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Continentes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 24), new java.awt.Color(0, 0, 0))); // NOI18N
+        pnlContinentes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Continentes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 24))); // NOI18N
         pnlContinentes.setForeground(new java.awt.Color(51, 51, 51));
         pnlContinentes.setFocusable(false);
         pnlContinentes.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -252,7 +252,7 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnlContinentes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
