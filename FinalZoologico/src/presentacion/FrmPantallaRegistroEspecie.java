@@ -59,168 +59,231 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        txtNumAnimales = new javax.swing.JTextField();
+        btnEditarAnimal = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        txtNombreNormal = new javax.swing.JTextField();
-        txtNombreCientifico = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtADescripcion = new javax.swing.JTextArea();
-        btnEditarAnimal = new javax.swing.JButton();
-        btnRegistrarActualizar = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         cmbHabitat = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        txtNombreNormal = new javax.swing.JTextField();
+        txtNombreCientifico = new javax.swing.JTextField();
+        btnRegistrarActualizar = new javax.swing.JButton();
+        btnVerificarExistencia = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        cmbCuidador = new javax.swing.JComboBox<>();
-        jButton3 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        txtNumAnimales = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setBackground(new java.awt.Color(23, 100, 191));
+        jPanel2.setPreferredSize(new java.awt.Dimension(481, 75));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Registro / Actualización de especies");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1180, -1));
+
+        jPanel3.setBackground(new java.awt.Color(49, 58, 73));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Nombre normal");
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
+        txtNumAnimales.setBackground(new java.awt.Color(204, 204, 204));
+        txtNumAnimales.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jPanel3.add(txtNumAnimales, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, 190, -1));
+
+        btnEditarAnimal.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnEditarAnimal.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditarAnimal.setText("Editar Animales");
+        btnEditarAnimal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarAnimalclkBotonVerificarExistencia(evt);
+            }
+        });
+        jPanel3.add(btnEditarAnimal, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 460, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nombre cientifico");
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
-        txtNombreCientifico.setEnabled(false);
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Num de animales");
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Descripción");
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
 
+        jScrollPane1.setBackground(new java.awt.Color(204, 204, 204));
+
+        txtADescripcion.setBackground(new java.awt.Color(204, 204, 204));
         txtADescripcion.setColumns(20);
+        txtADescripcion.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        txtADescripcion.setForeground(new java.awt.Color(255, 255, 255));
         txtADescripcion.setRows(5);
         txtADescripcion.setEnabled(false);
         jScrollPane1.setViewportView(txtADescripcion);
 
-        btnEditarAnimal.setText("Editar Animales");
-        btnEditarAnimal.setEnabled(false);
-        btnEditarAnimal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clkMostrarEditarAnimales(evt);
-            }
-        });
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 540, -1));
 
+        cmbHabitat.setBackground(new java.awt.Color(204, 204, 204));
+        cmbHabitat.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        cmbHabitat.setForeground(new java.awt.Color(255, 255, 255));
+        cmbHabitat.setEnabled(false);
+        jPanel3.add(cmbHabitat, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 200, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Habitat");
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, -1, -1));
+
+        txtNombreNormal.setBackground(new java.awt.Color(204, 204, 204));
+        txtNombreNormal.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jPanel3.add(txtNombreNormal, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, 190, -1));
+
+        txtNombreCientifico.setBackground(new java.awt.Color(204, 204, 204));
+        txtNombreCientifico.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jPanel3.add(txtNombreCientifico, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 190, -1));
+
+        btnRegistrarActualizar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnRegistrarActualizar.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrarActualizar.setText("Registrar/Actualizar");
-        btnRegistrarActualizar.setEnabled(false);
         btnRegistrarActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clkBotonGuardar(evt);
+                btnRegistrarActualizarclkBotonVerificarExistencia(evt);
             }
         });
+        jPanel3.add(btnRegistrarActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 460, -1, -1));
 
-        jLabel4.setText("Habitat");
-
-        cmbHabitat.setEnabled(false);
-
-        jLabel5.setText("Cuidador");
-
-        cmbCuidador.setEnabled(false);
-
-        jButton3.setText("Verificar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnVerificarExistencia.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnVerificarExistencia.setForeground(new java.awt.Color(255, 255, 255));
+        btnVerificarExistencia.setText("Verificar");
+        btnVerificarExistencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clkBotonVerificarExistencia(evt);
+                btnVerificarExistenciaclkBotonVerificarExistencia(evt);
             }
         });
+        jPanel3.add(btnVerificarExistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, -1, -1));
 
-        jLabel6.setText("Numero de animales");
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 630, 530));
 
-        txtNumAnimales.setEnabled(false);
+        jPanel4.setBackground(new java.awt.Color(204, 204, 204));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtNumAnimales))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(cmbCuidador, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(cmbHabitat, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(btnRegistrarActualizar)
-                    .addComponent(btnEditarAnimal)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNombreCientifico))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtNombreNormal)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        jLabel5.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Cuidadores disponibles");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable2);
+
+        jLabel8.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("Cuidadores seleccionados");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(jLabel8))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane2)
+                            .addComponent(jScrollPane3))))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtNombreNormal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton3)))
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtNombreCientifico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtNumAnimales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(cmbHabitat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(cmbCuidador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(btnEditarAnimal)
-                .addGap(32, 32, 32)
-                .addComponent(btnRegistrarActualizar)
-                .addGap(27, 27, 27))
+                .addComponent(jLabel8)
+                .addGap(51, 51, 51)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(62, Short.MAX_VALUE))
         );
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 70, 550, 540));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void clkBotonVerificarExistencia(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clkBotonVerificarExistencia
+    private void btnEditarAnimalclkBotonVerificarExistencia(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarAnimalclkBotonVerificarExistencia
         // TODO add your handling code here:
-        
+
         try {
             Especie especie = verificaExistencia();
             if (especie != null) {
@@ -235,36 +298,21 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
         } catch (BusinessException ex) {
             muestraMsjError(ex.getMessage(), JOptionPane.WARNING_MESSAGE);
         }
-    }//GEN-LAST:event_clkBotonVerificarExistencia
+    }//GEN-LAST:event_btnEditarAnimalclkBotonVerificarExistencia
 
-    private void clkMostrarEditarAnimales(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clkMostrarEditarAnimales
-        try {
-            // TODO add your handling code here:
+    private void btnRegistrarActualizarclkBotonVerificarExistencia(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActualizarclkBotonVerificarExistencia
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarActualizarclkBotonVerificarExistencia
 
-            List<Animal> listaAnimales = iNegocios.recuperarAnimales(especie.getId());
-            FrmEditarAnimales frmEditarAnimales = FrmEditarAnimales.getInstance(this, especie);
-            frmEditarAnimales.despliegaInformacion(listaAnimales);
-        } catch (DAOException ex) {
-            muestraMsjError(ex.getMessage(), JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_clkMostrarEditarAnimales
-
-    private void clkBotonGuardar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clkBotonGuardar
-        try {
-            // TODO add your handling code here:
-            this.getEspecie().verificarCampos();
-            iNegocios.guadarEspecie(especie);
-        } catch (BusinessException | DAOException ex) {
-            muestraMsjError(ex.getMessage(), JOptionPane.ERROR_MESSAGE);
-        }
-        
-    }//GEN-LAST:event_clkBotonGuardar
+    private void btnVerificarExistenciaclkBotonVerificarExistencia(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarExistenciaclkBotonVerificarExistencia
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVerificarExistenciaclkBotonVerificarExistencia
 
     public void activaCampos(){
         this.txtADescripcion.setEnabled(true);
         this.txtNombreCientifico.setEnabled(true);
         this.txtNombreNormal.setEnabled(true);
-        this.cmbCuidador.setEnabled(true);
+        //this.cmbCuidador.setEnabled(true);
         this.cmbHabitat.setEnabled(true);
         this.btnEditarAnimal.setEnabled(true);
         this.btnRegistrarActualizar.setEnabled(true);
@@ -292,6 +340,7 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
          this.txtADescripcion.setText(especie.getDescripcion());
          this.txtNombreCientifico.setText(especie.getNombreCientifico());
          this.txtNombreNormal.setText(especie.getNombreNormal());
+         /*
          for (int i = 0; i < cmbCuidador.getItemCount(); i++) {
             if(cmbCuidador.getItemAt(i).getNombre().equals(especie.getListaCuidadoresEspecie().get(i).getCuidador().getNombre())){
                 cmbCuidador.setSelectedIndex(i);
@@ -302,6 +351,7 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
                 cmbHabitat.setSelectedIndex(i);
             }
         }
+*/
     }
 
     public Especie verificaExistencia() throws DAOException, BusinessException {
@@ -320,11 +370,13 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
                     this.cmbHabitat.addItem((Habitat) habitat);
                 });
             }
+            /*
             if (datos.get(i).get(0).getClass() == Cuidador.class) {
                 for (Object cuidador : (((List) datos.get(i)))) {
                     this.cmbCuidador.addItem((Cuidador) cuidador);
                 }
             }
+*/
         }
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -334,17 +386,25 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditarAnimal;
     private javax.swing.JButton btnRegistrarActualizar;
-    private javax.swing.JComboBox<Cuidador> cmbCuidador;
+    private javax.swing.JButton btnVerificarExistencia;
     private javax.swing.JComboBox<Habitat> cmbHabitat;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextArea txtADescripcion;
     private javax.swing.JTextField txtNombreCientifico;
     private javax.swing.JTextField txtNombreNormal;

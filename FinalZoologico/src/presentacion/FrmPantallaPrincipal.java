@@ -5,6 +5,7 @@
  */
 package presentacion;
 
+import java.awt.Cursor;
 import java.util.List;
 import javax.swing.JOptionPane;
 import reglas_negocio.FabricaNegocios;
@@ -38,65 +39,125 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        btnMostrarRegistroHabitat = new javax.swing.JLabel();
+        btnRegistroEspecies = new javax.swing.JLabel();
+        btnRegistrarItinerario = new javax.swing.JLabel();
+        btnRegistrarQueja = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Registrar Habitat");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clkBotonMostrarRegistroHabitat(evt);
-            }
-        });
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton2.setText("Registrar/Actualizar Especie");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clkMostrarRegistrarEspecie(evt);
+        jPanel3.setBackground(new java.awt.Color(23, 100, 191));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Zoológico");
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 6, -1, -1));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 60));
+
+        jPanel4.setBackground(new java.awt.Color(49, 58, 73));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnMostrarRegistroHabitat.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        btnMostrarRegistroHabitat.setForeground(new java.awt.Color(255, 255, 255));
+        btnMostrarRegistroHabitat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_no_image_64px.png"))); // NOI18N
+        btnMostrarRegistroHabitat.setText("Registro hábitats");
+        btnMostrarRegistroHabitat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnMostrarRegistroHabitatMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnMostrarRegistroHabitatMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnMostrarRegistroHabitatclkBotonMostrarRegistroHabitat(evt);
             }
         });
+        jPanel4.add(btnMostrarRegistroHabitat, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, 50));
+
+        btnRegistroEspecies.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        btnRegistroEspecies.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegistroEspecies.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_pets_64px.png"))); // NOI18N
+        btnRegistroEspecies.setText("Registro de especies");
+        btnRegistroEspecies.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegistroEspeciesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegistroEspeciesMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnRegistroEspeciesclkMostrarRegistrarEspecie(evt);
+            }
+        });
+        jPanel4.add(btnRegistroEspecies, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, 60));
+
+        btnRegistrarItinerario.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        btnRegistrarItinerario.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegistrarItinerario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_contact_details_64px.png"))); // NOI18N
+        btnRegistrarItinerario.setText("Registro de itinerarios");
+        btnRegistrarItinerario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegistrarItinerarioMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegistrarItinerarioMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnRegistrarItinerarioMouseReleased(evt);
+            }
+        });
+        jPanel4.add(btnRegistrarItinerario, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 197, 450, 60));
+
+        btnRegistrarQueja.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        btnRegistrarQueja.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegistrarQueja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_disclaimer_64px.png"))); // NOI18N
+        btnRegistrarQueja.setText("Registrar queja");
+        btnRegistrarQueja.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegistrarQuejaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegistrarQuejaMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnRegistrarQuejaMouseReleased(evt);
+            }
+        });
+        jPanel4.add(btnRegistrarQueja, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 279, -1, 60));
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 57, 470, 370));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jButton2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jButton1)))
-                .addContainerGap(21, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addContainerGap(318, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void clkBotonMostrarRegistroHabitat(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clkBotonMostrarRegistroHabitat
-        
-        try{
-            listaDatos = iNegocios.recuperarDatosFormHabitat();
-            FrmPantallaRegistrarHabitat frmPantallaRegistrarHabitat = FrmPantallaRegistrarHabitat.getInstance(this);
-            frmPantallaRegistrarHabitat.despliegaInformacion(listaDatos);
-        }catch(Exception e){
-            muestraMsjError(e.getMessage());
-        }
-        
-    }//GEN-LAST:event_clkBotonMostrarRegistroHabitat
+    private void btnMostrarRegistroHabitatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMostrarRegistroHabitatMouseEntered
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_btnMostrarRegistroHabitatMouseEntered
 
-    private void clkMostrarRegistrarEspecie(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clkMostrarRegistrarEspecie
+    private void btnMostrarRegistroHabitatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMostrarRegistroHabitatMouseExited
+        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_btnMostrarRegistroHabitatMouseExited
+
+    private void btnMostrarRegistroHabitatclkBotonMostrarRegistroHabitat(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMostrarRegistroHabitatclkBotonMostrarRegistroHabitat
         try{
             listaDatos = iNegocios.recuperarDatosFormEspecie();
             FrmPantallaRegistroEspecie frmPantallaRegistroEspecie = FrmPantallaRegistroEspecie.getInstance(this);
@@ -104,7 +165,49 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
         }catch(Exception e){
             muestraMsjError(e.getMessage());
         }
-    }//GEN-LAST:event_clkMostrarRegistrarEspecie
+    }//GEN-LAST:event_btnMostrarRegistroHabitatclkBotonMostrarRegistroHabitat
+
+    private void btnRegistroEspeciesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroEspeciesMouseEntered
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_btnRegistroEspeciesMouseEntered
+
+    private void btnRegistroEspeciesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroEspeciesMouseExited
+        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_btnRegistroEspeciesMouseExited
+
+    private void btnRegistroEspeciesclkMostrarRegistrarEspecie(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroEspeciesclkMostrarRegistrarEspecie
+        try{
+            listaDatos = iNegocios.recuperarDatosFormHabitat();
+            FrmPantallaRegistrarHabitat frmPantallaRegistrarHabitat = FrmPantallaRegistrarHabitat.getInstance(this);
+            frmPantallaRegistrarHabitat.despliegaInformacion(listaDatos);
+        }catch(Exception e){
+            muestraMsjError(e.getMessage());
+        }
+    }//GEN-LAST:event_btnRegistroEspeciesclkMostrarRegistrarEspecie
+
+    private void btnRegistrarItinerarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarItinerarioMouseEntered
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_btnRegistrarItinerarioMouseEntered
+
+    private void btnRegistrarItinerarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarItinerarioMouseExited
+        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_btnRegistrarItinerarioMouseExited
+
+    private void btnRegistrarItinerarioMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarItinerarioMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarItinerarioMouseReleased
+
+    private void btnRegistrarQuejaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarQuejaMouseEntered
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_btnRegistrarQuejaMouseEntered
+
+    private void btnRegistrarQuejaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarQuejaMouseExited
+        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_btnRegistrarQuejaMouseExited
+
+    private void btnRegistrarQuejaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarQuejaMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarQuejaMouseReleased
 
     
     public void muestraMsjError(String mensaje){
@@ -145,7 +248,13 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel btnMostrarRegistroHabitat;
+    private javax.swing.JLabel btnRegistrarItinerario;
+    private javax.swing.JLabel btnRegistrarQueja;
+    private javax.swing.JLabel btnRegistroEspecies;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
 }

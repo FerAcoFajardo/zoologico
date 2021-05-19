@@ -89,15 +89,20 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel3 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         lblNombreHabitat = new javax.swing.JLabel();
         txtNombreHabitat = new javax.swing.JTextField();
         btnVerificar = new javax.swing.JButton();
         cmbVegetacion = new javax.swing.JComboBox<>();
+        lblVegetacion = new javax.swing.JLabel();
+        lblClima = new javax.swing.JLabel();
         cmbClima = new javax.swing.JComboBox<>();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        lblVegetacion = new javax.swing.JLabel();
-        lblClima = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         pnlContinentes = new javax.swing.JPanel();
         scrlSeleccionados = new javax.swing.JScrollPane();
         listContinentesSeleccionados = new javax.swing.JList<>();
@@ -108,55 +113,116 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
         setForeground(java.awt.Color.red);
         setResizable(false);
 
+        jPanel3.setForeground(new java.awt.Color(204, 204, 204));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(23, 100, 191));
+        jPanel1.setPreferredSize(new java.awt.Dimension(481, 75));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Registrar hábitats");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 40));
+
+        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 62));
+
+        jPanel2.setBackground(new java.awt.Color(49, 58, 73));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblNombreHabitat.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblNombreHabitat.setForeground(new java.awt.Color(255, 255, 255));
         lblNombreHabitat.setText("Nombre Habitat");
         lblNombreHabitat.setToolTipText("");
+        jPanel2.add(lblNombreHabitat, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
 
+        txtNombreHabitat.setBackground(new java.awt.Color(204, 204, 204));
+        txtNombreHabitat.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        txtNombreHabitat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreHabitatActionPerformed(evt);
+            }
+        });
+        jPanel2.add(txtNombreHabitat, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 220, -1));
+
+        btnVerificar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnVerificar.setForeground(new java.awt.Color(255, 255, 255));
         btnVerificar.setText("Verificar");
         btnVerificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clkBotonVerificarExistencia(evt);
+                btnVerificarclkBotonVerificarExistencia(evt);
             }
         });
+        jPanel2.add(btnVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, -1, -1));
 
+        cmbVegetacion.setBackground(new java.awt.Color(204, 204, 204));
+        cmbVegetacion.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         cmbVegetacion.setEnabled(false);
+        jPanel2.add(cmbVegetacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 220, -1));
 
+        lblVegetacion.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblVegetacion.setForeground(new java.awt.Color(255, 255, 255));
+        lblVegetacion.setText("Tipo vegetación");
+        jPanel2.add(lblVegetacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+
+        lblClima.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblClima.setForeground(new java.awt.Color(255, 255, 255));
+        lblClima.setText("Clima");
+        jPanel2.add(lblClima, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
+
+        cmbClima.setBackground(new java.awt.Color(204, 204, 204));
+        cmbClima.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         cmbClima.setEnabled(false);
+        jPanel2.add(cmbClima, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 220, -1));
 
+        btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardar.setText("Guardar");
         btnGuardar.setEnabled(false);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clkBotonGuardarHabitat(evt);
+                btnGuardarclkBotonGuardarHabitat(evt);
             }
         });
+        jPanel2.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, -1, -1));
 
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
             }
         });
+        jPanel2.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, -1, -1));
 
-        lblVegetacion.setText("Tipo vegetación");
+        jPanel3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 600, 300));
 
-        lblClima.setText("Clima");
+        jPanel4.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel4.setForeground(new java.awt.Color(204, 204, 204));
 
-        pnlContinentes.setBorder(javax.swing.BorderFactory.createTitledBorder("Continentes"));
+        pnlContinentes.setBackground(new java.awt.Color(204, 204, 204));
+        pnlContinentes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Continentes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 24), new java.awt.Color(0, 0, 0))); // NOI18N
+        pnlContinentes.setForeground(new java.awt.Color(51, 51, 51));
+        pnlContinentes.setFocusable(false);
+        pnlContinentes.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
 
-        listContinentesSeleccionados.setBorder(javax.swing.BorderFactory.createTitledBorder("Seleccionados"));
+        listContinentesSeleccionados.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Seleccionados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 3, 14))); // NOI18N
+        listContinentesSeleccionados.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         listContinentesSeleccionados.setEnabled(false);
         listContinentesSeleccionados.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clkBotonEliminarContinente(evt);
+                listContinentesSeleccionadosclkBotonEliminarContinente(evt);
             }
         });
         scrlSeleccionados.setViewportView(listContinentesSeleccionados);
 
-        listContinentesDisponibles.setBorder(javax.swing.BorderFactory.createTitledBorder("Disponibles"));
+        listContinentesDisponibles.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Disponibles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 3, 14))); // NOI18N
+        listContinentesDisponibles.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         listContinentesDisponibles.setEnabled(false);
         listContinentesDisponibles.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clkBotonAgregarContinente(evt);
+                listContinentesDisponiblesclkBotonAgregarContinente(evt);
             }
         });
         scrlDisponibles.setViewportView(listContinentesDisponibles);
@@ -167,104 +233,82 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
             pnlContinentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlContinentesLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(scrlSeleccionados, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
-                .addComponent(scrlDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(scrlSeleccionados, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(scrlDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlContinentesLayout.setVerticalGroup(
             pnlContinentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlContinentesLayout.createSequentialGroup()
                 .addGroup(pnlContinentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrlDisponibles, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                    .addComponent(scrlDisponibles, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
                     .addComponent(scrlSeleccionados))
                 .addContainerGap())
         );
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(pnlContinentes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlContinentes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 60, 340, 300));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(btnGuardar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCancelar)
-                .addGap(53, 53, 53))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(pnlContinentes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNombreHabitat)
-                            .addComponent(lblVegetacion)
-                            .addComponent(lblClima))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cmbVegetacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmbClima, 0, 148, Short.MAX_VALUE)
-                            .addComponent(txtNombreHabitat))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnVerificar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNombreHabitat)
-                    .addComponent(txtNombreHabitat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVerificar))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbVegetacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblVegetacion))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbClima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblClima))
-                .addGap(34, 34, 34)
-                .addComponent(pnlContinentes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardar)
-                    .addComponent(btnCancelar))
-                .addGap(14, 14, 14))
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtNombreHabitatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreHabitatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreHabitatActionPerformed
+
+    private void btnVerificarclkBotonVerificarExistencia(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarclkBotonVerificarExistencia
+        try {
+            // TODO add your handling code here:
+            verificarExistenciaHabitat();
+        } catch (DAOException ex) {
+            muestraMsjError(ex.getMessage());
+        }
+    }//GEN-LAST:event_btnVerificarclkBotonVerificarExistencia
+
+    private void btnGuardarclkBotonGuardarHabitat(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarclkBotonGuardarHabitat
+        // TODO add your handling code here:
+        guardarHabitat();
+    }//GEN-LAST:event_btnGuardarclkBotonGuardarHabitat
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.instancia = null;
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void clkBotonVerificarExistencia(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clkBotonVerificarExistencia
-        try {
-            // TODO add your handling code here:
-            verificarExistenciaHabitat();
-        } catch (DAOException ex) {
-           muestraMsjError(ex.getMessage());
-        }
-    }//GEN-LAST:event_clkBotonVerificarExistencia
-
-    private void clkBotonAgregarContinente(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clkBotonAgregarContinente
-        agregarContiente();
-    }//GEN-LAST:event_clkBotonAgregarContinente
-
-    private void clkBotonEliminarContinente(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clkBotonEliminarContinente
+    private void listContinentesSeleccionadosclkBotonEliminarContinente(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listContinentesSeleccionadosclkBotonEliminarContinente
         eliminarContiente();
-    }//GEN-LAST:event_clkBotonEliminarContinente
+    }//GEN-LAST:event_listContinentesSeleccionadosclkBotonEliminarContinente
 
-    private void clkBotonGuardarHabitat(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clkBotonGuardarHabitat
-        // TODO add your handling code here:
-        guardarHabitat();
-    }//GEN-LAST:event_clkBotonGuardarHabitat
+    private void listContinentesDisponiblesclkBotonAgregarContinente(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listContinentesDisponiblesclkBotonAgregarContinente
+        agregarContiente();
+    }//GEN-LAST:event_listContinentesDisponiblesclkBotonAgregarContinente
 
     
     public void guardarHabitat(){
@@ -365,6 +409,11 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
     private javax.swing.JButton btnVerificar;
     private javax.swing.JComboBox<Clima> cmbClima;
     private javax.swing.JComboBox<Vegetacion> cmbVegetacion;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel lblClima;
     private javax.swing.JLabel lblNombreHabitat;
     private javax.swing.JLabel lblVegetacion;
