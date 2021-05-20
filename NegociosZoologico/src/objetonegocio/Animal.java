@@ -5,6 +5,7 @@
 package objetonegocio;
 
 import exceptions.BusinessException;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -15,6 +16,7 @@ public class Animal {
     private int edad;
     private Especie especie;
     private Sexo sexo;
+    private ObjectId id;
     
     public Animal() {}
 
@@ -34,9 +36,26 @@ public class Animal {
         this.edad = edad;
         this.sexo = sexo;
     }
-    
-    
 
+    public Animal(String nombre, int edad, Especie especie, Sexo sexo, ObjectId id) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.especie = especie;
+        this.sexo = sexo;
+        this.id = id;
+    }
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+    
+    
+    
+    
     @Override
     public String toString() {
         return "Animal{" + "nombre=" + nombre + ", edad=" + edad + ", especie=" + especie + ", sexo=" + sexo + '}';

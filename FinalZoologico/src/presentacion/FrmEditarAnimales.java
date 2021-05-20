@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import objetonegocio.Animal;
 import objetonegocio.Especie;
 import objetonegocio.Sexo;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -22,22 +23,22 @@ public class FrmEditarAnimales extends javax.swing.JDialog {
 
      private static FrmEditarAnimales instancia;
      private DefaultTableModel modeloTabla;
-     private Especie especie;
+     //private Especie especie;
      private javax.swing.JDialog parent;
     /**
      * Creates new form FrmEditarAnimales
      */
-    private FrmEditarAnimales(javax.swing.JDialog parent, boolean modal, Especie especie) {
+    private FrmEditarAnimales(javax.swing.JDialog parent, boolean modal/*, Especie especie*/) {
         super(parent, modal);
         this.parent = parent;
         initComponents();
-        this.especie = especie;
+        //this.especie = especie;
         this.setLocationRelativeTo(null);
     }
     
-    public static FrmEditarAnimales getInstance(javax.swing.JDialog parent, Especie especie) {
+    public static FrmEditarAnimales getInstance(javax.swing.JDialog parent/*, Especie especie*/) {
         if (instancia == null) {
-            instancia = new FrmEditarAnimales(parent, true, especie);
+            instancia = new FrmEditarAnimales(parent, true/*, especie*/);
         }
         return instancia;
     }
@@ -65,6 +66,12 @@ public class FrmEditarAnimales extends javax.swing.JDialog {
         btnCerrarVentana = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Editar especies");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Nombre");
 
@@ -198,21 +205,30 @@ public class FrmEditarAnimales extends javax.swing.JDialog {
 
     private void clkCerrarVentana(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clkCerrarVentana
         // TODO add your handling code here:
+        cerrarVentana();
+    }//GEN-LAST:event_clkCerrarVentana
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        cerrarVentana();
+    }//GEN-LAST:event_formWindowClosing
+
+    public void cerrarVentana(){
         List<Animal> listaAnimales = new ArrayList();
         instancia = null;
         for (int i = 0; i < tblAnimales.getRowCount(); i++) {
             String nombre = tblAnimales.getValueAt(i, 1).toString();
             int edad = Integer.parseInt(tblAnimales.getValueAt(i, 2).toString());
             Sexo sexo = (Sexo) tblAnimales.getValueAt(i, 3);
-            Animal animal = new Animal(nombre, edad, especie, sexo);
+            Animal animal = new Animal(nombre, edad, ((FrmPantallaRegistroEspecie)parent).getEspecie(), sexo, new ObjectId());
             listaAnimales.add(animal);
         }
-        especie.setAnimales(listaAnimales);
-        ((FrmPantallaRegistroEspecie)super.getParent()).setEspecie(especie);
+        //especie.setAnimales(listaAnimales);
+        //((FrmPantallaRegistroEspecie)super.getParent()).setEspecie(especie);
         ((FrmPantallaRegistroEspecie)super.getParent()).actualizarNumAnimales(listaAnimales.size());
         dispose();
-    }//GEN-LAST:event_clkCerrarVentana
-
+    }
+    
     
     public void verificaAnimalSeleccionado() throws BusinessException{
         int fila = tblAnimales.getSelectedRow();
@@ -239,10 +255,12 @@ public class FrmEditarAnimales extends javax.swing.JDialog {
         String nombre = txtNombre.getText();
         int edad = Integer.parseInt(spinEdad.getValue().toString());
         Sexo sexo = (Sexo) cmbSexo.getSelectedItem();
+        //ObjectId id = new ObjectId();
         
         animal.setEdad(edad);
         animal.setNombre(nombre);
         animal.setSexo(sexo);
+        //animal.setId(id);
         
         verificaExistencia(animal);
         

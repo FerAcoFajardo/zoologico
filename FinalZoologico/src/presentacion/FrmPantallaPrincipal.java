@@ -49,6 +49,7 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
         btnRegistrarQueja = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Menu principal");
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -57,10 +58,11 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Zoológico");
-        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 6, -1, -1));
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, 6, 550, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 60));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 60));
 
         jPanel4.setBackground(new java.awt.Color(49, 58, 73));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -117,7 +119,7 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
                 btnRegistrarItinerarioMouseReleased(evt);
             }
         });
-        jPanel4.add(btnRegistrarItinerario, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 197, 450, 60));
+        jPanel4.add(btnRegistrarItinerario, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 197, 530, 60));
 
         btnRegistrarQueja.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         btnRegistrarQueja.setForeground(new java.awt.Color(255, 255, 255));
@@ -136,13 +138,13 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
         });
         jPanel4.add(btnRegistrarQueja, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 279, -1, 60));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 57, 470, 370));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 57, 550, 370));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,11 +163,15 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMostrarRegistroHabitatMouseExited
 
     private void btnMostrarRegistroHabitatclkBotonMostrarRegistroHabitat(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMostrarRegistroHabitatclkBotonMostrarRegistroHabitat
+        
+        
         try{
             listaDatos = iNegocios.recuperarDatosFormHabitat();
+           // System.out.println(listaDatos.toString());
             FrmPantallaRegistrarHabitat frmPantallaRegistrarHabitat = FrmPantallaRegistrarHabitat.getInstance(this);
-            frmPantallaRegistrarHabitat.despliegaInformacion(listaDatos);
+            frmPantallaRegistrarHabitat.despliegaInformacion(listaDatos, iNegocios);
         }catch(Exception e){
+            //System.out.println(e.getMessage());
             muestraMsjError(e.getMessage());
         }
     }//GEN-LAST:event_btnMostrarRegistroHabitatclkBotonMostrarRegistroHabitat
@@ -182,7 +188,7 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
         try{
             listaDatos = iNegocios.recuperarDatosFormEspecie();
             FrmPantallaRegistroEspecie frmPantallaRegistroEspecie = FrmPantallaRegistroEspecie.getInstance(this);
-            frmPantallaRegistroEspecie.despliegaInformacion(listaDatos);
+            frmPantallaRegistroEspecie.despliegaInformacion(listaDatos, iNegocios);
         }catch(Exception e){
             muestraMsjError(e.getMessage());
         }

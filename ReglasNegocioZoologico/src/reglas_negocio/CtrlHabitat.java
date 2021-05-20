@@ -18,11 +18,10 @@ import objetonegocio.Habitat;
  */
 public class CtrlHabitat {
     
-    iDatos iDatos;
+    private iDatos iDatos;
     
-    
-    public CtrlHabitat() {
-        iDatos = FabricaDatos.crearDatos();
+    public CtrlHabitat(iDatos iDatos) {
+        this.iDatos = iDatos;
     }
     
     

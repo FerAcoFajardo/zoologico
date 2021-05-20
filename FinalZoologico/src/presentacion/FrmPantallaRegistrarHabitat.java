@@ -7,15 +7,12 @@ package presentacion;
 
 import exceptions.DAOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import objetonegocio.Clima;
 import objetonegocio.Continente;
 import objetonegocio.Habitat;
 import objetonegocio.Vegetacion;
-import reglas_negocio.FabricaNegocios;
 import reglas_negocio.iNegocios;
 
 /**
@@ -26,7 +23,7 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
 
     private static FrmPantallaRegistrarHabitat instancia;
     private static Habitat habitat;
-    private iNegocios iNegocios = FabricaNegocios.crearNegocios();
+    private iNegocios iNegocios;
     private DefaultListModel mdlDisponibles;
     private DefaultListModel mdlSeleccionados = new DefaultListModel();
 
@@ -47,11 +44,19 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
         return instancia;
     }
 
-    public void despliegaInformacion(List<List> datos) throws Exception {
+    public void despliegaInformacion(List<List> datos, iNegocios iNegocios) throws Exception {
         if (datos.isEmpty()) {
-            throw new Exception("La lista de datos esta vacia");
+            
+            throw new Exception("No se pudo recuperar algun dato");
+        }else{
+            for (List dato : datos) {
+                if(dato.isEmpty()){
+                    throw new Exception("No se pudo recuperar un dato");
+                }
+            }
         }
-
+        this.iNegocios = iNegocios;
+        
         for (int i = 0; i < datos.size(); i++) {
             if (datos.get(i).get(0).getClass() == Vegetacion.class) {
                 datos.get(i).forEach(vegetacion -> {
@@ -59,9 +64,9 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
                 });
             }
             if (datos.get(i).get(0).getClass() == Clima.class) {
-                for (Object item : (((List) datos.get(i)))) {
-                    this.cmbClima.addItem((Clima) item);
-                }
+//                for (Object item : (((List) datos.get(i)))) {
+//                    this.cmbClima.addItem((Clima) item);
+//                }
                 datos.get(i).forEach(clima -> {
                     this.cmbClima.addItem((Clima) clima);
                 });
@@ -110,8 +115,14 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
         listContinentesDisponibles = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Registrar Habitats");
         setForeground(java.awt.Color.red);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel3.setForeground(new java.awt.Color(204, 204, 204));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -125,7 +136,7 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
         jLabel1.setText("Registrar hábitats");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 40));
 
-        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 62));
+        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 62));
 
         jPanel2.setBackground(new java.awt.Color(49, 58, 73));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -143,8 +154,9 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
                 txtNombreHabitatActionPerformed(evt);
             }
         });
-        jPanel2.add(txtNombreHabitat, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 220, -1));
+        jPanel2.add(txtNombreHabitat, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 220, -1));
 
+        btnVerificar.setBackground(java.awt.Color.darkGray);
         btnVerificar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnVerificar.setForeground(new java.awt.Color(255, 255, 255));
         btnVerificar.setText("Verificar");
@@ -153,12 +165,12 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
                 btnVerificarclkBotonVerificarExistencia(evt);
             }
         });
-        jPanel2.add(btnVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, -1, -1));
+        jPanel2.add(btnVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, -1, -1));
 
         cmbVegetacion.setBackground(new java.awt.Color(204, 204, 204));
         cmbVegetacion.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         cmbVegetacion.setEnabled(false);
-        jPanel2.add(cmbVegetacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 220, -1));
+        jPanel2.add(cmbVegetacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 220, -1));
 
         lblVegetacion.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblVegetacion.setForeground(new java.awt.Color(255, 255, 255));
@@ -173,8 +185,9 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
         cmbClima.setBackground(new java.awt.Color(204, 204, 204));
         cmbClima.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         cmbClima.setEnabled(false);
-        jPanel2.add(cmbClima, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 220, -1));
+        jPanel2.add(cmbClima, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 220, -1));
 
+        btnGuardar.setBackground(java.awt.Color.darkGray);
         btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardar.setText("Guardar");
@@ -186,6 +199,7 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
         });
         jPanel2.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, -1, -1));
 
+        btnCancelar.setBackground(java.awt.Color.darkGray);
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar");
@@ -196,7 +210,7 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
         });
         jPanel2.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, -1, -1));
 
-        jPanel3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 600, 300));
+        jPanel3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 640, 300));
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
         jPanel4.setForeground(new java.awt.Color(204, 204, 204));
@@ -263,7 +277,7 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
                 .addComponent(pnlContinentes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 60, 340, 300));
+        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 60, 340, 300));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -310,6 +324,11 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
         agregarContiente();
     }//GEN-LAST:event_listContinentesDisponiblesclkBotonAgregarContinente
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        this.instancia = null;
+    }//GEN-LAST:event_formWindowClosed
+
     
     public void guardarHabitat(){
         try{
@@ -318,7 +337,7 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
             habitat.setNombre(txtNombreHabitat.getText());
             habitat.verificaCampos();
             iNegocios.guadarHabitat(habitat);
-            JOptionPane.showMessageDialog(this, habitat,"Creado exitosamente", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Se ha creado exitosamente el nuevo habitat "+habitat.getNombre(),"Creado exitosamente", JOptionPane.INFORMATION_MESSAGE);
         }catch(Exception e){
             muestraMsjError(e.getMessage());
         }

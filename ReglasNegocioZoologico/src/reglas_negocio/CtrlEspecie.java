@@ -19,11 +19,11 @@ import org.bson.types.ObjectId;
  */
 public class CtrlEspecie {
     
-    iDatos iDatos;
+    private iDatos iDatos;
     
     
-    public CtrlEspecie() {
-        iDatos = FabricaDatos.crearDatos();
+    public CtrlEspecie(iDatos iDatos) {
+        this.iDatos = iDatos;
     }
     
     public List<Especie> buscarEspecie() throws DAOException{

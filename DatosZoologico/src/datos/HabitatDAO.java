@@ -102,6 +102,9 @@ public class HabitatDAO extends BaseDAO<Habitat> {
             MongoCollection<Habitat> coleccionHabitat = this.getColeccion();
             List<Habitat> habitats = new ArrayList<>();
             coleccionHabitat.find().into(habitats);
+            if(habitats.isEmpty()){
+                return new ArrayList<Habitat>();
+            }
             return habitats;
         } catch (Exception ex) {
             throw new DAOException(ex.getMessage(), ex);

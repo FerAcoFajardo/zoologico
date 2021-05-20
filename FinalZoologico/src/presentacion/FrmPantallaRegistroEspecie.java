@@ -13,7 +13,6 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import objetonegocio.Especie;
 import objetonegocio.Habitat;
-import reglas_negocio.FabricaNegocios;
 import reglas_negocio.iNegocios;
 
 /**
@@ -24,7 +23,7 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
 
     private static FrmPantallaRegistroEspecie instancia;
     private static Especie especie;
-    private iNegocios iNegocios = FabricaNegocios.crearNegocios();
+    private iNegocios iNegocios;
     private DefaultListModel mdlDisponibles;
     private DefaultListModel mdlSeleccionados = new DefaultListModel();
 
@@ -65,6 +64,8 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -85,13 +86,12 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
         btnVerificarExistencia = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Registrar/Actualizar especie");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -122,8 +122,9 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
 
         txtNumAnimales.setBackground(new java.awt.Color(204, 204, 204));
         txtNumAnimales.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jPanel3.add(txtNumAnimales, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, 190, -1));
+        jPanel3.add(txtNumAnimales, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 190, -1));
 
+        btnEditarAnimal.setBackground(java.awt.Color.darkGray);
         btnEditarAnimal.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnEditarAnimal.setForeground(new java.awt.Color(255, 255, 255));
         btnEditarAnimal.setText("Editar Animales");
@@ -165,7 +166,7 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
         cmbHabitat.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         cmbHabitat.setForeground(new java.awt.Color(255, 255, 255));
         cmbHabitat.setEnabled(false);
-        jPanel3.add(cmbHabitat, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 200, -1));
+        jPanel3.add(cmbHabitat, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 320, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -174,12 +175,13 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
 
         txtNombreNormal.setBackground(new java.awt.Color(204, 204, 204));
         txtNombreNormal.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jPanel3.add(txtNombreNormal, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, 190, -1));
+        jPanel3.add(txtNombreNormal, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 190, -1));
 
         txtNombreCientifico.setBackground(new java.awt.Color(204, 204, 204));
         txtNombreCientifico.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jPanel3.add(txtNombreCientifico, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 190, -1));
+        jPanel3.add(txtNombreCientifico, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, 190, -1));
 
+        btnRegistrarActualizar.setBackground(java.awt.Color.darkGray);
         btnRegistrarActualizar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnRegistrarActualizar.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrarActualizar.setText("Registrar/Actualizar");
@@ -188,8 +190,9 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
                 btnRegistrarActualizarclkBotonVerificarExistencia(evt);
             }
         });
-        jPanel3.add(btnRegistrarActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 460, -1, -1));
+        jPanel3.add(btnRegistrarActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 460, -1, -1));
 
+        btnVerificarExistencia.setBackground(java.awt.Color.darkGray);
         btnVerificarExistencia.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnVerificarExistencia.setForeground(new java.awt.Color(255, 255, 255));
         btnVerificarExistencia.setText("Verificar");
@@ -198,80 +201,57 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
                 btnVerificarExistenciaclkBotonVerificarExistencia(evt);
             }
         });
-        jPanel3.add(btnVerificarExistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, -1, -1));
+        jPanel3.add(btnVerificarExistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 30, -1, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 630, 530));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 690, 540));
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel5.setBackground(new java.awt.Color(0, 0, 0));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Cuidadores disponibles");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable1);
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane3.setViewportView(jTable2);
 
         jLabel8.setBackground(new java.awt.Color(0, 0, 0));
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel8.setText("Cuidadores seleccionados");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(jLabel5))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(jLabel8))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane2)
-                            .addComponent(jScrollPane3))))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(56, 56, 56)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabel5)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
-                .addGap(51, 51, 51)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(268, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 70, 550, 540));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 70, 490, 540));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -314,16 +294,16 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
     private void btnRegistrarActualizarclkBotonVerificarExistencia(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActualizarclkBotonVerificarExistencia
    
         try{
-            Especie especiee = new Especie();
-            especiee.setNombreNormal(this.txtNombreNormal.getText());
-            especiee.setNombreCientifico(this.txtNombreCientifico.getText());
-            especiee.setDescripcion(this.txtADescripcion.getText());
-            especiee.setHabitat( ((Habitat) this.cmbHabitat.getSelectedItem()) );
+            //Especie especie = new Especie();
+            especie.setNombreNormal(this.txtNombreNormal.getText());
+            especie.setNombreCientifico(this.txtNombreCientifico.getText());
+            especie.setDescripcion(this.txtADescripcion.getText());
+            especie.setHabitat(((Habitat)this.cmbHabitat.getSelectedItem()).getId());
             if(exist)
-                iNegocios.guadarEspecie(especiee);
+                iNegocios.guadarEspecie(especie);
             else
-                iNegocios.guadarEspecie(especiee);
-            JOptionPane.showMessageDialog(this, especiee,"Creado exitosamente", JOptionPane.INFORMATION_MESSAGE);
+                iNegocios.guadarEspecie(especie);
+            JOptionPane.showMessageDialog(this, especie,"Creado exitosamente", JOptionPane.INFORMATION_MESSAGE);
         }catch(DAOException | HeadlessException e){
             muestraMsjError(e.getMessage(), JOptionPane.ERROR_MESSAGE);
         }
@@ -332,19 +312,18 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
     //Codigo para verificar existencia
     private void btnVerificarExistenciaclkBotonVerificarExistencia(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarExistenciaclkBotonVerificarExistencia
         try {
-            Especie especie = verificaExistencia();
+            especie = verificaExistencia();
             if (especie != null) {
                 this.exist = true;
                 llenaCamposInfo(especie);
-                throw new BusinessException("La especie ya existe");
+                muestraMsjError("La especie ya existe",JOptionPane.WARNING_MESSAGE);
+                return;
             }
-
+            activaCampos();
         } catch (DAOException ex) {
             System.out.println("pito");
-            activaCampos();
+            
             muestraMsjError(ex.getMessage(), JOptionPane.ERROR_MESSAGE);
-        } catch (BusinessException ex) {
-            muestraMsjError(ex.getMessage(), JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnVerificarExistenciaclkBotonVerificarExistencia
 
@@ -398,15 +377,23 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
 */
     }
 
-    public Especie verificaExistencia() throws DAOException, BusinessException {
+    public Especie verificaExistencia() throws DAOException {
 
         return iNegocios.buscarEspecie(txtNombreNormal.getText());
     }
 
-    public void despliegaInformacion(List<List> datos) throws Exception {
+    public void despliegaInformacion(List<List> datos, iNegocios iNegocios) throws Exception {
         if (datos.isEmpty()) {
-            throw new BusinessException("La lista de datos esta vacia");
+            
+            throw new Exception("No se pudo recuperar algun dato");
+        }else{
+            for (List dato : datos) {
+                if(dato.isEmpty()){
+                    throw new Exception("No se pudo recuperar un dato");
+                }
+            }
         }
+        this.iNegocios = iNegocios;
 
         for (int i = 0; i < datos.size(); i++) {
             if (datos.get(i).get(0).getClass() == Habitat.class) {
@@ -431,6 +418,8 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
     private javax.swing.JButton btnEditarAnimal;
     private javax.swing.JButton btnRegistrarActualizar;
     private javax.swing.JButton btnVerificarExistencia;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<Habitat> cmbHabitat;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -444,11 +433,9 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextArea txtADescripcion;
     private javax.swing.JTextField txtNombreCientifico;
     private javax.swing.JTextField txtNombreNormal;

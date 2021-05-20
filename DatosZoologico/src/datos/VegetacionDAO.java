@@ -28,7 +28,7 @@ public class VegetacionDAO extends BaseDAO<Vegetacion> {
             coleccionVegetacion.find().into(vegetaciones);
             return vegetaciones;
         } catch (Exception ex) {
-            throw new DAOException(ex.getMessage(), ex);
+            throw new DAOException(ex.getMessage()+this.getClass(), ex);
         }
     }
 
@@ -38,9 +38,6 @@ public class VegetacionDAO extends BaseDAO<Vegetacion> {
             MongoCollection<Vegetacion> coleccionVegetacion = this.getColeccion();
             Vegetacion vegetacion = coleccionVegetacion.find(
                     Filters.eq("_id", id)).first();
-            if (vegetacion == null) {
-                throw new DAOException("Error: Esta vegetación no existe");
-            }
             return vegetacion;
         } catch (Exception ex) {
             throw new DAOException(ex.getMessage(), ex);
