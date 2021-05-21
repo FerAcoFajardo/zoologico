@@ -125,7 +125,6 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
         });
 
         jPanel3.setForeground(new java.awt.Color(204, 204, 204));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(23, 100, 191));
         jPanel1.setPreferredSize(new java.awt.Dimension(481, 75));
@@ -135,8 +134,6 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Registrar hábitats");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 40));
-
-        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 62));
 
         jPanel2.setBackground(new java.awt.Color(49, 58, 73));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -149,6 +146,11 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
 
         txtNombreHabitat.setBackground(new java.awt.Color(204, 204, 204));
         txtNombreHabitat.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        txtNombreHabitat.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNombreHabitatFocusLost(evt);
+            }
+        });
         txtNombreHabitat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreHabitatActionPerformed(evt);
@@ -210,8 +212,6 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
         });
         jPanel2.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, -1, -1));
 
-        jPanel3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 640, 300));
-
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
         jPanel4.setForeground(new java.awt.Color(204, 204, 204));
 
@@ -256,7 +256,7 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
             pnlContinentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlContinentesLayout.createSequentialGroup()
                 .addGroup(pnlContinentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrlDisponibles, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                    .addComponent(scrlDisponibles, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
                     .addComponent(scrlSeleccionados))
                 .addContainerGap())
         );
@@ -266,7 +266,7 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addComponent(pnlContinentes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -277,7 +277,25 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
                 .addComponent(pnlContinentes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 60, 340, 300));
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 980, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(640, 640, 640)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -329,6 +347,19 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
         this.instancia = null;
     }//GEN-LAST:event_formWindowClosed
 
+    private void txtNombreHabitatFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreHabitatFocusLost
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            verificarExistenciaHabitat();
+        } catch (DAOException ex) {
+            muestraMsjError(ex.getMessage());
+        }
+    }//GEN-LAST:event_txtNombreHabitatFocusLost
+
+    
+    
+    
     
     public void guardarHabitat(){
         try{
