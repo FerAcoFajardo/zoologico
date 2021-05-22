@@ -8,6 +8,7 @@ package presentacion;
 import exceptions.BusinessException;
 import exceptions.DAOException;
 import java.awt.HeadlessException;
+import java.awt.geom.RoundRectangle2D;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -33,8 +34,8 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
     private FrmPantallaRegistroEspecie(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.setLocationRelativeTo(null);
-        
+        // Ventana con bordes redondeados
+        this.setShape(new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 30, 30));
         this.txtADescripcion.setEnabled(false);
         this.txtNombreCientifico.setEnabled(false);
         this.txtNumAnimales.setEnabled(false);
@@ -42,7 +43,6 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
         this.cmbHabitat.setEnabled(false);
         this.btnEditarAnimal.setEnabled(false);
         this.btnRegistrarActualizar.setEnabled(false);
- 
         
     }
 
@@ -51,7 +51,6 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
             instancia = new FrmPantallaRegistroEspecie(parent, true);
             especie = new Especie();
         }
-        
         return instancia;
     }
 
@@ -68,6 +67,8 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
         buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        btnExit = new javax.swing.JLabel();
+        labelCabecera = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -84,15 +85,17 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
         txtNombreCientifico = new javax.swing.JTextField();
         btnRegistrarActualizar = new javax.swing.JButton();
         btnVerificarExistencia = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar/Actualizar especie");
+        setUndecorated(true);
         setResizable(false);
+        setSize(new java.awt.Dimension(1090, 610));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -102,15 +105,37 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(23, 100, 191));
-        jPanel2.setPreferredSize(new java.awt.Dimension(481, 75));
+        jPanel2.setPreferredSize(new java.awt.Dimension(481, 60));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_cancel_40px.png"))); // NOI18N
+        btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnExitMouseReleased(evt);
+            }
+        });
+        jPanel2.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 10, 40, 40));
+
+        labelCabecera.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        labelCabecera.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                labelCabeceraMouseDragged(evt);
+            }
+        });
+        labelCabecera.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                labelCabeceraMousePressed(evt);
+            }
+        });
+        jPanel2.add(labelCabecera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 60));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Registro / Actualización de especies");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 40));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1180, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, -1));
 
         jPanel3.setBackground(new java.awt.Color(49, 58, 73));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -120,20 +145,17 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
         jLabel1.setText("Nombre normal");
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
-        txtNumAnimales.setBackground(new java.awt.Color(204, 204, 204));
-        txtNumAnimales.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jPanel3.add(txtNumAnimales, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 190, -1));
+        txtNumAnimales.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jPanel3.add(txtNumAnimales, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, 190, -1));
 
-        btnEditarAnimal.setBackground(java.awt.Color.darkGray);
         btnEditarAnimal.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btnEditarAnimal.setForeground(new java.awt.Color(255, 255, 255));
         btnEditarAnimal.setText("Editar Animales");
         btnEditarAnimal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarAnimalclkBotonVerificarExistencia(evt);
             }
         });
-        jPanel3.add(btnEditarAnimal, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 460, -1, -1));
+        jPanel3.add(btnEditarAnimal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -152,58 +174,61 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
 
         jScrollPane1.setBackground(new java.awt.Color(204, 204, 204));
 
-        txtADescripcion.setBackground(new java.awt.Color(204, 204, 204));
         txtADescripcion.setColumns(20);
-        txtADescripcion.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        txtADescripcion.setForeground(new java.awt.Color(255, 255, 255));
+        txtADescripcion.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         txtADescripcion.setRows(5);
         txtADescripcion.setEnabled(false);
         jScrollPane1.setViewportView(txtADescripcion);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 540, -1));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 450, -1));
 
-        cmbHabitat.setBackground(new java.awt.Color(204, 204, 204));
-        cmbHabitat.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        cmbHabitat.setForeground(new java.awt.Color(255, 255, 255));
+        cmbHabitat.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         cmbHabitat.setEnabled(false);
-        jPanel3.add(cmbHabitat, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 320, -1));
+        jPanel3.add(cmbHabitat, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, 320, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Habitat");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, -1, -1));
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, -1, -1));
 
-        txtNombreNormal.setBackground(new java.awt.Color(204, 204, 204));
-        txtNombreNormal.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jPanel3.add(txtNombreNormal, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 190, -1));
+        txtNombreNormal.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jPanel3.add(txtNombreNormal, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, 190, -1));
 
-        txtNombreCientifico.setBackground(new java.awt.Color(204, 204, 204));
-        txtNombreCientifico.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jPanel3.add(txtNombreCientifico, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, 190, -1));
+        txtNombreCientifico.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jPanel3.add(txtNombreCientifico, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 190, -1));
 
-        btnRegistrarActualizar.setBackground(java.awt.Color.darkGray);
         btnRegistrarActualizar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btnRegistrarActualizar.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrarActualizar.setText("Registrar/Actualizar");
         btnRegistrarActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarActualizarclkBotonVerificarExistencia(evt);
             }
         });
-        jPanel3.add(btnRegistrarActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 460, -1, -1));
+        jPanel3.add(btnRegistrarActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 470, -1, -1));
 
-        btnVerificarExistencia.setBackground(java.awt.Color.darkGray);
         btnVerificarExistencia.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btnVerificarExistencia.setForeground(new java.awt.Color(255, 255, 255));
         btnVerificarExistencia.setText("Verificar");
         btnVerificarExistencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVerificarExistenciaclkBotonVerificarExistencia(evt);
             }
         });
-        jPanel3.add(btnVerificarExistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 30, -1, -1));
+        jPanel3.add(btnVerificarExistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, -1, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 690, 540));
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 410, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 440, Short.MAX_VALUE)
+        );
+
+        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(657, 71, 410, 440));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 630, 550));
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -233,51 +258,36 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
         });
         jScrollPane4.setViewportView(jTable1);
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGap(90, 90, 90)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(28, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 70, 490, 540));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 60, 460, 550));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,7 +296,8 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(1090, 610));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     //Codigo inutil
@@ -349,6 +360,20 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
         this.instancia = null;
     }//GEN-LAST:event_formWindowClosed
 
+    private void labelCabeceraMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelCabeceraMouseDragged
+        this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);
+    }//GEN-LAST:event_labelCabeceraMouseDragged
+
+    private void labelCabeceraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelCabeceraMousePressed
+        x = evt.getX();
+        y = evt.getY();
+    }//GEN-LAST:event_labelCabeceraMousePressed
+
+    private void btnExitMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseReleased
+        this.instancia = null;
+        dispose();
+    }//GEN-LAST:event_btnExitMouseReleased
+
     public void activaCampos(){
         this.txtADescripcion.setEnabled(true);
         this.txtNombreCientifico.setEnabled(true);
@@ -357,6 +382,7 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
         this.cmbHabitat.setEnabled(true);
         this.btnEditarAnimal.setEnabled(true);
         this.btnRegistrarActualizar.setEnabled(true);
+        
     }
 
     public Especie getEspecie() {
@@ -434,6 +460,7 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditarAnimal;
+    private javax.swing.JLabel btnExit;
     private javax.swing.JButton btnRegistrarActualizar;
     private javax.swing.JButton btnVerificarExistencia;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -454,11 +481,12 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel labelCabecera;
     private javax.swing.JTextArea txtADescripcion;
     private javax.swing.JTextField txtNombreCientifico;
     private javax.swing.JTextField txtNombreNormal;
     private javax.swing.JTextField txtNumAnimales;
     // End of variables declaration//GEN-END:variables
     private boolean exist = false;
-    
+    int x,y;
 }
