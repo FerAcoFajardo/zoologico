@@ -109,7 +109,7 @@ public class PruebasZoologico {
 //        Vegetacion vegetacion = new Vegetacion("Pitaya", "Pitayus algo");
 //        
 //
-//        Vegetacion vegetacion = vegetacionDAO.buscar("60a3717af9b8845576b19fd7");
+//        //Vegetacion vegetacion = vegetacionDAO.buscar("60a3717af9b8845576b19fd7");
 //        
 //        vegetacion.setNombreCientifico("Stenocereus thurberi");
 //        vegetacionDAO.actualizar(vegetacion);
@@ -150,17 +150,17 @@ public class PruebasZoologico {
 //recorridoDAO.guardar(recorrido);
 
 
-//        VegetacionDAO vegetacionDAO = new VegetacionDAO();
-//
-//        Vegetacion vegetacion1 = new Vegetacion("Arbusto enano", "Abutilon Enano");
-//        Vegetacion vegetacion2 = new Vegetacion("Pochote", "Pachira quinata");
-//        Vegetacion vegetacion3 = new Vegetacion("Sahuaro", "Carnegiea gigantea");
-//        Vegetacion vegetacion4 = new Vegetacion("Pitaya", "Stenocereus thurberi");
-//        
-//        vegetacionDAO.guardar(vegetacion3);
-//        vegetacionDAO.guardar(vegetacion2);
-//        vegetacionDAO.guardar(vegetacion1);
-//        vegetacionDAO.guardar(vegetacion4);
+        VegetacionDAO vegetacionDAO = new VegetacionDAO();
+
+        Vegetacion vegetacion1 = new Vegetacion("Arbusto enano", "Abutilon Enano");
+        Vegetacion vegetacion2 = new Vegetacion("Pochote", "Pachira quinata");
+        Vegetacion vegetacion3 = new Vegetacion("Sahuaro", "Carnegiea gigantea");
+        Vegetacion vegetacion4 = new Vegetacion("Pitaya", "Stenocereus thurberi");
+        
+        vegetacionDAO.guardar(vegetacion3);
+        vegetacionDAO.guardar(vegetacion2);
+        vegetacionDAO.guardar(vegetacion1);
+        vegetacionDAO.guardar(vegetacion4);
 
     }
     

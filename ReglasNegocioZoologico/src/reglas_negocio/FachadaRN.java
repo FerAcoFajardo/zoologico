@@ -13,6 +13,8 @@ import java.util.List;
 import objetonegocio.Animal;
 import objetonegocio.Especie;
 import objetonegocio.Habitat;
+import objetonegocio.Itinerario;
+import objetonegocio.Queja;
 import org.bson.types.ObjectId;
 
 /**
@@ -27,6 +29,9 @@ public class FachadaRN implements iNegocios{
     CtrlVegetacion ctrlVegetacion;
     CtrlCuidador ctrlCuidador;
     CtrlEspecie ctrlEspecie;
+    CtrlItinerario ctrlItinerario;
+    CtrlQueja ctrlQueja;
+    CtrlGuia ctrlGuia;
     iDatos iDatos = FabricaDatos.crearDatos();
     
     public FachadaRN() {
@@ -36,6 +41,9 @@ public class FachadaRN implements iNegocios{
         this.ctrlVegetacion = new CtrlVegetacion(iDatos);
         this.ctrlCuidador = new CtrlCuidador(iDatos);
         this.ctrlEspecie = new CtrlEspecie(iDatos);
+        this.ctrlItinerario = new CtrlItinerario(iDatos);
+        this.ctrlQueja = new CtrlQueja(iDatos);
+        this.ctrlGuia = new CtrlGuia(iDatos);
     }
     
     
@@ -96,6 +104,36 @@ public class FachadaRN implements iNegocios{
     @Override
     public void guadarEspecie(Especie especie) throws DAOException{
         ctrlEspecie.guardarEspecie(especie);
+    }
+
+    @Override
+    public List recurerarDatosFormItinerario() throws DAOException {
+       List listaDatos = new ArrayList();
+       
+       listaDatos.add(this.ctrlItinerario.recuperaItinerario());
+       listaDatos.add(this.ctrlGuia.recuperaGuias());
+       
+       return listaDatos;
+    }
+
+    @Override
+    public void guardaItinerario(Itinerario itinerario) throws DAOException {
+        this.ctrlItinerario.guardarItinerario(itinerario);
+    }
+
+    @Override
+    public Itinerario recuperaItinerario(ObjectId id) throws DAOException {
+        return this.ctrlItinerario.recuperaItinerario(id);
+    }
+
+    @Override
+    public List<Itinerario> recuperaItinerario() throws DAOException {
+        return this.iDatos.recuperItinerario();
+    }
+
+    @Override
+    public void guardarQueja(Queja queja) throws DAOException{
+        this.ctrlQueja.guardarQueja(queja);
     }
     
     

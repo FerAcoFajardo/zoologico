@@ -186,20 +186,20 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
                 txtNombreHabitatActionPerformed(evt);
             }
         });
-        jPanel2.add(txtNombreHabitat, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 220, -1));
+        jPanel2.add(txtNombreHabitat, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 220, -1));
 
         btnVerificar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnVerificar.setText("Verificar");
         btnVerificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVerificarclkBotonVerificarExistencia(evt);
+                clkBotonVerificarExistencia(evt);
             }
         });
-        jPanel2.add(btnVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, -1, -1));
+        jPanel2.add(btnVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, -1, -1));
 
         cmbVegetacion.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         cmbVegetacion.setEnabled(false);
-        jPanel2.add(cmbVegetacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 220, -1));
+        jPanel2.add(cmbVegetacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 220, -1));
 
         lblVegetacion.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblVegetacion.setForeground(new java.awt.Color(255, 255, 255));
@@ -213,14 +213,14 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
 
         cmbClima.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         cmbClima.setEnabled(false);
-        jPanel2.add(cmbClima, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 220, -1));
+        jPanel2.add(cmbClima, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 220, -1));
 
         btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.setEnabled(false);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarclkBotonGuardarHabitat(evt);
+                clkBotonGuardarHabitat(evt);
             }
         });
         jPanel2.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, -1, -1));
@@ -306,19 +306,19 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreHabitatActionPerformed
 
-    private void btnVerificarclkBotonVerificarExistencia(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarclkBotonVerificarExistencia
+    private void clkBotonVerificarExistencia(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clkBotonVerificarExistencia
         try {
             // TODO add your handling code here:
             verificarExistenciaHabitat();
         } catch (DAOException ex) {
             muestraMsjError(ex.getMessage());
         }
-    }//GEN-LAST:event_btnVerificarclkBotonVerificarExistencia
+    }//GEN-LAST:event_clkBotonVerificarExistencia
 
-    private void btnGuardarclkBotonGuardarHabitat(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarclkBotonGuardarHabitat
+    private void clkBotonGuardarHabitat(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clkBotonGuardarHabitat
         // TODO add your handling code here:
         guardarHabitat();
-    }//GEN-LAST:event_btnGuardarclkBotonGuardarHabitat
+    }//GEN-LAST:event_clkBotonGuardarHabitat
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.instancia = null;

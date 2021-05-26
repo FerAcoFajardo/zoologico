@@ -77,7 +77,7 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
                 btnExitMouseReleased(evt);
             }
         });
-        panelTitulo.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 40, 40));
+        panelTitulo.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 10, 40, 40));
 
         labelCabecera.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         labelCabecera.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -102,14 +102,14 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
         btnMostrarRegistroHabitat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_no_image_64px.png"))); // NOI18N
         btnMostrarRegistroHabitat.setText("Registro hábitats");
         btnMostrarRegistroHabitat.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnMostrarRegistroHabitatMouseEntered(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                clkBotonMostrarRegistroHabitat(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnMostrarRegistroHabitatMouseExited(evt);
             }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                btnMostrarRegistroHabitatclkBotonMostrarRegistroHabitat(evt);
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnMostrarRegistroHabitatMouseEntered(evt);
             }
         });
         panelContenido.add(btnMostrarRegistroHabitat, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, 50));
@@ -119,14 +119,14 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
         btnRegistroEspecies.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_pets_64px.png"))); // NOI18N
         btnRegistroEspecies.setText("Registro especies");
         btnRegistroEspecies.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnRegistroEspeciesMouseEntered(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                clkMostrarRegistrarEspecie(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnRegistroEspeciesMouseExited(evt);
             }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                btnRegistroEspeciesclkMostrarRegistrarEspecie(evt);
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegistroEspeciesMouseEntered(evt);
             }
         });
         panelContenido.add(btnRegistroEspecies, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, 60));
@@ -136,14 +136,14 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
         btnRegistrarItinerario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_contact_details_64px.png"))); // NOI18N
         btnRegistrarItinerario.setText("Registro itinerarios");
         btnRegistrarItinerario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnRegistrarItinerarioMouseEntered(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                clkBotonMostrarRAItinerario(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnRegistrarItinerarioMouseExited(evt);
             }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                btnRegistrarItinerarioMouseReleased(evt);
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegistrarItinerarioMouseEntered(evt);
             }
         });
         panelContenido.add(btnRegistrarItinerario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 470, 50));
@@ -153,14 +153,14 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
         btnRegistrarQueja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_disclaimer_64px.png"))); // NOI18N
         btnRegistrarQueja.setText("Registrar queja");
         btnRegistrarQueja.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnRegistrarQuejaMouseEntered(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                clkBotonMostrarPantallaQueja(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnRegistrarQuejaMouseExited(evt);
             }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                btnRegistrarQuejaMouseReleased(evt);
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegistrarQuejaMouseEntered(evt);
             }
         });
         panelContenido.add(btnRegistrarQueja, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, 60));
@@ -190,19 +190,17 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnMostrarRegistroHabitatMouseExited
 
-    private void btnMostrarRegistroHabitatclkBotonMostrarRegistroHabitat(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMostrarRegistroHabitatclkBotonMostrarRegistroHabitat
+    private void clkBotonMostrarRegistroHabitat(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clkBotonMostrarRegistroHabitat
         
         
         try{
             listaDatos = iNegocios.recuperarDatosFormHabitat();
-           // System.out.println(listaDatos.toString());
             FrmPantallaRegistrarHabitat frmPantallaRegistrarHabitat = FrmPantallaRegistrarHabitat.getInstance(this);
             frmPantallaRegistrarHabitat.despliegaInformacion(listaDatos, iNegocios);
         }catch(Exception e){
-            //System.out.println(e.getMessage());
             muestraMsjError(e.getMessage());
         }
-    }//GEN-LAST:event_btnMostrarRegistroHabitatclkBotonMostrarRegistroHabitat
+    }//GEN-LAST:event_clkBotonMostrarRegistroHabitat
 
     private void btnRegistroEspeciesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroEspeciesMouseEntered
         setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -212,7 +210,7 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnRegistroEspeciesMouseExited
 
-    private void btnRegistroEspeciesclkMostrarRegistrarEspecie(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroEspeciesclkMostrarRegistrarEspecie
+    private void clkMostrarRegistrarEspecie(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clkMostrarRegistrarEspecie
         try{
             listaDatos = iNegocios.recuperarDatosFormEspecie();
             FrmPantallaRegistroEspecie frmPantallaRegistroEspecie = FrmPantallaRegistroEspecie.getInstance(this);
@@ -220,7 +218,7 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
         }catch(Exception e){
             muestraMsjError(e.getMessage());
         }
-    }//GEN-LAST:event_btnRegistroEspeciesclkMostrarRegistrarEspecie
+    }//GEN-LAST:event_clkMostrarRegistrarEspecie
 
     private void btnRegistrarItinerarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarItinerarioMouseEntered
         setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -230,9 +228,16 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnRegistrarItinerarioMouseExited
 
-    private void btnRegistrarItinerarioMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarItinerarioMouseReleased
+    private void clkBotonMostrarRAItinerario(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clkBotonMostrarRAItinerario
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegistrarItinerarioMouseReleased
+        try{
+            listaDatos = iNegocios.recurerarDatosFormItinerario();
+            FrmPantallaRegistrarItinerario frmPantallaRegistrarItinerario = FrmPantallaRegistrarItinerario.getInstance(this);
+            frmPantallaRegistrarItinerario.despliegaInformacion(listaDatos, iNegocios);
+        }catch(Exception e){
+            muestraMsjError(e.getMessage());
+        }
+    }//GEN-LAST:event_clkBotonMostrarRAItinerario
 
     private void btnRegistrarQuejaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarQuejaMouseEntered
         setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -242,7 +247,7 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnRegistrarQuejaMouseExited
 
-    private void btnRegistrarQuejaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarQuejaMouseReleased
+    private void clkBotonMostrarPantallaQueja(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clkBotonMostrarPantallaQueja
         try{
             listaDatos = iNegocios.recuperarDatosFormHabitat();
            // System.out.println(listaDatos.toString());
@@ -252,7 +257,7 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
             //System.out.println(e.getMessage());
             muestraMsjError(e.getMessage());
         }
-    }//GEN-LAST:event_btnRegistrarQuejaMouseReleased
+    }//GEN-LAST:event_clkBotonMostrarPantallaQueja
 
     private void labelCabeceraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelCabeceraMousePressed
         x = evt.getX();
