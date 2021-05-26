@@ -9,6 +9,8 @@ import exceptions.DAOException;
 import java.awt.event.KeyEvent;
 import java.awt.geom.RoundRectangle2D;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import objetonegocio.Clima;
@@ -49,17 +51,17 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
 
     public void despliegaInformacion(List<List> datos, iNegocios iNegocios) throws Exception {
         if (datos.isEmpty()) {
-            
+
             throw new Exception("No se pudo recuperar algun dato");
-        }else{
+        } else {
             for (List dato : datos) {
-                if(dato.isEmpty()){
+                if (dato.isEmpty()) {
                     throw new Exception("No se pudo recuperar un dato");
                 }
             }
         }
         this.iNegocios = iNegocios;
-        
+
         for (int i = 0; i < datos.size(); i++) {
             if (datos.get(i).get(0).getClass() == Vegetacion.class) {
                 datos.get(i).forEach(vegetacion -> {
@@ -81,6 +83,8 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
                 });
 
                 listContinentesDisponibles.setModel(mdlDisponibles);
+                listContinentesDisponibles.setEnabled(false);
+                listContinentesSeleccionados.setEnabled(false);
             }
         }
         this.setVisible(true);
@@ -257,17 +261,17 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
         listContinentesSeleccionados.setEnabled(false);
         listContinentesSeleccionados.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                listContinentesSeleccionadosclkBotonEliminarContinente(evt);
+                clkBotonEliminarContinente(evt);
             }
         });
         scrlSeleccionados.setViewportView(listContinentesSeleccionados);
 
         listContinentesDisponibles.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Disponibles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 3, 14))); // NOI18N
         listContinentesDisponibles.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        listContinentesDisponibles.setEnabled(false);
+        listContinentesDisponibles.setAutoscrolls(false);
         listContinentesDisponibles.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                listContinentesDisponiblesclkBotonAgregarContinente(evt);
+                clkBotonAgregarContinente(evt);
             }
         });
         scrlDisponibles.setViewportView(listContinentesDisponibles);
@@ -313,12 +317,18 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNombreHabitatActionPerformed
 
     private void clkBotonVerificarExistencia(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clkBotonVerificarExistencia
-        verificarExistencia();
+        try {
+            verificarExistencia();
+            txtNombreHabitat.setEnabled(false);
+        } catch (DAOException ex) {
+            Logger.getLogger(FrmPantallaRegistrarHabitat.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_clkBotonVerificarExistencia
 
     private void clkBotonGuardarHabitat(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clkBotonGuardarHabitat
         // TODO add your handling code here:
         guardarHabitat();
+        
     }//GEN-LAST:event_clkBotonGuardarHabitat
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -326,33 +336,32 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void listContinentesSeleccionadosclkBotonEliminarContinente(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listContinentesSeleccionadosclkBotonEliminarContinente
-        eliminarContiente();
-    }//GEN-LAST:event_listContinentesSeleccionadosclkBotonEliminarContinente
+    private void clkBotonEliminarContinente(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clkBotonEliminarContinente
+        if (listContinentesSeleccionados.isEnabled()) {
+            eliminarContiente();
+        }
+    }//GEN-LAST:event_clkBotonEliminarContinente
 
-    private void listContinentesDisponiblesclkBotonAgregarContinente(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listContinentesDisponiblesclkBotonAgregarContinente
-        agregarContiente();
-    }//GEN-LAST:event_listContinentesDisponiblesclkBotonAgregarContinente
+    private void clkBotonAgregarContinente(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clkBotonAgregarContinente
+        if (listContinentesDisponibles.isEnabled()) {
+            agregarContiente();
+        }
+    }//GEN-LAST:event_clkBotonAgregarContinente
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         this.instancia = null;
     }//GEN-LAST:event_formWindowClosed
 
     private void txtNombreHabitatFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreHabitatFocusLost
-        // TODO add your handling code here:
-        verificarExistencia();
+//        try {
+//            // TODO add your handling code here:
+//            verificarExistencia();
+//            txtNombreHabitat.setEnabled(false);
+//        } catch (DAOException ex) {
+//            Logger.getLogger(FrmPantallaRegistrarHabitat.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_txtNombreHabitatFocusLost
 
-    
-    public void verificarExistencia(){
-        try {
-            // TODO add your handling code here:
-            verificarExistenciaHabitat();
-        } catch (DAOException ex) {
-            muestraMsjError(ex.getMessage());
-        }
-    }
-    
     private void labelCabeceraMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelCabeceraMouseDragged
         this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);
     }//GEN-LAST:event_labelCabeceraMouseDragged
@@ -369,40 +378,38 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
 
     private void txtNombreHabitatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreHabitatKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            verificarExistencia();
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            try {
+                verificarExistencia();
+                txtNombreHabitat.setEnabled(false);
+            } catch (DAOException ex) {
+                Logger.getLogger(FrmPantallaRegistrarHabitat.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_txtNombreHabitatKeyPressed
 
-    
-    
-    
-    
-    public void guardarHabitat(){
-        try{
+    public void guardarHabitat() {
+        try {
             habitat.setClima((Clima) cmbClima.getSelectedItem());
             habitat.setVegetacion((Vegetacion) cmbVegetacion.getSelectedItem());
             habitat.setNombre(txtNombreHabitat.getText());
             habitat.verificaCampos();
             iNegocios.guadarHabitat(habitat);
-            JOptionPane.showMessageDialog(this, "Se ha creado exitosamente el nuevo habitat "+habitat.getNombre(),"Creado exitosamente", JOptionPane.INFORMATION_MESSAGE);
-        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Se ha creado exitosamente el nuevo habitat " + habitat.getNombre(), "Creado exitosamente", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
             muestraMsjError(e.getMessage());
         }
     }
-    
-    
-    
-    
-    public void verificarExistenciaHabitat() throws DAOException {
+
+    public void verificarExistencia() throws DAOException {
         String nombre = this.txtNombreHabitat.getText();
 
         for (Habitat habitatNuevo : iNegocios.buscaHabitat()) {
             if (habitatNuevo.getNombre().equals(nombre)) {
-                    muestraMsjExistencia();
-                    System.out.println(habitatNuevo);
-                    llenarCamposInfo(habitatNuevo);
-                    return;
+                muestraMsjExistencia();
+                System.out.println(habitatNuevo);
+                llenarCamposInfo(habitatNuevo);
+                return;
             }
         }
 
@@ -412,6 +419,7 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
     public void muestraMsjExistencia() {
         JOptionPane.showMessageDialog(this, "Este habitat ya existe", "Advertencia", JOptionPane.WARNING_MESSAGE);
     }
+
     public void muestraMsjError(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
     }
@@ -421,13 +429,13 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
         this.txtNombreHabitat.setText(habitatEncontrado.getNombre());
         //cmbClima.setSelectedItem(habitatEncontrado.getClima());
         for (int i = 0; i < cmbClima.getItemCount(); i++) {
-            if(cmbClima.getItemAt(i) == habitatEncontrado.getClima()){
+            if (cmbClima.getItemAt(i) == habitatEncontrado.getClima()) {
                 cmbClima.setSelectedIndex(i);
             }
         }
         //cmbVegetacion.setSelectedItem(habitatEncontrado.getVegetacion());
         for (int i = 0; i < cmbVegetacion.getItemCount(); i++) {
-            if(cmbVegetacion.getItemAt(i).getNombre().equals(habitatEncontrado.getVegetacion().getNombre())){
+            if (cmbVegetacion.getItemAt(i).getNombre().equals(habitatEncontrado.getVegetacion().getNombre())) {
                 cmbVegetacion.setSelectedIndex(i);
             }
         }
@@ -435,33 +443,37 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
             mdlSeleccionados.addElement(continente);
             listContinentesSeleccionados.setModel(mdlSeleccionados);
         });
-        
+
     }
-    public void agregarContiente(){
-        
+
+    public void agregarContiente() {
+
         int fila = listContinentesDisponibles.getSelectedIndex();
-        
-        mdlSeleccionados.addElement(listContinentesDisponibles.getSelectedValue());
-        habitat.agregarContinente(listContinentesDisponibles.getSelectedValue());
-        mdlDisponibles = (DefaultListModel) listContinentesDisponibles.getModel();
-        mdlDisponibles.remove(fila);
-        listContinentesDisponibles.setModel(mdlDisponibles);
-        listContinentesSeleccionados.setModel(mdlSeleccionados);
-        
+        if (fila > -1) {
+            mdlSeleccionados.addElement(listContinentesDisponibles.getSelectedValue());
+            habitat.agregarContinente(listContinentesDisponibles.getSelectedValue());
+            mdlDisponibles = (DefaultListModel) listContinentesDisponibles.getModel();
+            mdlDisponibles.remove(fila);
+            listContinentesDisponibles.setModel(mdlDisponibles);
+            listContinentesSeleccionados.setModel(mdlSeleccionados);
+        }
     }
-    public void eliminarContiente(){
+
+    public void eliminarContiente() {
         int fila = listContinentesSeleccionados.getSelectedIndex();
-        
-        mdlDisponibles.addElement(listContinentesSeleccionados.getSelectedValue());
-        habitat.eliminarContinente(listContinentesDisponibles.getSelectedValue());
-        mdlSeleccionados = (DefaultListModel) listContinentesSeleccionados.getModel();
-        mdlSeleccionados.remove(fila);
-        listContinentesSeleccionados.setModel(mdlSeleccionados);
-        listContinentesDisponibles.setModel(mdlDisponibles);
-        
+
+        if (fila > -1) {
+            mdlDisponibles.addElement(listContinentesSeleccionados.getSelectedValue());
+            habitat.eliminarContinente(listContinentesDisponibles.getSelectedValue());
+            mdlSeleccionados = (DefaultListModel) listContinentesSeleccionados.getModel();
+            mdlSeleccionados.remove(fila);
+            listContinentesSeleccionados.setModel(mdlSeleccionados);
+            listContinentesDisponibles.setModel(mdlDisponibles);
+        }
+
     }
-    
-    public void activarCampos(){
+
+    public void activarCampos() {
         this.cmbClima.setEnabled(true);
         this.cmbVegetacion.setEnabled(true);
         this.listContinentesDisponibles.setEnabled(true);
@@ -493,5 +505,5 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
     private javax.swing.JScrollPane scrlSeleccionados;
     private javax.swing.JTextField txtNombreHabitat;
     // End of variables declaration//GEN-END:variables
-    int x,y;
+    int x, y;
 }

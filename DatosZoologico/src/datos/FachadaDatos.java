@@ -128,6 +128,5 @@ public class FachadaDatos implements iDatos{
     public Itinerario recuperarItinerario(String itinerario) throws DAOException {
        return itinerarioDAO.buscarNombre(itinerario);
     }
-
     
 }

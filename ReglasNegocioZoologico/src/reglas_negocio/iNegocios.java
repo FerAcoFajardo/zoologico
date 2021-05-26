@@ -31,6 +31,8 @@ public interface iNegocios {
     
     public List recuperarDatosFormEspecie() throws DAOException;
     
+    public List recuperarDatosFormQueja() throws DAOException;
+    
     public void guadarEspecie(Especie especie) throws DAOException;
 
     public List recurerarDatosFormItinerario() throws DAOException;
@@ -44,5 +46,4 @@ public interface iNegocios {
    public List<Itinerario> recuperaItinerario() throws DAOException;
    
    public void guardarQueja(Queja queja) throws DAOException;
-   
 }

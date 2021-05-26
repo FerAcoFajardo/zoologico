@@ -57,5 +57,4 @@ public interface iDatos {
     
     public void guardarQueja(Queja queja) throws DAOException;
     
-    
 }

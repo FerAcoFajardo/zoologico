@@ -143,5 +143,10 @@ public class FachadaRN implements iNegocios{
         return this.ctrlItinerario.recuperaItinerario(itinerario);
     }
     
-    
+    @Override
+    public List recuperarDatosFormQueja() throws DAOException {
+        List listaDatos = new ArrayList();
+        listaDatos.add(this.ctrlItinerario.recuperaItinerario());
+        return listaDatos;
+    }
 }

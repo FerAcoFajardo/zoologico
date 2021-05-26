@@ -5,9 +5,6 @@
  */
 package presentacion;
 
-import com.sun.awt.AWTUtilities;
-import java.awt.Cursor;
-import java.awt.Shape;
 import java.awt.geom.RoundRectangle2D;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -101,15 +98,10 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
         btnMostrarRegistroHabitat.setForeground(new java.awt.Color(255, 255, 255));
         btnMostrarRegistroHabitat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_no_image_64px.png"))); // NOI18N
         btnMostrarRegistroHabitat.setText("Registro hábitats");
+        btnMostrarRegistroHabitat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMostrarRegistroHabitat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 clkBotonMostrarRegistroHabitat(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnMostrarRegistroHabitatMouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnMostrarRegistroHabitatMouseEntered(evt);
             }
         });
         panelContenido.add(btnMostrarRegistroHabitat, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, 50));
@@ -118,15 +110,10 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
         btnRegistroEspecies.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistroEspecies.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_pets_64px.png"))); // NOI18N
         btnRegistroEspecies.setText("Registro especies");
+        btnRegistroEspecies.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegistroEspecies.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 clkMostrarRegistrarEspecie(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnRegistroEspeciesMouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnRegistroEspeciesMouseEntered(evt);
             }
         });
         panelContenido.add(btnRegistroEspecies, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, 60));
@@ -135,32 +122,22 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
         btnRegistrarItinerario.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrarItinerario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_contact_details_64px.png"))); // NOI18N
         btnRegistrarItinerario.setText("Registro itinerarios");
+        btnRegistrarItinerario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegistrarItinerario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 clkBotonMostrarRAItinerario(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnRegistrarItinerarioMouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnRegistrarItinerarioMouseEntered(evt);
-            }
         });
-        panelContenido.add(btnRegistrarItinerario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 470, 50));
+        panelContenido.add(btnRegistrarItinerario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 400, 50));
 
         btnRegistrarQueja.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         btnRegistrarQueja.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrarQueja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_disclaimer_64px.png"))); // NOI18N
         btnRegistrarQueja.setText("Registrar queja");
+        btnRegistrarQueja.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegistrarQueja.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 clkBotonMostrarPantallaQueja(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnRegistrarQuejaMouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnRegistrarQuejaMouseEntered(evt);
             }
         });
         panelContenido.add(btnRegistrarQueja, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, 60));
@@ -182,14 +159,6 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnMostrarRegistroHabitatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMostrarRegistroHabitatMouseEntered
-        setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_btnMostrarRegistroHabitatMouseEntered
-
-    private void btnMostrarRegistroHabitatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMostrarRegistroHabitatMouseExited
-        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_btnMostrarRegistroHabitatMouseExited
-
     private void clkBotonMostrarRegistroHabitat(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clkBotonMostrarRegistroHabitat
         
         
@@ -202,14 +171,6 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_clkBotonMostrarRegistroHabitat
 
-    private void btnRegistroEspeciesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroEspeciesMouseEntered
-        setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_btnRegistroEspeciesMouseEntered
-
-    private void btnRegistroEspeciesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroEspeciesMouseExited
-        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_btnRegistroEspeciesMouseExited
-
     private void clkMostrarRegistrarEspecie(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clkMostrarRegistrarEspecie
         try{
             listaDatos = iNegocios.recuperarDatosFormEspecie();
@@ -219,14 +180,6 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
             muestraMsjError(e.getMessage());
         }
     }//GEN-LAST:event_clkMostrarRegistrarEspecie
-
-    private void btnRegistrarItinerarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarItinerarioMouseEntered
-        setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_btnRegistrarItinerarioMouseEntered
-
-    private void btnRegistrarItinerarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarItinerarioMouseExited
-        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_btnRegistrarItinerarioMouseExited
 
     private void clkBotonMostrarRAItinerario(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clkBotonMostrarRAItinerario
         // TODO add your handling code here:
@@ -239,20 +192,12 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_clkBotonMostrarRAItinerario
 
-    private void btnRegistrarQuejaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarQuejaMouseEntered
-        setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_btnRegistrarQuejaMouseEntered
-
-    private void btnRegistrarQuejaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarQuejaMouseExited
-        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_btnRegistrarQuejaMouseExited
-
     private void clkBotonMostrarPantallaQueja(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clkBotonMostrarPantallaQueja
         try{
-            listaDatos = iNegocios.recuperarDatosFormHabitat();
+            listaDatos = iNegocios.recuperarDatosFormQueja();
            // System.out.println(listaDatos.toString());
             FrmPantallaRegistrarQueja frmPantallaRegistrarQuejas = FrmPantallaRegistrarQueja.getInstance(this);
-            //FrmPantallaRegistrarQueja.despliegaInformacion(listaDatos, iNegocios);
+            frmPantallaRegistrarQuejas.despliegaInformacion(listaDatos, iNegocios);
         }catch(Exception e){
             //System.out.println(e.getMessage());
             muestraMsjError(e.getMessage());
