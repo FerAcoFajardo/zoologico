@@ -5,6 +5,7 @@
  */
 package reglas_negocio;
 
+import datos.iDatos;
 import exceptions.DAOException;
 import java.util.List;
 import objetonegocio.Animal;
@@ -16,7 +17,7 @@ import org.bson.types.ObjectId;
  *
  * @author fernando
  */
-public interface iNegocios {
+public interface iNegocios {  
     public List<Habitat> buscaHabitat() throws DAOException;
     public void guadarHabitat(Habitat habitat) throws DAOException;
     public Especie buscarEspecie(String nombreComun) throws DAOException;

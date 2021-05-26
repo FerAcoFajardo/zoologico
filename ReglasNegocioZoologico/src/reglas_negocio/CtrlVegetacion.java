@@ -17,11 +17,11 @@ import objetonegocio.Vegetacion;
  */
 public class CtrlVegetacion {
     
-    iDatos iDatos;
+    private iDatos iDatos;
     
     
-    public CtrlVegetacion() {
-        iDatos = FabricaDatos.crearDatos();
+    public CtrlVegetacion(iDatos iDatos) {
+        this.iDatos = iDatos;
     }
     
     public List<Vegetacion> recuperarVegetacion() throws DAOException{

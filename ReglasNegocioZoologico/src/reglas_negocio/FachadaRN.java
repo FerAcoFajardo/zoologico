@@ -5,6 +5,8 @@
  */
 package reglas_negocio;
 
+import datos.FabricaDatos;
+import datos.iDatos;
 import exceptions.DAOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,14 +27,15 @@ public class FachadaRN implements iNegocios{
     CtrlVegetacion ctrlVegetacion;
     CtrlCuidador ctrlCuidador;
     CtrlEspecie ctrlEspecie;
+    iDatos iDatos = FabricaDatos.crearDatos();
     
     public FachadaRN() {
         this.ctrlClima = new CtrlClima();
         this.ctrlContinente = new CtrlContinente();
-        this.ctrlHabitat = new CtrlHabitat();
-        this.ctrlVegetacion = new CtrlVegetacion();
-        this.ctrlCuidador = new CtrlCuidador();
-        this.ctrlEspecie = new CtrlEspecie();
+        this.ctrlHabitat = new CtrlHabitat(iDatos);
+        this.ctrlVegetacion = new CtrlVegetacion(iDatos);
+        this.ctrlCuidador = new CtrlCuidador(iDatos);
+        this.ctrlEspecie = new CtrlEspecie(iDatos);
     }
     
     

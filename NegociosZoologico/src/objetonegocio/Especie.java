@@ -15,7 +15,7 @@ import org.bson.types.ObjectId;
  */
 public class Especie {
     private ObjectId id;
-    private List<ObjectId> habitat;
+    private ObjectId habitat;
     private List<Animal> animales;
     private String            nombreNormal;
     private String            nombreCientifico;
@@ -75,11 +75,11 @@ public class Especie {
         return descripcion;
     }
 
-    public List<ObjectId> getHabitat() {
+    public ObjectId getHabitat() {
         return habitat;
     }
 
-    public void setHabitat(List<ObjectId> habitat) {
+    public void setHabitat(ObjectId habitat) {
         this.habitat = habitat;
     }
     

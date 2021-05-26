@@ -101,11 +101,11 @@ public class AnimalesDAO extends BaseDAO<Especie> {
         }
     }
 
-    public void eliminarAnimal(ObjectId idEspecie, String nombreAnimal) throws DAOException {
+    public void eliminarAnimal(ObjectId idEspecie, ObjectId idAnimal) throws DAOException {
         try {
             MongoCollection<Especie> coleccionEspecie = getColeccion();
             coleccionEspecie.updateOne(Filters.eq("_id", idEspecie), 
-                    Updates.pull("animales", Filters.eq("nombre", nombreAnimal)));
+                    Updates.pull("animales", Filters.eq("_id", idAnimal)));
         } catch (Exception ex) {
             throw new DAOException(ex.getMessage(), ex);
         }

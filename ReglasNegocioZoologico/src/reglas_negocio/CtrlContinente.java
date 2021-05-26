@@ -16,7 +16,7 @@ import objetonegocio.Continente;
 public class CtrlContinente {
     
     public List<Continente> recuperarContinentes(){
-        return Arrays.asList(Continente.AFRICA,Continente.AMERICA,Continente.ASIA,Continente.EUROPA,Continente.OCEANIA);
+        return Arrays.asList(Continente.AFRICA,Continente.AMERICA,Continente.ASIA,Continente.EUROPA,Continente.OCEANIA, Continente.ANTARTIDA);
     }
     
 }

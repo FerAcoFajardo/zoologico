@@ -50,9 +50,6 @@ public class EspecieDAO extends BaseDAO<Especie> {
             MongoCollection<Especie> coleccionEspecie = this.getColeccion();
             Especie especie = coleccionEspecie.find(
                     Filters.eq("nombreNormal", nombreComun)).first();
-            if (especie == null) {
-                throw new DAOException("Error: La especie no existe");
-            }
             return especie;
         } catch (Exception ex) {
             throw new DAOException(ex.getMessage(), ex);

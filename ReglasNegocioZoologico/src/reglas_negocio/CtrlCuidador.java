@@ -16,11 +16,11 @@ import objetonegocio.Cuidador;
  * @author fernando
  */
 public class CtrlCuidador {
-    iDatos iDatos;
+    private iDatos iDatos;
     
     
-    public CtrlCuidador() {
-        iDatos = FabricaDatos.crearDatos();
+    public CtrlCuidador(iDatos iDatos) {
+        this.iDatos = iDatos;
     }
     
     public List<Cuidador> buscarCuidadores() throws DAOException{

@@ -6,8 +6,7 @@
 package datos;
 
 import exceptions.DAOException;
-import objetonegocio.Recorrido;
-import objetonegocio.Zona;
+import objetonegocio.Vegetacion;
 
 /**
  *
@@ -137,20 +136,31 @@ public class PruebasZoologico {
 //        zonaDAO.actualizar(zona);
 //
 //
-        RecorridoDAO recorridoDAO = new RecorridoDAO();
+//        RecorridoDAO recorridoDAO = new RecorridoDAO();
 //        
 //        Recorrido recorrido = new Recorrido(zona.getId(), 60, 200,zona.getEspecies().size() );
 //
-  
-
-        Recorrido recorrido = recorridoDAO.buscar("60a3776f5ab431630f0e29aa");
-        
-        recorrido.setDuracion(90);
-        
-        recorridoDAO.actualizar(recorrido);
+//  
+//
+//        Recorrido recorrido = recorridoDAO.buscar("60a3776f5ab431630f0e29aa");
+//        
+//        recorrido.setDuracion(90);
+//        
+//        recorridoDAO.actualizar(recorrido);
 //recorridoDAO.guardar(recorrido);
 
 
+//        VegetacionDAO vegetacionDAO = new VegetacionDAO();
+//
+//        Vegetacion vegetacion1 = new Vegetacion("Arbusto enano", "Abutilon Enano");
+//        Vegetacion vegetacion2 = new Vegetacion("Pochote", "Pachira quinata");
+//        Vegetacion vegetacion3 = new Vegetacion("Sahuaro", "Carnegiea gigantea");
+//        Vegetacion vegetacion4 = new Vegetacion("Pitaya", "Stenocereus thurberi");
+//        
+//        vegetacionDAO.guardar(vegetacion3);
+//        vegetacionDAO.guardar(vegetacion2);
+//        vegetacionDAO.guardar(vegetacion1);
+//        vegetacionDAO.guardar(vegetacion4);
 
     }
     

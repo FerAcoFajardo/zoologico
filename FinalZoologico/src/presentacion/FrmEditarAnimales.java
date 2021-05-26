@@ -6,6 +6,7 @@
 package presentacion;
 
 import exceptions.BusinessException;
+import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -13,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import objetonegocio.Animal;
 import objetonegocio.Especie;
 import objetonegocio.Sexo;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -22,22 +24,22 @@ public class FrmEditarAnimales extends javax.swing.JDialog {
 
      private static FrmEditarAnimales instancia;
      private DefaultTableModel modeloTabla;
-     private Especie especie;
+     //private Especie especie;
      private javax.swing.JDialog parent;
     /**
      * Creates new form FrmEditarAnimales
      */
-    private FrmEditarAnimales(javax.swing.JDialog parent, boolean modal, Especie especie) {
+    private FrmEditarAnimales(javax.swing.JDialog parent, boolean modal/*, Especie especie*/) {
         super(parent, modal);
         this.parent = parent;
         initComponents();
-        this.especie = especie;
-        this.setLocationRelativeTo(null);
+        // Ventana con bordes redondeados
+        this.setShape(new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 30, 30));
     }
     
-    public static FrmEditarAnimales getInstance(javax.swing.JDialog parent, Especie especie) {
+    public static FrmEditarAnimales getInstance(javax.swing.JDialog parent/*, Especie especie*/) {
         if (instancia == null) {
-            instancia = new FrmEditarAnimales(parent, true, especie);
+            instancia = new FrmEditarAnimales(parent, true/*, especie*/);
         }
         return instancia;
     }
@@ -51,24 +53,90 @@ public class FrmEditarAnimales extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        btnExit = new javax.swing.JLabel();
+        labelCabecera = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        txtNombre = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         spinEdad = new javax.swing.JSpinner();
-        txtNombre = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblAnimales = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         cmbSexo = new javax.swing.JComboBox<>();
-        btnEliminar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblAnimales = new javax.swing.JTable();
         btnCerrarVentana = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Editar especies");
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(518, 610));
+        setSize(new java.awt.Dimension(518, 610));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel2.setPreferredSize(new java.awt.Dimension(411, 449));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel3.setBackground(new java.awt.Color(23, 100, 191));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_cancel_40px.png"))); // NOI18N
+        btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnExitMouseReleased(evt);
+            }
+        });
+        jPanel3.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 10, 40, 40));
+
+        labelCabecera.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        labelCabecera.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                labelCabeceraMouseDragged(evt);
+            }
+        });
+        labelCabecera.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                labelCabeceraMousePressed(evt);
+            }
+        });
+        jPanel3.add(labelCabecera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 60));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Editar animales");
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 40));
+
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 60));
+
+        jPanel4.setBackground(new java.awt.Color(49, 58, 73));
+
+        txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Nombre");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Edad");
+
+        spinEdad.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Sexo");
+
+        cmbSexo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         tblAnimales.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -88,33 +156,7 @@ public class FrmEditarAnimales extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tblAnimales);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
-        );
-
-        jButton2.setText("Agregar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clkBotonAgregarAnimal(evt);
-            }
-        });
-
-        jLabel3.setText("Sexo");
-
-        btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clkBotonEliminarAnimal(evt);
-            }
-        });
-
+        btnCerrarVentana.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnCerrarVentana.setText("Cerrar");
         btnCerrarVentana.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,59 +164,82 @@ public class FrmEditarAnimales extends javax.swing.JDialog {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(spinEdad)
-                            .addComponent(txtNombre)
-                            .addComponent(cmbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jButton2)
-                            .addGap(40, 40, 40)
-                            .addComponent(btnEliminar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCerrarVentana))
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        btnEliminar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clkBotonEliminarAnimal(evt);
+            }
+        });
+
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jButton2.setText("Agregar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clkBotonAgregarAnimal(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cmbSexo, 0, 207, Short.MAX_VALUE)
+                    .addComponent(spinEdad)
+                    .addComponent(txtNombre))
+                .addGap(34, 34, 34)
+                .addComponent(jButton2)
+                .addGap(34, 34, 34))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnEliminar)
+                .addGap(53, 53, 53)
+                .addComponent(btnCerrarVentana)
+                .addGap(114, 114, 114))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(94, 94, 94)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(98, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton2))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(spinEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(btnEliminar)
-                    .addComponent(btnCerrarVentana))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(cmbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCerrarVentana)
+                    .addComponent(btnEliminar))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        pack();
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 520, -1));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 580));
+
+        setSize(new java.awt.Dimension(518, 577));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void clkBotonAgregarAnimal(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clkBotonAgregarAnimal
@@ -198,21 +263,43 @@ public class FrmEditarAnimales extends javax.swing.JDialog {
 
     private void clkCerrarVentana(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clkCerrarVentana
         // TODO add your handling code here:
+        cerrarVentana();
+    }//GEN-LAST:event_clkCerrarVentana
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        cerrarVentana();
+    }//GEN-LAST:event_formWindowClosing
+
+    private void labelCabeceraMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelCabeceraMouseDragged
+        this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);
+    }//GEN-LAST:event_labelCabeceraMouseDragged
+
+    private void labelCabeceraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelCabeceraMousePressed
+        x = evt.getX();
+        y = evt.getY();
+    }//GEN-LAST:event_labelCabeceraMousePressed
+
+    private void btnExitMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseReleased
+        System.exit(0);
+    }//GEN-LAST:event_btnExitMouseReleased
+
+    public void cerrarVentana(){
         List<Animal> listaAnimales = new ArrayList();
         instancia = null;
         for (int i = 0; i < tblAnimales.getRowCount(); i++) {
             String nombre = tblAnimales.getValueAt(i, 1).toString();
             int edad = Integer.parseInt(tblAnimales.getValueAt(i, 2).toString());
             Sexo sexo = (Sexo) tblAnimales.getValueAt(i, 3);
-            Animal animal = new Animal(nombre, edad, especie, sexo);
+            Animal animal = new Animal(nombre, edad, ((FrmPantallaRegistroEspecie)parent).getEspecie(), sexo, new ObjectId());
             listaAnimales.add(animal);
         }
-        especie.setAnimales(listaAnimales);
-        ((FrmPantallaRegistroEspecie)super.getParent()).setEspecie(especie);
+        //especie.setAnimales(listaAnimales);
+        //((FrmPantallaRegistroEspecie)super.getParent()).setEspecie(especie);
         ((FrmPantallaRegistroEspecie)super.getParent()).actualizarNumAnimales(listaAnimales.size());
         dispose();
-    }//GEN-LAST:event_clkCerrarVentana
-
+    }
+    
     
     public void verificaAnimalSeleccionado() throws BusinessException{
         int fila = tblAnimales.getSelectedRow();
@@ -239,10 +326,12 @@ public class FrmEditarAnimales extends javax.swing.JDialog {
         String nombre = txtNombre.getText();
         int edad = Integer.parseInt(spinEdad.getValue().toString());
         Sexo sexo = (Sexo) cmbSexo.getSelectedItem();
+        //ObjectId id = new ObjectId();
         
         animal.setEdad(edad);
         animal.setNombre(nombre);
         animal.setSexo(sexo);
+        //animal.setId(id);
         
         verificaExistencia(animal);
         
@@ -284,18 +373,24 @@ public class FrmEditarAnimales extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrarVentana;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JLabel btnExit;
     private javax.swing.JComboBox<Sexo> cmbSexo;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelCabecera;
     private javax.swing.JSpinner spinEdad;
     private javax.swing.JTable tblAnimales;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
+    int x,y;
     private void muestaMsjError(String message) {
         JOptionPane.showMessageDialog(this, message,"Error",JOptionPane.ERROR_MESSAGE);
     }

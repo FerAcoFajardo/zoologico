@@ -4,10 +4,7 @@
  */
 package objetonegocio;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+
 import java.util.List;
 import org.bson.types.ObjectId;
 
@@ -20,15 +17,15 @@ public class Itinerario {
     private ObjectId id;
     private String nombre;
     private List<ObjectId> quejas;
-    private List<Recorrido> recorridos;
+    private List<ObjectId> recorridos;
     private int maxVisitantes;
     private ObjectId guia;
-    private Date fecha;
+    private List<DiaSemana> fecha;
 
     public Itinerario() {
     }
 
-    public Itinerario(ObjectId id, String nombre, List<ObjectId> quejas, List<Recorrido> recorridos, int maxVisitantes, ObjectId guia, Date fecha) {
+    public Itinerario(ObjectId id, String nombre, List<ObjectId> quejas, List<ObjectId> recorridos, int maxVisitantes, ObjectId guia, List<DiaSemana> fecha) {
         this.id = id;
         this.nombre = nombre;
         this.quejas = quejas;
@@ -38,14 +35,14 @@ public class Itinerario {
         this.fecha = fecha;
     }
 
-    public Itinerario(String nombre, int maxVisitantes, ObjectId guia, Date fecha) {
+    public Itinerario(String nombre, int maxVisitantes, ObjectId guia, List<DiaSemana> fecha) {
         this.nombre = nombre;
         this.maxVisitantes = maxVisitantes;
         this.guia = guia;
         this.fecha = fecha;
     }
 
-    public Itinerario(String nombre, List<ObjectId> quejas, List<Recorrido> recorridos, int maxVisitantes, ObjectId guia, Date fecha) {
+    public Itinerario(String nombre, List<ObjectId> quejas, List<ObjectId> recorridos, int maxVisitantes, ObjectId guia, List<DiaSemana> fecha) {
         this.nombre = nombre;
         this.quejas = quejas;
         this.recorridos = recorridos;
@@ -58,7 +55,7 @@ public class Itinerario {
         this.id = id;
     }
 
-    public Itinerario(ObjectId id, String nombre, List<Recorrido> recorridos, int maxVisitantes, ObjectId guia, Date fecha) {
+    public Itinerario(ObjectId id, String nombre, List<ObjectId> recorridos, int maxVisitantes, ObjectId guia, List<DiaSemana> fecha) {
         this.id = id;
         this.nombre = nombre;
         this.recorridos = recorridos;
@@ -67,7 +64,7 @@ public class Itinerario {
         this.fecha = fecha;
     }
 
-    public Itinerario(String nombre, List<Recorrido> recorridos, int maxVisitantes, ObjectId guia, Date fecha) {
+    public Itinerario(String nombre, List<ObjectId> recorridos, int maxVisitantes, ObjectId guia, List<DiaSemana> fecha) {
         this.nombre = nombre;
         this.recorridos = recorridos;
         this.maxVisitantes = maxVisitantes;
@@ -118,11 +115,11 @@ public class Itinerario {
         return quejas;
     }
 
-    public List<Recorrido> getRecorridos() {
+    public List<ObjectId> getRecorridos() {
         return recorridos;
     }
 
-    public void setRecorridos(List<Recorrido> recorridos) {
+    public void setRecorridos(List<ObjectId> recorridos) {
         this.recorridos = recorridos;
     }
 
@@ -142,11 +139,11 @@ public class Itinerario {
         this.nombre = nombre;
     }
 
-    public Date getFecha() {
+    public List<DiaSemana> getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(List<DiaSemana> fecha) {
         this.fecha = fecha;
     }
 
