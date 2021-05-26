@@ -7,12 +7,17 @@ package presentacion;
 
 import exceptions.DAOException;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import objetonegocio.DiaSemana;
 import objetonegocio.Guia;
+import objetonegocio.Horario;
 import objetonegocio.Itinerario;
 import objetonegocio.Zona;
+import org.bson.types.ObjectId;
 import reglas_negocio.iNegocios;
 
 /**
@@ -36,6 +41,8 @@ public class FrmPantallaRegistrarItinerario extends javax.swing.JDialog {
         initComponents();
         modeloTablaHorario = (DefaultTableModel)this.tblHorario.getModel();
         modeloTablaZonas = (DefaultTableModel)this.tblZonas.getModel();
+        
+        
         this.itinerario = new Itinerario();
     }
 
@@ -168,7 +175,7 @@ public class FrmPantallaRegistrarItinerario extends javax.swing.JDialog {
         btnGuardar.setEnabled(false);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
+                clkBotonGuardar(evt);
             }
         });
         pnlFechas.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, -1, -1));
@@ -205,12 +212,7 @@ public class FrmPantallaRegistrarItinerario extends javax.swing.JDialog {
 
         tblHorario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"MARTES", null},
-                {"MIERCOLES", null},
-                {"JUEVES", null},
-                {"VIERNES", null},
-                {"SABADO", null},
-                {"DOMINGO", null}
+
             },
             new String [] {
                 "Dia", "Horario"
@@ -291,10 +293,58 @@ public class FrmPantallaRegistrarItinerario extends javax.swing.JDialog {
         y = evt.getY();
     }//GEN-LAST:event_labelCabeceraMousePressed
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnGuardarActionPerformed
+    private void clkBotonGuardar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clkBotonGuardar
+        guardar();
+    }//GEN-LAST:event_clkBotonGuardar
 
+    
+    public void guardar(){
+        try{
+            List<Horario> horario = new ArrayList<>();
+            List<ObjectId> recorridos = new ArrayList();
+            itinerario.setGuia(((Guia)cmbGuia.getSelectedItem()).getId());
+            for (int i = 0; i < tblHorario.getRowCount(); i++) {
+                Horario hora = new Horario();
+                if(tblHorario.getValueAt(i, 1).toString().isEmpty() || String.valueOf(tblHorario.getValueAt(i, 1))!= " " || tblHorario.getValueAt(i, 1) != ""){
+                    System.out.println("El valor de la segunda columna es:" +tblHorario.getValueAt(i, 1));
+                    String[] horas = ((String)tblHorario.getValueAt(i, 1)).split(",");
+                    
+                    
+                    hora.setDia((DiaSemana) tblHorario.getValueAt(i, 0));
+                    for (String hora1 : Arrays.asList(horas)) {
+                        hora.agregarHora(hora1);
+                    }
+                    horario.add(hora);
+                }
+            }
+            itinerario.setHorario(horario);
+            itinerario.setMaxVisitantes(Integer.parseInt(txtMaxVisitantes.getText()));
+            itinerario.setNombre(txtNombreItinerario.getText());
+            
+            for (int i = 0; i < tblZonas.getRowCount(); i++) {
+                if((boolean)tblZonas.getValueAt(i, 1)){
+                    recorridos.add(((Zona)tblZonas.getValueAt(i, 0)).getId());
+                }
+            }
+            itinerario.setRecorridos(recorridos);
+            itinerario.setDuracion(Integer.parseInt(txtDuracion.getText()));
+            itinerario.setLongitud(Float.parseFloat(txtLongitud.getText()));
+            
+            Itinerario recuperado = iNegocios.recuperaItinerario(itinerario.getNombre());
+            
+            if(recuperado != null){
+                muestraMsj("Error: itinerario existente");
+                return;
+            }
+            iNegocios.guardaItinerario(itinerario);
+            muestraMsj("Registro exitoso");
+            limpiarCampos();
+        }catch(DAOException ex){
+            muestraMsj(ex.getMessage());
+        }
+    }
+    
+    
     private void clkBotonBuscar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clkBotonBuscar
         // TODO add your handling code here:
         verificarExistencia();
@@ -302,7 +352,6 @@ public class FrmPantallaRegistrarItinerario extends javax.swing.JDialog {
 
     private void txtNombreItinerarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreItinerarioFocusLost
         // TODO add your handling code here:
-        verificarExistencia();
     }//GEN-LAST:event_txtNombreItinerarioFocusLost
 
     private void txtNombreItinerarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreItinerarioKeyPressed
@@ -317,6 +366,7 @@ public class FrmPantallaRegistrarItinerario extends javax.swing.JDialog {
             // TODO add your handling code here:
             Itinerario itinerario = iNegocios.recuperaItinerario(txtNombreItinerario.getText());
             if(itinerario != null){
+                llenaCamposInfor(itinerario);
                 muestraMsj("Error: el Itinerario ya existe");
                 return;
             }
@@ -342,6 +392,15 @@ public class FrmPantallaRegistrarItinerario extends javax.swing.JDialog {
             }
         }
         this.iNegocios = iNegocios;
+        
+        modeloTablaHorario.addRow(new Object[]{DiaSemana.MARTES,""});
+        modeloTablaHorario.addRow(new Object[]{DiaSemana.MIERCOLES,""});
+        modeloTablaHorario.addRow(new Object[]{DiaSemana.JUEVES,""});
+        modeloTablaHorario.addRow(new Object[]{DiaSemana.VIERNES,""});
+        modeloTablaHorario.addRow(new Object[]{DiaSemana.SABADO,""});
+        modeloTablaHorario.addRow(new Object[]{DiaSemana.DOMINGO,""});
+        
+        this.tblHorario.setModel(modeloTablaHorario);
         
         
         for (int i = 0; i < datos.size(); i++) {
@@ -411,6 +470,39 @@ public class FrmPantallaRegistrarItinerario extends javax.swing.JDialog {
                     this.modeloTablaZonas.addRow(row);
                 }
             
+    }
+
+    private void limpiarCampos() {
+        txtDuracion.setText("");
+        txtLongitud.setText("");
+        txtMaxVisitantes.setText("");
+        txtNombreItinerario.setText("");
+
+    }
+
+    private void llenaCamposInfor(Itinerario itinerario) throws DAOException {
+        this.txtDuracion.setText(String.valueOf(itinerario.getDuracion()));
+        this.txtLongitud.setText(String.valueOf(itinerario.getLongitud()));
+        this.txtMaxVisitantes.setText(String.valueOf(itinerario.getMaxVisitantes()));
+        modeloTablaZonas = new DefaultTableModel();
+        for (int i = 0; i < cmbGuia.getItemCount(); i++) {
+            if(((Guia)cmbGuia.getItemAt(i)).getId() == itinerario.getGuia()){
+                cmbGuia.setSelectedIndex(i);
+                break;
+            }
+        }
+        
+        for (int i = 0; i < itinerario.getRecorridos().size(); i++) {
+            modeloTablaZonas.addRow(new Object[]{iNegocios.recuperarZona(itinerario.getRecorridos().get(i)),true});            
+        }
+        tblZonas.setModel(modeloTablaZonas);
+        
+        
+        for (int i = 0; i < itinerario.getHorario().size(); i++) {
+            modeloTablaHorario.addRow(new Object[]{itinerario.getHorario().get(i).getDia(),itinerario.getHorario().get(i).getHora()});
+        }
+        tblHorario.setModel(modeloTablaHorario);
+
     }
 
 

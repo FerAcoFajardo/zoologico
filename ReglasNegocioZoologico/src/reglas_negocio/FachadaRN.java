@@ -15,6 +15,7 @@ import objetonegocio.Especie;
 import objetonegocio.Habitat;
 import objetonegocio.Itinerario;
 import objetonegocio.Queja;
+import objetonegocio.Zona;
 import org.bson.types.ObjectId;
 
 /**
@@ -148,5 +149,10 @@ public class FachadaRN implements iNegocios{
         List listaDatos = new ArrayList();
         listaDatos.add(this.ctrlItinerario.recuperaItinerario());
         return listaDatos;
+    }
+
+    @Override
+    public Zona recuperarZona(ObjectId objectId) throws DAOException {
+        return this.ctrlZona.recuperarZona(objectId);
     }
 }

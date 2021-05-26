@@ -12,6 +12,7 @@ import objetonegocio.Especie;
 import objetonegocio.Habitat;
 import objetonegocio.Itinerario;
 import objetonegocio.Queja;
+import objetonegocio.Zona;
 import org.bson.types.ObjectId;
 
 /**
@@ -46,4 +47,6 @@ public interface iNegocios {
    public List<Itinerario> recuperaItinerario() throws DAOException;
    
    public void guardarQueja(Queja queja) throws DAOException;
+   
+   public Zona recuperarZona(ObjectId objectId) throws DAOException;
 }

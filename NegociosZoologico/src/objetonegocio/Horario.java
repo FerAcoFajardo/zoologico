@@ -5,6 +5,7 @@
  */
 package objetonegocio;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -15,14 +16,22 @@ import java.util.List;
  */
 public class Horario {
     
-    List<String> hora;
     DiaSemana dia;
+    List<String> hora;
+    
 
     public Horario(List<String> hora, DiaSemana dia) {
         this.hora = hora;
         this.dia = dia;
     }
 
+    public Horario() {
+        hora = new ArrayList<>();
+    }
+
+    public void agregarHora(String hora){
+        this.hora.add(hora);
+    }
 
     public List<String> getHora() {
         return hora;

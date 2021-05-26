@@ -9,6 +9,7 @@ import datos.iDatos;
 import exceptions.DAOException;
 import java.util.List;
 import objetonegocio.Zona;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -24,6 +25,10 @@ public class CtrlZona {
     
     public List<Zona> recuperarZona() throws DAOException{
         return iDatos.recuperarZonas();
+    }
+
+    public Zona recuperarZona(ObjectId objectId) {
+        return iDatos.recuperarZonas(objectId);
     }
     
 }

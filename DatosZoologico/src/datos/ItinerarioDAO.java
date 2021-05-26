@@ -27,9 +27,6 @@ public class ItinerarioDAO extends BaseDAO<Itinerario> {
            MongoCollection<Itinerario> coleccionItinerario = this.getColeccion();
             Itinerario itinerario = coleccionItinerario.find(
                     Filters.eq("_id", id)).first();
-            if(itinerario == null){
-                throw new DAOException("Error: El itinerario no existe");
-            }
             return itinerario;
         } catch (Exception ex) {
             throw new DAOException(ex.getMessage(), ex);
@@ -63,7 +60,7 @@ public class ItinerarioDAO extends BaseDAO<Itinerario> {
             Itinerario itinerarioActualizado = coleccionItinerario.find(
                     Filters.eq("_id", itinerario.getId())).first();
 
-            itinerarioActualizado.setFecha(itinerario.getFecha());
+            itinerarioActualizado.setHorario(itinerario.getHorario());
             itinerarioActualizado.setGuia(itinerario.getGuia());
             itinerarioActualizado.setQuejas(itinerario.getQuejas());
             itinerarioActualizado.setNombre(itinerario.getNombre());

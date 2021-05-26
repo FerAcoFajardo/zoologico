@@ -56,5 +56,8 @@ public interface iDatos {
     public void guardarItinerario(Itinerario itinerario) throws DAOException;
     
     public void guardarQueja(Queja queja) throws DAOException;
+
+
+    public Zona recuperarZonas(ObjectId objectId) throws DAOException;
     
 }
