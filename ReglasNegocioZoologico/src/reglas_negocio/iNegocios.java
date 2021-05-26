@@ -39,6 +39,8 @@ public interface iNegocios {
    
    public Itinerario recuperaItinerario(ObjectId id) throws DAOException;
    
+   public Itinerario recuperaItinerario(String itinerio) throws DAOException;
+   
    public List<Itinerario> recuperaItinerario() throws DAOException;
    
    public void guardarQueja(Queja queja) throws DAOException;

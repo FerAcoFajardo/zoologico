@@ -14,7 +14,6 @@ import org.bson.types.ObjectId;
 public class Animal {
     private String nombre;
     private int edad;
-    private Especie especie;
     private Sexo sexo;
     private ObjectId id;
     
@@ -24,23 +23,16 @@ public class Animal {
         this.nombre = nombre;
     }
 
-    public Animal(String nombre, int edad, Especie especie, Sexo sexo) {
-        this.nombre = nombre;
-        this.edad = edad;
-        this.especie = especie;
-        this.sexo = sexo;
-    }
-
     public Animal(String nombre, int edad, Sexo sexo) {
         this.nombre = nombre;
         this.edad = edad;
         this.sexo = sexo;
     }
 
-    public Animal(String nombre, int edad, Especie especie, Sexo sexo, ObjectId id) {
+
+    public Animal(String nombre, int edad, Sexo sexo, ObjectId id) {
         this.nombre = nombre;
         this.edad = edad;
-        this.especie = especie;
         this.sexo = sexo;
         this.id = id;
     }
@@ -58,7 +50,7 @@ public class Animal {
     
     @Override
     public String toString() {
-        return "Animal{" + "nombre=" + nombre + ", edad=" + edad + ", especie=" + especie + ", sexo=" + sexo + '}';
+        return "Animal{" + "nombre=" + nombre + ", edad=" + edad + ", sexo=" + sexo + '}';
     }
 
     
@@ -111,18 +103,6 @@ public class Animal {
         this.edad = edad;
     }
 
-    /**
-     * Método que establece la especie del animal
-     * @return Especie 
-     */
-    public Especie getEspecie() {
-        return especie;
-    }
-
-    public void setEspecie(Especie especie) {
-        this.especie = especie;
-    }
-    
     
     public void verificar() throws BusinessException{
         if(this.edad < 0 || this.edad > 150){

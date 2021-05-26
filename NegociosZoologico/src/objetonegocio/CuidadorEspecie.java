@@ -3,43 +3,40 @@
  */
 package objetonegocio;
 
+import java.util.Date;
+import org.bson.types.ObjectId;
+
 /**
  *
  * @author paulb
  */
 public class CuidadorEspecie {
-    private Cuidador cuidador;
+    private ObjectId cuidador;
     private Conocimiento conocimiento;
-    private Especie especie;
+    private Date fecha;
 
     public CuidadorEspecie() {
     }
 
-    public CuidadorEspecie(Cuidador cuidador) {
+    public CuidadorEspecie(ObjectId cuidador) {
         this.cuidador = cuidador;
     }
 
-    public CuidadorEspecie(Cuidador cuidador, Conocimiento conocimiento) {
+    public CuidadorEspecie(ObjectId cuidador, Conocimiento conocimiento) {
         this.cuidador = cuidador;
         this.conocimiento = conocimiento;
+        this.fecha = new Date();
     }
     
 
-    public Cuidador getCuidador() {
+    public ObjectId getCuidador() {
         return cuidador;
     }
 
-    public void setCuidador(Cuidador cuidador) {
+    public void setCuidador(ObjectId cuidador) {
         this.cuidador = cuidador;
     }
 
-    public Especie getEspecie() {
-        return especie;
-    }
-
-    public void setEspecie(Especie especie) {
-        this.especie = especie;
-    }
 
     
     public Conocimiento getConocimiento() {

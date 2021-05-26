@@ -35,6 +35,17 @@ public class ItinerarioDAO extends BaseDAO<Itinerario> {
             throw new DAOException(ex.getMessage(), ex);
         }
     }
+    
+    public Itinerario buscarNombre(String nombre) throws DAOException {
+        try {
+           MongoCollection<Itinerario> coleccionItinerario = this.getColeccion();
+            Itinerario itinerario = coleccionItinerario.find(
+                    Filters.eq("nombre", nombre)).first();
+            return itinerario;
+        } catch (Exception ex) {
+            throw new DAOException(ex.getMessage(), ex);
+        }
+    }
 
     @Override
     public Itinerario buscar(String id) throws DAOException {

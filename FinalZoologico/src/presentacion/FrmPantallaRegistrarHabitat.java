@@ -6,6 +6,7 @@
 package presentacion;
 
 import exceptions.DAOException;
+import java.awt.event.KeyEvent;
 import java.awt.geom.RoundRectangle2D;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -186,6 +187,11 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
                 txtNombreHabitatActionPerformed(evt);
             }
         });
+        txtNombreHabitat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreHabitatKeyPressed(evt);
+            }
+        });
         jPanel2.add(txtNombreHabitat, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 220, -1));
 
         btnVerificar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -307,12 +313,7 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNombreHabitatActionPerformed
 
     private void clkBotonVerificarExistencia(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clkBotonVerificarExistencia
-        try {
-            // TODO add your handling code here:
-            verificarExistenciaHabitat();
-        } catch (DAOException ex) {
-            muestraMsjError(ex.getMessage());
-        }
+        verificarExistencia();
     }//GEN-LAST:event_clkBotonVerificarExistencia
 
     private void clkBotonGuardarHabitat(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clkBotonGuardarHabitat
@@ -339,14 +340,19 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
 
     private void txtNombreHabitatFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreHabitatFocusLost
         // TODO add your handling code here:
+        verificarExistencia();
+    }//GEN-LAST:event_txtNombreHabitatFocusLost
+
+    
+    public void verificarExistencia(){
         try {
             // TODO add your handling code here:
             verificarExistenciaHabitat();
         } catch (DAOException ex) {
             muestraMsjError(ex.getMessage());
         }
-    }//GEN-LAST:event_txtNombreHabitatFocusLost
-
+    }
+    
     private void labelCabeceraMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelCabeceraMouseDragged
         this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);
     }//GEN-LAST:event_labelCabeceraMouseDragged
@@ -360,6 +366,13 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
         this.instancia = null;
         dispose();
     }//GEN-LAST:event_btnExitMouseReleased
+
+    private void txtNombreHabitatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreHabitatKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            verificarExistencia();
+        }
+    }//GEN-LAST:event_txtNombreHabitatKeyPressed
 
     
     

@@ -32,6 +32,7 @@ public class FachadaRN implements iNegocios{
     CtrlItinerario ctrlItinerario;
     CtrlQueja ctrlQueja;
     CtrlGuia ctrlGuia;
+    CtrlZona ctrlZona;
     iDatos iDatos = FabricaDatos.crearDatos();
     
     public FachadaRN() {
@@ -44,6 +45,7 @@ public class FachadaRN implements iNegocios{
         this.ctrlItinerario = new CtrlItinerario(iDatos);
         this.ctrlQueja = new CtrlQueja(iDatos);
         this.ctrlGuia = new CtrlGuia(iDatos);
+        this.ctrlZona = new CtrlZona(iDatos);
     }
     
     
@@ -110,7 +112,7 @@ public class FachadaRN implements iNegocios{
     public List recurerarDatosFormItinerario() throws DAOException {
        List listaDatos = new ArrayList();
        
-       listaDatos.add(this.ctrlItinerario.recuperaItinerario());
+       listaDatos.add(this.ctrlZona.recuperarZona());
        listaDatos.add(this.ctrlGuia.recuperaGuias());
        
        return listaDatos;
@@ -134,6 +136,11 @@ public class FachadaRN implements iNegocios{
     @Override
     public void guardarQueja(Queja queja) throws DAOException{
         this.ctrlQueja.guardarQueja(queja);
+    }
+
+    @Override
+    public Itinerario recuperaItinerario(String itinerario) throws DAOException {
+        return this.ctrlItinerario.recuperaItinerario(itinerario);
     }
     
     

@@ -51,6 +51,8 @@ public interface iDatos {
     
     public Itinerario recuperarItinerario(ObjectId id) throws DAOException;
     
+    public Itinerario recuperarItinerario(String itinerario) throws DAOException;
+    
     public void guardarItinerario(Itinerario itinerario) throws DAOException;
     
     public void guardarQueja(Queja queja) throws DAOException;

@@ -124,5 +124,10 @@ public class FachadaDatos implements iDatos{
         quejaDAO.guardar(queja);
     }
 
+    @Override
+    public Itinerario recuperarItinerario(String itinerario) throws DAOException {
+       return itinerarioDAO.buscarNombre(itinerario);
+    }
+
     
 }

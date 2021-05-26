@@ -5,12 +5,12 @@
  */
 package presentacion;
 
+import exceptions.DAOException;
+import java.awt.event.KeyEvent;
 import java.util.List;
-import javax.swing.DefaultListModel;
-import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import objetonegocio.Continente;
-import objetonegocio.DiaSemana;
+import objetonegocio.Guia;
 import objetonegocio.Itinerario;
 import objetonegocio.Zona;
 import reglas_negocio.iNegocios;
@@ -24,7 +24,9 @@ public class FrmPantallaRegistrarItinerario extends javax.swing.JDialog {
     private static FrmPantallaRegistrarItinerario instancia;
     private Itinerario itinerario;
     private iNegocios iNegocios;
-    private DefaultTableModel modeloTabla;
+    private DefaultTableModel modeloTablaHorario;
+    private DefaultTableModel modeloTablaZonas;
+    private List<Zona> zonas;
     
     /**
      * Creates new form FrmPantallaRegistrarItinerario
@@ -32,7 +34,8 @@ public class FrmPantallaRegistrarItinerario extends javax.swing.JDialog {
     private FrmPantallaRegistrarItinerario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        modeloTabla = (DefaultTableModel)this.tblHorario.getModel();
+        modeloTablaHorario = (DefaultTableModel)this.tblHorario.getModel();
+        modeloTablaZonas = (DefaultTableModel)this.tblZonas.getModel();
         this.itinerario = new Itinerario();
     }
 
@@ -61,7 +64,6 @@ public class FrmPantallaRegistrarItinerario extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         pnlFechas = new javax.swing.JPanel();
-        pnlZonas = new javax.swing.JPanel();
         txtDuracion = new javax.swing.JTextField();
         txtLongitud = new javax.swing.JTextField();
         txtMaxVisitantes = new javax.swing.JTextField();
@@ -70,9 +72,11 @@ public class FrmPantallaRegistrarItinerario extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel4 = new javax.swing.JPanel();
+        tblZonas = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblHorario = new javax.swing.JTable();
+        jLabel7 = new javax.swing.JLabel();
+        cmbGuia = new javax.swing.JComboBox<>();
         btnBuscar = new javax.swing.JButton();
         txtNombreItinerario = new javax.swing.JTextField();
 
@@ -127,140 +131,115 @@ public class FrmPantallaRegistrarItinerario extends javax.swing.JDialog {
         pnlFechas.setForeground(new java.awt.Color(51, 51, 51));
         pnlFechas.setFocusable(false);
         pnlFechas.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-
-        pnlZonas.setBackground(new java.awt.Color(49, 58, 73));
-        pnlZonas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Checkbox list", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 24), new java.awt.Color(255, 255, 255))); // NOI18N
-        pnlZonas.setForeground(new java.awt.Color(51, 51, 51));
-        pnlZonas.setFocusable(false);
-        pnlZonas.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-
-        javax.swing.GroupLayout pnlZonasLayout = new javax.swing.GroupLayout(pnlZonas);
-        pnlZonas.setLayout(pnlZonasLayout);
-        pnlZonasLayout.setHorizontalGroup(
-            pnlZonasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 193, Short.MAX_VALUE)
-        );
-        pnlZonasLayout.setVerticalGroup(
-            pnlZonasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 326, Short.MAX_VALUE)
-        );
+        pnlFechas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtDuracion.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         txtDuracion.setToolTipText("");
+        txtDuracion.setEnabled(false);
+        pnlFechas.add(txtDuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 127, -1));
 
         txtLongitud.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         txtLongitud.setToolTipText("");
+        txtLongitud.setEnabled(false);
+        pnlFechas.add(txtLongitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 120, 127, -1));
 
         txtMaxVisitantes.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         txtMaxVisitantes.setToolTipText("");
+        txtMaxVisitantes.setEnabled(false);
+        pnlFechas.add(txtMaxVisitantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 170, 127, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Duración en minutos");
+        pnlFechas.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(249, 71, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Longitud en metros");
+        pnlFechas.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 118, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Max num visitantes");
+        jLabel5.setText("Guia");
+        pnlFechas.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 230, -1, -1));
 
         btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnGuardar.setText("Guardar");
+        btnGuardar.setEnabled(false);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
             }
         });
+        pnlFechas.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, -1, -1));
 
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Zonas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 0, 18), new java.awt.Color(255, 255, 255))); // NOI18N
+        jScrollPane1.setEnabled(false);
+
+        tblZonas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Zona", ""
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblZonas);
+        if (tblZonas.getColumnModel().getColumnCount() > 0) {
+            tblZonas.getColumnModel().getColumn(1).setMinWidth(25);
+            tblZonas.getColumnModel().getColumn(1).setPreferredWidth(25);
+            tblZonas.getColumnModel().getColumn(1).setMaxWidth(25);
+        }
+
+        pnlFechas.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 39, 230, 360));
+
+        jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Horarios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 0, 18), new java.awt.Color(255, 255, 255))); // NOI18N
 
         tblHorario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {"MARTES", null},
+                {"MIERCOLES", null},
+                {"JUEVES", null},
+                {"VIERNES", null},
+                {"SABADO", null},
+                {"DOMINGO", null}
             },
             new String [] {
                 "Dia", "Horario"
             }
         ));
+        tblHorario.setEnabled(false);
         jScrollPane2.setViewportView(tblHorario);
+        if (tblHorario.getColumnModel().getColumnCount() > 0) {
+            tblHorario.getColumnModel().getColumn(0).setResizable(false);
+        }
 
-        jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 360));
+        pnlFechas.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 30, 210, 370));
 
-        javax.swing.GroupLayout pnlFechasLayout = new javax.swing.GroupLayout(pnlFechas);
-        pnlFechas.setLayout(pnlFechasLayout);
-        pnlFechasLayout.setHorizontalGroup(
-            pnlFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFechasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnlFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFechasLayout.createSequentialGroup()
-                        .addComponent(btnGuardar)
-                        .addGap(180, 180, 180))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFechasLayout.createSequentialGroup()
-                        .addGroup(pnlFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(pnlFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel4)))
-                        .addGap(20, 20, 20)
-                        .addGroup(pnlFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtMaxVisitantes, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                            .addComponent(txtDuracion)
-                            .addComponent(txtLongitud))
-                        .addGap(44, 44, 44)))
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
-            .addGroup(pnlFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFechasLayout.createSequentialGroup()
-                    .addContainerGap(15, Short.MAX_VALUE)
-                    .addComponent(pnlZonas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(697, Short.MAX_VALUE)))
-        );
-        pnlFechasLayout.setVerticalGroup(
-            pnlFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlFechasLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(pnlFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLongitud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtMaxVisitantes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(63, 63, 63)
-                .addComponent(btnGuardar)
-                .addContainerGap(110, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFechasLayout.createSequentialGroup()
-                .addGroup(pnlFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnlFechasLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pnlFechasLayout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jScrollPane1)))
-                .addContainerGap())
-            .addGroup(pnlFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnlFechasLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(pnlZonas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Max num visitantes");
+        pnlFechas.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(249, 165, -1, -1));
 
-        jPanel3.add(pnlFechas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 910, 410));
+        cmbGuia.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        cmbGuia.setEnabled(false);
+        pnlFechas.add(cmbGuia, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 230, 250, 30));
+
+        jPanel3.add(pnlFechas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 920, 410));
 
         btnBuscar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
+                clkBotonBuscar(evt);
             }
         });
         jPanel3.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, -1, -1));
@@ -268,6 +247,11 @@ public class FrmPantallaRegistrarItinerario extends javax.swing.JDialog {
         txtNombreItinerario.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtNombreItinerarioFocusLost(evt);
+            }
+        });
+        txtNombreItinerario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreItinerarioKeyPressed(evt);
             }
         });
         jPanel3.add(txtNombreItinerario, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 260, 30));
@@ -290,9 +274,14 @@ public class FrmPantallaRegistrarItinerario extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExitMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseReleased
-        System.exit(0);
+        cerrarVentana();
     }//GEN-LAST:event_btnExitMouseReleased
 
+       public void cerrarVentana(){
+           instancia = null;
+           dispose();
+       }
+    
     private void labelCabeceraMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelCabeceraMouseDragged
         this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);
     }//GEN-LAST:event_labelCabeceraMouseDragged
@@ -306,14 +295,40 @@ public class FrmPantallaRegistrarItinerario extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+    private void clkBotonBuscar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clkBotonBuscar
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuscarActionPerformed
+        verificarExistencia();
+    }//GEN-LAST:event_clkBotonBuscar
 
     private void txtNombreItinerarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreItinerarioFocusLost
         // TODO add your handling code here:
+        verificarExistencia();
     }//GEN-LAST:event_txtNombreItinerarioFocusLost
 
+    private void txtNombreItinerarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreItinerarioKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            verificarExistencia();
+        }
+    }//GEN-LAST:event_txtNombreItinerarioKeyPressed
+
+    public void verificarExistencia(){
+        try {
+            // TODO add your handling code here:
+            Itinerario itinerario = iNegocios.recuperaItinerario(txtNombreItinerario.getText());
+            if(itinerario != null){
+                muestraMsj("Error: el Itinerario ya existe");
+                return;
+            }
+            activaCampos();
+            cargaCheckBoxZonas();
+        } catch (DAOException ex) {
+            muestraMsj(ex.getMessage());
+        }
+    }
+    
+    
+    
     void despliegaInformacion(List<List> datos, iNegocios iNegocios) throws Exception {
         
         if (datos.isEmpty()) {
@@ -330,26 +345,16 @@ public class FrmPantallaRegistrarItinerario extends javax.swing.JDialog {
         
         
         for (int i = 0; i < datos.size(); i++) {
-            if (datos.get(i).get(0).getClass() == DiaSemana.class) {
                
-                for (int j=0;j< datos.get(i).size();j++) {
-                    modeloTabla.setValueAt(datos.get(i).get(j), j, 1);
-                }
-            }
             if (datos.get(i).get(0).getClass() == Zona.class) {
+                this.zonas = datos.get(i);
+            }
+            
+            if (datos.get(i).get(0).getClass() == Guia.class) {
                 for (int j = 0; j < datos.get(i).size(); j++) {
-                    JCheckBox zonaCheck = new JCheckBox(((Zona)datos.get(i).get(j)).getNombre());
-                    this.pnlZonas.add(zonaCheck);
+                    this.cmbGuia.addItem((Guia) datos.get(i).get(j));
                 }
             }
-//            if (datos.get(i).get(0).getClass() == Continente.class) {
-//                mdlDisponibles = new DefaultListModel();
-//                datos.get(i).forEach(continente -> {
-//                    mdlDisponibles.addElement(continente);
-//                });
-//
-//                listContinentesDisponibles.setModel(mdlDisponibles);
-//            }
         }
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -359,27 +364,55 @@ public class FrmPantallaRegistrarItinerario extends javax.swing.JDialog {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JLabel btnExit;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JComboBox<Guia> cmbGuia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelCabecera;
     private javax.swing.JPanel pnlFechas;
-    private javax.swing.JPanel pnlZonas;
     private javax.swing.JTable tblHorario;
+    private javax.swing.JTable tblZonas;
     private javax.swing.JTextField txtDuracion;
     private javax.swing.JTextField txtLongitud;
     private javax.swing.JTextField txtMaxVisitantes;
     private javax.swing.JTextField txtNombreItinerario;
     // End of variables declaration//GEN-END:variables
     int x,y;
+
+    private void muestraMsj(String message) {
+        JOptionPane.showMessageDialog(this, message, "Error/Advertencia",JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void activaCampos() {
+        this.txtDuracion.setEnabled(true);
+        this.txtLongitud.setEnabled(true);
+        this.txtMaxVisitantes.setEnabled(true);
+        this.txtNombreItinerario.setEnabled(true);
+        this.cmbGuia.setEnabled(true);
+        this.tblHorario.setEnabled(true);
+        this.tblZonas.setEnabled(true);
+        this.btnGuardar.setEnabled(true);
+    }
+
+    private void cargaCheckBoxZonas() {
+        
+                for (int i = 0; i < zonas.size(); i++) {
+                    Object[] row = new Object[2];
+                    row[0] = zonas.get(i);
+                    row[1] = false;
+                    this.modeloTablaZonas.addRow(row);
+                }
+            
+    }
+
 
     
 }

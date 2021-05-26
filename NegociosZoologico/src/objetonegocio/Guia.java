@@ -56,7 +56,7 @@ public class Guia extends Empleado {
      */
     @Override
     public String toString() {
-        return "Guia{" + super.toString() + '}';
+        return super.toString();
     }
 }
 

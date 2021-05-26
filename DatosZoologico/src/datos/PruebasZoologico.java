@@ -6,7 +6,11 @@
 package datos;
 
 import exceptions.DAOException;
-import objetonegocio.Vegetacion;
+import java.util.ArrayList;
+import java.util.List;
+import objetonegocio.Especie;
+import objetonegocio.Zona;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -56,20 +60,28 @@ public class PruebasZoologico {
 //        CuidadorDAO cuidadorDAO = new CuidadorDAO();
 //        
 //        Cuidador cuidador = new Cuidador("Pepe", "Su caso", "65498731", new Date());
+//        Cuidador cuidador2 = new Cuidador("Pepe2", "Su caso", "65498731", new Date());
+//        Cuidador cuidador3 = new Cuidador("Pepe3", "Su caso", "65498731", new Date());
 //        
-//        Cuidador cuidadorConsultado = cuidadorDAO.buscar("60a35c092b8faa63fd7b3c02");
+//        //Cuidador cuidadorConsultado = cuidadorDAO.buscar("60a35c092b8faa63fd7b3c02");
 //        
-//        cuidadorConsultado.setDireccion("su casas");
+//        //cuidadorConsultado.setDireccion("su casas");
 //        
-//        cuidadorDAO.eliminar("60a35c092b8faa63fd7b3c02");
+//        cuidadorDAO.guardar(cuidador);
+//        cuidadorDAO.guardar(cuidador2);
+//        cuidadorDAO.guardar(cuidador3);
 //        GuiaDAO guiaDAO = new GuiaDAO();
 //        
 //        Guia guia = new Guia("Pepe", "Su caso", "65498731", new Date());
+//        Guia guia2 = new Guia("Pepe", "Su caso", "65498731", new Date());
+//        Guia guia3 = new Guia("Pepe", "Su caso", "65498731", new Date());
 //        Guia guia = guiaDAO.buscar("60a361a124510e718111186d");
 //        
 //        
 //        guia.setNombre("Caballo Homosexual");
-//        guiaDAO.eliminar("60a361ba16903b3dbd5d0a2d");
+//        guiaDAO.guardar(guia);
+//        guiaDAO.guardar(guia2);
+//        guiaDAO.guardar(guia3);
 //    
 //    
 //        AnimalesDAO animalesDAO = new AnimalesDAO();
@@ -82,7 +94,6 @@ public class PruebasZoologico {
 //        for (Animal animal : animales) {
 //            System.out.println(animal);
 //        }
-    
 //        ItinerarioDAO itinerarioDAO = new ItinerarioDAO();
 //        QuejaDAO quejaDAO = new QuejaDAO();
 //
@@ -103,7 +114,6 @@ public class PruebasZoologico {
 //        Queja queja = quejaDAO.buscar("60a36fa931af584fb25c6b1c");
 //        
 //        itinerarioDAO.agregarQueja(itinerario.getId(), queja.getId());
-
 //        VegetacionDAO vegetacionDAO = new VegetacionDAO();
 //
 //        Vegetacion vegetacion = new Vegetacion("Pitaya", "Pitayus algo");
@@ -113,10 +123,8 @@ public class PruebasZoologico {
 //        
 //        vegetacion.setNombreCientifico("Stenocereus thurberi");
 //        vegetacionDAO.actualizar(vegetacion);
-        
 //        ZonasDAO zonaDAO = new ZonasDAO();
 //        EspecieDAO especieDAO = new EspecieDAO();
-        
 //        List<Especie> especies = especieDAO.buscar();
 //        
 //        List<ObjectId> especieses = new ArrayList();
@@ -128,7 +136,6 @@ public class PruebasZoologico {
 //        Zona zona = new Zona(especieses, "zona 1", 130.0f);
 //        
 //        zonaDAO.guardar(zona);
-
 //        Zona zona = zonaDAO.buscar("60a3755b457b0c36c46daa8b");
 //        
 //        zona.setNombre("Zona 1 remodelada");
@@ -148,22 +155,40 @@ public class PruebasZoologico {
 //        
 //        recorridoDAO.actualizar(recorrido);
 //recorridoDAO.guardar(recorrido);
+//        VegetacionDAO vegetacionDAO = new VegetacionDAO();
+//
+//        Vegetacion vegetacion1 = new Vegetacion("Arbusto enano", "Abutilon Enano");
+//        Vegetacion vegetacion2 = new Vegetacion("Pochote", "Pachira quinata");
+//        Vegetacion vegetacion3 = new Vegetacion("Sahuaro", "Carnegiea gigantea");
+//        Vegetacion vegetacion4 = new Vegetacion("Pitaya", "Stenocereus thurberi");
+//        
+//        vegetacionDAO.guardar(vegetacion3);
+//        vegetacionDAO.guardar(vegetacion2);
+//        vegetacionDAO.guardar(vegetacion1);
+//        vegetacionDAO.guardar(vegetacion4);
 
-
-        VegetacionDAO vegetacionDAO = new VegetacionDAO();
-
-        Vegetacion vegetacion1 = new Vegetacion("Arbusto enano", "Abutilon Enano");
-        Vegetacion vegetacion2 = new Vegetacion("Pochote", "Pachira quinata");
-        Vegetacion vegetacion3 = new Vegetacion("Sahuaro", "Carnegiea gigantea");
-        Vegetacion vegetacion4 = new Vegetacion("Pitaya", "Stenocereus thurberi");
-        
-        vegetacionDAO.guardar(vegetacion3);
-        vegetacionDAO.guardar(vegetacion2);
-        vegetacionDAO.guardar(vegetacion1);
-        vegetacionDAO.guardar(vegetacion4);
+//        EspecieDAO especieDAO = new EspecieDAO();
+//
+//        List<ObjectId> especies = new ArrayList();
+//        
+//        List<Especie> especies1 = especieDAO.buscar();
+//        
+//        especies1.forEach(especie -> {
+//            especies.add(especie.getId());
+//        });
+//
+//        Zona zona0 = new Zona(especies, "Zona monos", 30);
+//        Zona zona1 = new Zona(especies, "Zona de puercos", 200);
+//        Zona zona2 = new Zona(especies, "Zona de caballos", 300);
+//        Zona zona3 = new Zona(especies, "Zona de Felinos", 50);
+//        
+//        ZonaDAO zonaDAO = new ZonaDAO();
+//        
+//        zonaDAO.guardar(zona0);
+//        zonaDAO.guardar(zona1);
+//        zonaDAO.guardar(zona2);
+//        zonaDAO.guardar(zona3);
 
     }
-    
-    
 
 }

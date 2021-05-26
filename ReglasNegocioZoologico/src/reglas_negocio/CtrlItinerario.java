@@ -31,6 +31,10 @@ public class CtrlItinerario {
         return iDatos.recuperarItinerario(id);
     }
     
+    public Itinerario recuperaItinerario(String itinerario) throws DAOException{
+        return iDatos.recuperarItinerario(itinerario);
+    }
+    
     public void guardarItinerario(Itinerario itinerario) throws DAOException{
         iDatos.guardarItinerario(itinerario);
     }

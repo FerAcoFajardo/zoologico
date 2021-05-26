@@ -246,6 +246,7 @@ public class FrmEditarAnimales extends javax.swing.JDialog {
          try {
              // TODO add your handling code here:
              agregarAnimal();
+             limpiarCampos();
          } catch (BusinessException ex) {
             muestaMsjError(ex.getMessage());
          }
@@ -288,15 +289,21 @@ public class FrmEditarAnimales extends javax.swing.JDialog {
         List<Animal> listaAnimales = new ArrayList();
         instancia = null;
         for (int i = 0; i < tblAnimales.getRowCount(); i++) {
-            String nombre = tblAnimales.getValueAt(i, 1).toString();
-            int edad = Integer.parseInt(tblAnimales.getValueAt(i, 2).toString());
-            Sexo sexo = (Sexo) tblAnimales.getValueAt(i, 3);
-            Animal animal = new Animal(nombre, edad, ((FrmPantallaRegistroEspecie)parent).getEspecie(), sexo, new ObjectId());
+            String nombre = tblAnimales.getValueAt(i, 0).toString();
+            int edad = Integer.parseInt(tblAnimales.getValueAt(i, 1).toString());
+            Sexo sexo = (Sexo) tblAnimales.getValueAt(i, 2);
+            Animal animal = new Animal(nombre, edad, sexo, new ObjectId());
             listaAnimales.add(animal);
         }
+        listaAnimales.forEach(listaAnimale -> {
+            System.out.println(listaAnimale);
+         });
         //especie.setAnimales(listaAnimales);
-        //((FrmPantallaRegistroEspecie)super.getParent()).setEspecie(especie);
-        ((FrmPantallaRegistroEspecie)super.getParent()).actualizarNumAnimales(listaAnimales.size());
+        Especie especie = ((FrmPantallaRegistroEspecie)parent).getEspecie();
+        especie.setAnimales(listaAnimales);
+        System.out.println(especie);
+        ((FrmPantallaRegistroEspecie)parent).setEspecie(especie);
+        ((FrmPantallaRegistroEspecie)parent).actualizarNumAnimales(listaAnimales.size());
         dispose();
     }
     
@@ -312,13 +319,22 @@ public class FrmEditarAnimales extends javax.swing.JDialog {
     
     public void muestraMensajeConfirmacion(int fila ){
         int opcion = JOptionPane.showConfirmDialog(this, "Desea confirmar la eliminación","Confirmación", JOptionPane.YES_NO_OPTION);
-        if(opcion == 1){
+        if(opcion == 0){
             eliminarAnimal(fila);
         }
     }
     
+    public void limpiarCampos(){
+        this.txtNombre.setText("");
+        this.spinEdad.setValue(0);
+    }
+    
     public void eliminarAnimal(int fila){
-        this.tblAnimales.remove(fila);
+        this.modeloTabla = (DefaultTableModel)this.tblAnimales.getModel();
+        
+        modeloTabla.removeRow(fila);
+        
+        this.tblAnimales.setModel(modeloTabla);
     }
     
     public void agregarAnimal() throws BusinessException{
@@ -366,6 +382,8 @@ public class FrmEditarAnimales extends javax.swing.JDialog {
         
         tblAnimales.setModel(modeloTabla);
         }
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
     }
     
     
