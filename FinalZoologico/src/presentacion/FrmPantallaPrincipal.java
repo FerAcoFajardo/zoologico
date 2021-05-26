@@ -68,7 +68,7 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Zoológico");
-        panelTitulo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 180, -1));
+        panelTitulo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 500, -1));
 
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_cancel_40px.png"))); // NOI18N
         btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -77,7 +77,7 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
                 btnExitMouseReleased(evt);
             }
         });
-        panelTitulo.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, 40, 40));
+        panelTitulo.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 40, 40));
 
         labelCabecera.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         labelCabecera.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -90,9 +90,9 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
                 labelCabeceraMousePressed(evt);
             }
         });
-        panelTitulo.add(labelCabecera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 60));
+        panelTitulo.add(labelCabecera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 60));
 
-        panelBackground.add(panelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 60));
+        panelBackground.add(panelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 60));
 
         panelContenido.setBackground(new java.awt.Color(49, 58, 73));
         panelContenido.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -146,7 +146,7 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
                 btnRegistrarItinerarioMouseReleased(evt);
             }
         });
-        panelContenido.add(btnRegistrarItinerario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 390, 50));
+        panelContenido.add(btnRegistrarItinerario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 470, 50));
 
         btnRegistrarQueja.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         btnRegistrarQueja.setForeground(new java.awt.Color(255, 255, 255));
@@ -165,7 +165,7 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
         });
         panelContenido.add(btnRegistrarQueja, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, 60));
 
-        panelBackground.add(panelContenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 57, 430, 320));
+        panelBackground.add(panelContenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 57, 500, 320));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -178,7 +178,7 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
             .addComponent(panelBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        setSize(new java.awt.Dimension(430, 377));
+        setSize(new java.awt.Dimension(500, 377));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
