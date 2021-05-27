@@ -9,6 +9,7 @@ import exceptions.DAOException;
 import java.util.List;
 import objetonegocio.Animal;
 import objetonegocio.Especie;
+import objetonegocio.Guia;
 import objetonegocio.Habitat;
 import objetonegocio.Itinerario;
 import objetonegocio.Queja;
@@ -49,4 +50,6 @@ public interface iNegocios {
    public void guardarQueja(Queja queja) throws DAOException;
    
    public Zona recuperarZona(ObjectId objectId) throws DAOException;
+
+    public Guia buscarGuia(ObjectId guia) throws DAOException;
 }

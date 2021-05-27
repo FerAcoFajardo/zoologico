@@ -8,6 +8,8 @@ package objetonegocio;
 import exceptions.DAOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.bson.types.ObjectId;
 
 /**
@@ -183,17 +185,28 @@ public class Itinerario {
     }
 
     public void verificarCampos() throws DAOException{
+        
+         Pattern pat = Pattern.compile("(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]+$");
+         
         if(this.horario.isEmpty()){
             throw new DAOException("Error: debe incluir al menos 1 fecha");
+        }
+        if(!this.horario.isEmpty()){
+            for (Horario horario1 : horario) {
+                Matcher mat = pat.matcher(horario1.getHora().toString());
+                if(mat.matches())
+                    throw new DAOException("Error: El formato es incorrecto");
+            }
+                
         }
         if(this.duracion <= 0 || this.duracion > 90){
             throw new DAOException("Error: Minimo 1 minuto de duracion");
         }
-        if(this.maxVisitantes <= 0 ){
+        if(this.maxVisitantes <= 0 || this.maxVisitantes > 30){
             throw new DAOException("Error: Se deben de poder incluir visitantes");
         }
         if(this.longitud <= 0.0f || this.longitud > 1500.0f){
-            throw new DAOException("Error: Se La longitud debe de ser mayor");
+            throw new DAOException("Error: Longitud fuera de rango, maximo 1500 mts");
         }
         if(this.nombre == null){
             throw new DAOException("Error: Nombre no puede estar vacio");

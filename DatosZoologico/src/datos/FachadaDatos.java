@@ -134,5 +134,10 @@ public class FachadaDatos implements iDatos{
         return zonasDAO.buscar(objectId);
 
     }
+
+    @Override
+    public Guia buscarGuia(ObjectId guia) throws DAOException {
+        return guiaDAO.buscar(guia);
+    }
     
 }

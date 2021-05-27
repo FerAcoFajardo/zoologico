@@ -128,7 +128,7 @@ public class FrmPantallaPrincipal extends javax.swing.JFrame {
                 clkBotonMostrarRAItinerario(evt);
             }
         });
-        panelContenido.add(btnRegistrarItinerario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 400, 50));
+        panelContenido.add(btnRegistrarItinerario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, 50));
 
         btnRegistrarQueja.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         btnRegistrarQueja.setForeground(new java.awt.Color(255, 255, 255));

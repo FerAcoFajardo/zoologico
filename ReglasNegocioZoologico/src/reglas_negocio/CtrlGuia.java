@@ -9,6 +9,7 @@ import datos.iDatos;
 import exceptions.DAOException;
 import java.util.List;
 import objetonegocio.Guia;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -24,6 +25,10 @@ public class CtrlGuia {
     
     public List<Guia> recuperaGuias() throws DAOException{
         return iDatos.recuperarGuias();
+    }
+
+    public Guia recuperaGuias(ObjectId guia) throws DAOException{
+        return iDatos.buscarGuia(guia);
     }
     
 }

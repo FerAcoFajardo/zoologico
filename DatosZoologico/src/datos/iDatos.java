@@ -59,5 +59,7 @@ public interface iDatos {
 
 
     public Zona recuperarZonas(ObjectId objectId) throws DAOException;
+
+    public Guia buscarGuia(ObjectId guia) throws DAOException;
     
 }

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import objetonegocio.Animal;
 import objetonegocio.Especie;
+import objetonegocio.Guia;
 import objetonegocio.Habitat;
 import objetonegocio.Itinerario;
 import objetonegocio.Queja;
@@ -154,5 +155,10 @@ public class FachadaRN implements iNegocios{
     @Override
     public Zona recuperarZona(ObjectId objectId) throws DAOException {
         return this.ctrlZona.recuperarZona(objectId);
+    }
+
+    @Override
+    public Guia buscarGuia(ObjectId guia) throws DAOException {
+        return this.ctrlGuia.recuperaGuias(guia);
     }
 }

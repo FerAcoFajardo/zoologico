@@ -190,11 +190,6 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
         jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 550, 210));
 
         txtNombreNormal.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        txtNombreNormal.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtNombreNormalFocusLost(evt);
-            }
-        });
         txtNombreNormal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtNombreNormalKeyPressed(evt);
@@ -411,11 +406,6 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
             verificarExistencia();
         }
     }//GEN-LAST:event_txtNombreNormalKeyPressed
-
-    private void txtNombreNormalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreNormalFocusLost
-        // TODO add your handling code here:
-        verificarExistencia();
-    }//GEN-LAST:event_txtNombreNormalFocusLost
 
     public void activaCampos() {
         this.txtADescripcion.setEnabled(true);

@@ -8,17 +8,18 @@ package presentacion;
 import datePolicy.SampleDateVetoPolicy;
 import datePolicy.SampleHighlightPolicy;
 import com.github.lgooddatepicker.components.DatePickerSettings;
-import com.github.lgooddatepicker.components.TimePickerSettings;
-import com.sun.org.apache.xerces.internal.impl.dtd.models.CMBinOp;
+import exceptions.DAOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import objetonegocio.DiaSemana;
 import objetonegocio.Horario;
 import objetonegocio.Itinerario;
 import objetonegocio.Queja;
@@ -61,15 +62,15 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
         int pickerNumber = 0;
 
         // Note: Veto policies can only be set after constructing the date picker.
-        DatePickerSettings dateSettings = datePicker1.getSettings().copySettings();
+        DatePickerSettings dateSettings = pckDate.getSettings().copySettings();
         dateSettings.setAllowKeyboardEditing(false);
-        datePicker1.setSettings(dateSettings);
+        pckDate.setSettings(dateSettings);
 
         //prueba forzada
         List<DayOfWeek> dias = Arrays.asList(DayOfWeek.FRIDAY, DayOfWeek.MONDAY);
 
         dateSettings.setHighlightPolicy(new SampleHighlightPolicy(dias));
-        dateSettings.setVetoPolicy(new SampleDateVetoPolicy(dias));
+        //dateSettings.setVetoPolicy(new SampleDateVetoPolicy(dias));
         dateSettings.setDateRangeLimits(today.minusDays(30), today.plusDays(0));
     }
 
@@ -80,9 +81,9 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
         int pickerNumber = 0;
 
         // Note: Veto policies can only be set after constructing the date picker.
-        DatePickerSettings dateSettings = datePicker1.getSettings().copySettings();
+        DatePickerSettings dateSettings = pckDate.getSettings().copySettings();
         dateSettings.setAllowKeyboardEditing(false);
-        datePicker1.setSettings(dateSettings);
+        pckDate.setSettings(dateSettings);
 
         //prueba forzada
         List<DayOfWeek> dias = Arrays.asList(DayOfWeek.FRIDAY, DayOfWeek.MONDAY);
@@ -108,7 +109,7 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
         labelCabecera = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        datePicker1 = new com.github.lgooddatepicker.components.DatePicker();
+        pckDate = new com.github.lgooddatepicker.components.DatePicker();
         cmbItinerarios = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -118,13 +119,13 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
         btnGetDates = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtADescripcion = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtPhone = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtNombreCompleto = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         txtEmail = new javax.swing.JTextField();
 
@@ -144,7 +145,7 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
                 jLabel7MouseReleased(evt);
             }
         });
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 10, 30, 30));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, 30, 30));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -164,7 +165,7 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
         });
         jPanel2.add(labelCabecera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 60));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 60));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 60));
 
         jPanel3.setBackground(new java.awt.Color(49, 58, 73));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -174,43 +175,43 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
-        datePicker1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                datePicker1MouseClicked(evt);
-            }
+        pckDate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                datePicker1MouseReleased(evt);
+                pckDateMouseReleased(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pckDateMouseClicked(evt);
             }
         });
-        datePicker1.addInputMethodListener(new java.awt.event.InputMethodListener() {
+        pckDate.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                datePicker1InputMethodTextChanged(evt);
+                pckDateInputMethodTextChanged(evt);
             }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
-        jPanel3.add(datePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 220, 30));
+        jPanel3.add(pckDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 230, 30));
 
         cmbItinerarios.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbItinerariosItemStateChanged(evt);
             }
         });
-        jPanel3.add(cmbItinerarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 22, 220, 30));
+        jPanel3.add(cmbItinerarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 22, 230, 30));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Itinerarios");
         jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
+        jLabel9.setText("Fecha");
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Fecha");
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
         txtGuia.setEditable(false);
         txtGuia.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jPanel3.add(txtGuia, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 208, -1));
+        jPanel3.add(txtGuia, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 220, -1));
 
         tblHoras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -239,23 +240,23 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
 
         jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 170, 290));
 
-        btnGetDates.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnGetDates.setText("Consultar Horarios");
+        btnGetDates.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnGetDates.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnGetDatesMouseClicked(evt);
             }
         });
-        jPanel3.add(btnGetDates, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, -1, 40));
+        jPanel3.add(btnGetDates, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 190, 220, 40));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 440, 550));
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jScrollPane1.setViewportView(jTextArea1);
+        txtADescripcion.setColumns(20);
+        txtADescripcion.setRows(5);
+        txtADescripcion.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jScrollPane1.setViewportView(txtADescripcion);
 
         jLabel3.setText("Descripción de la queja");
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -271,13 +272,18 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
         jLabel6.setText("Nombre (opcional)");
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
 
-        jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        txtNombreCompleto.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jButton1.setText("Enviar queja");
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clkEnviarQueja(evt);
             }
         });
 
@@ -305,10 +311,10 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
                             .addComponent(jLabel6))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNombreCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,28 +334,26 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombreCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addContainerGap(51, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 480, 550));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 520, 550));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 912, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 959, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(912, 614));
+        setSize(new java.awt.Dimension(959, 614));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -363,56 +367,90 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
     }//GEN-LAST:event_labelCabeceraMousePressed
 
     private void jLabel7MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseReleased
-        System.exit(0);
+        instancia = null;
+        dispose();
     }//GEN-LAST:event_jLabel7MouseReleased
 
     private void cmbItinerariosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbItinerariosItemStateChanged
         cargarListasDias();
-        muestraGuia();
+        try {
+            muestraGuia();
+        } catch (DAOException ex) {
+            muestraMensaje(ex.getMessage(),JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_cmbItinerariosItemStateChanged
 
-    private void datePicker1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_datePicker1MouseReleased
+    private void pckDateMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pckDateMouseReleased
         System.out.println("first");
         cargarHoras();
         
-    }//GEN-LAST:event_datePicker1MouseReleased
+    }//GEN-LAST:event_pckDateMouseReleased
 
-    private void datePicker1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_datePicker1MouseClicked
+    private void pckDateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pckDateMouseClicked
 
-    }//GEN-LAST:event_datePicker1MouseClicked
+    }//GEN-LAST:event_pckDateMouseClicked
 
-    private void datePicker1InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_datePicker1InputMethodTextChanged
+    private void pckDateInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_pckDateInputMethodTextChanged
 
-    }//GEN-LAST:event_datePicker1InputMethodTextChanged
+    }//GEN-LAST:event_pckDateInputMethodTextChanged
 
     private void btnGetDatesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGetDatesMouseClicked
         cargarHoras();
     }//GEN-LAST:event_btnGetDatesMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        //Email regex confirmation
-        String regex = "^(.+)@(.+)$";
- 
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(txtEmail.getText());
-        
-        if(matcher.matches() == false){
-            System.out.println("Correo invalido");
-            return;
-        }
-        //Phone
-        regex = "^((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$";
-        
-        pattern = Pattern.compile(regex);
-        matcher = pattern.matcher(txtPhone.getText());
-        
-        if(matcher.matches() == false){
-            System.out.println("Telefono invalido");
-            return;
-        }
+
 
     }//GEN-LAST:event_jButton1MouseClicked
 
+    private void clkEnviarQueja(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clkEnviarQueja
+        // TODO add your handling code here:
+        
+        LocalDate fecha = pckDate.getDate();
+        if(fecha == null){
+            muestraMensaje("Error: La fecha no puede estar vacia", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        Date date = Date.from(fecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        
+        int fila = tblHoras.getSelectedRow();
+        if(fila == -1){
+            muestraMensaje("Error: Debe de seleccionar una hora", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        List<String> hora = Arrays.asList(tblHoras.getValueAt(fila, 0).toString().split(":"));
+       
+        
+        date.setHours(Integer.parseInt(hora.get(0)));
+        date.setMinutes(Integer.parseInt(hora.get(1)));
+
+        
+        this.queja.setCorreo(txtEmail.getText());
+        this.queja.setDescripcion(txtADescripcion.getText());
+        this.queja.setTelefono(txtPhone.getText());
+        this.queja.setFecha(date);
+        this.queja.setItinerario(((Itinerario)cmbItinerarios.getSelectedItem()));
+        this.queja.setNombreCompleto(txtNombreCompleto.getText());
+        
+        try {
+            queja.validar();
+            iNegocios.guardarQueja(queja);
+            muestraMensaje("Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
+        } catch (DAOException ex) {
+            muestraMensaje(ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_clkEnviarQueja
+
+    
+    public void muestraMensaje(String message, int mode){
+        JOptionPane.showMessageDialog(this, message,"Mensaje",mode);
+    }
+    
+    
+    
     private void cargarListasDias() {
         int rowMultiplier = 4;
         int row = rowMultiplier;
@@ -423,9 +461,9 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
         List<DayOfWeek> dias = transformarDias(itinerarioSeleccionado);
         
         // Note: Veto policies can only be set after constructing the date picker.
-        DatePickerSettings dateSettings = datePicker1.getSettings().copySettings();
+        DatePickerSettings dateSettings = pckDate.getSettings().copySettings();
         dateSettings.setAllowKeyboardEditing(false);
-        datePicker1.setSettings(dateSettings);
+        pckDate.setSettings(dateSettings);
 
         //prueba forzada
         //List<DayOfWeek> dias = Arrays.asList(DayOfWeek.FRIDAY, DayOfWeek.MONDAY);
@@ -464,7 +502,7 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
     private void cargarHoras() {
         modeloTablaHoras.setRowCount(0);
         
-        LocalDate date = datePicker1.getDate();
+        LocalDate date = pckDate.getDate();
         if (date == null) {
             return;
         }
@@ -504,8 +542,8 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
 
     
 
-    public void muestraGuia() {
-        txtGuia.setText(((Itinerario) cmbItinerarios.getSelectedItem()).getNombre());
+    public void muestraGuia() throws DAOException {
+        txtGuia.setText(iNegocios.buscarGuia(((Itinerario) cmbItinerarios.getSelectedItem()).getGuia()).getNombre());
     }
 
     public void despliegaInformacion(List<List> datos, iNegocios iNegocios) throws Exception {
@@ -545,7 +583,6 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGetDates;
     private javax.swing.JComboBox<Itinerario> cmbItinerarios;
-    private com.github.lgooddatepicker.components.DatePicker datePicker1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -562,12 +599,13 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel labelCabecera;
+    private com.github.lgooddatepicker.components.DatePicker pckDate;
     private javax.swing.JTable tblHoras;
+    private javax.swing.JTextArea txtADescripcion;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtGuia;
+    private javax.swing.JTextField txtNombreCompleto;
     private javax.swing.JTextField txtPhone;
     // End of variables declaration//GEN-END:variables
 
