@@ -305,12 +305,11 @@ public class FrmPantallaRegistrarItinerario extends javax.swing.JDialog {
             itinerario.setGuia(((Guia)cmbGuia.getSelectedItem()).getId());
             for (int i = 0; i < tblHorario.getRowCount(); i++) {
                 Horario hora = new Horario();
-                if(tblHorario.getValueAt(i, 1).toString().isEmpty() || String.valueOf(tblHorario.getValueAt(i, 1))!= " " || tblHorario.getValueAt(i, 1) != ""){
-                    System.out.println("El valor de la segunda columna es:" +tblHorario.getValueAt(i, 1));
+                if(!tblHorario.getValueAt(i, 1).toString().isEmpty() ){
+                    
                     String[] horas = ((String)tblHorario.getValueAt(i, 1)).split(",");
-                    
-                    
                     hora.setDia((DiaSemana) tblHorario.getValueAt(i, 0));
+                     
                     for (String hora1 : Arrays.asList(horas)) {
                         hora.agregarHora(hora1);
                     }
@@ -484,7 +483,8 @@ public class FrmPantallaRegistrarItinerario extends javax.swing.JDialog {
         this.txtDuracion.setText(String.valueOf(itinerario.getDuracion()));
         this.txtLongitud.setText(String.valueOf(itinerario.getLongitud()));
         this.txtMaxVisitantes.setText(String.valueOf(itinerario.getMaxVisitantes()));
-        modeloTablaZonas = new DefaultTableModel();
+        
+        //modeloTablaZonas = new DefaultTableModel();
         for (int i = 0; i < cmbGuia.getItemCount(); i++) {
             if(((Guia)cmbGuia.getItemAt(i)).getId() == itinerario.getGuia()){
                 cmbGuia.setSelectedIndex(i);
@@ -492,19 +492,18 @@ public class FrmPantallaRegistrarItinerario extends javax.swing.JDialog {
             }
         }
         
+        modeloTablaZonas.setRowCount(0);
         for (int i = 0; i < itinerario.getRecorridos().size(); i++) {
             modeloTablaZonas.addRow(new Object[]{iNegocios.recuperarZona(itinerario.getRecorridos().get(i)),true});            
         }
         tblZonas.setModel(modeloTablaZonas);
         
-        
+        this.modeloTablaHorario.setRowCount(0);
+        this.txtNombreItinerario.setEnabled(false);
         for (int i = 0; i < itinerario.getHorario().size(); i++) {
             modeloTablaHorario.addRow(new Object[]{itinerario.getHorario().get(i).getDia(),itinerario.getHorario().get(i).getHora()});
         }
         tblHorario.setModel(modeloTablaHorario);
 
-    }
-
-
-    
+    }    
 }

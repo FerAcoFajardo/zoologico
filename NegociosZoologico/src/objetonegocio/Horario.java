@@ -6,8 +6,6 @@
 package objetonegocio;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,9 +36,7 @@ public class Horario {
     }
 
     public void setHora(List<String> hora) {
-        
-        this.hora.set(Calendar.HOUR, hora.get(Calendar.HOUR));
-        this.hora.set(Calendar.MINUTE, hora.get(Calendar.MINUTE));
+        this.hora = hora;
     }
 
     public DiaSemana getDia() {

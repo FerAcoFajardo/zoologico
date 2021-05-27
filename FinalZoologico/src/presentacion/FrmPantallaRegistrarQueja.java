@@ -8,10 +8,17 @@ package presentacion;
 import datePolicy.SampleDateVetoPolicy;
 import datePolicy.SampleHighlightPolicy;
 import com.github.lgooddatepicker.components.DatePickerSettings;
+import com.github.lgooddatepicker.components.TimePickerSettings;
+import com.sun.org.apache.xerces.internal.impl.dtd.models.CMBinOp;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import objetonegocio.DiaSemana;
+import objetonegocio.Horario;
+import objetonegocio.Itinerario;
 import objetonegocio.Queja;
 import reglas_negocio.iNegocios;
 
@@ -21,16 +28,19 @@ import reglas_negocio.iNegocios;
  */
 public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
 
+    int y, x;
+    private DefaultTableModel modeloTablaHoras;
     private static FrmPantallaRegistrarQueja instancia;
     private static Queja queja;
     private iNegocios iNegocios;
-    
+
     /**
      * Creates new form FrmPantallaRegistrarQuejas
      */
     private FrmPantallaRegistrarQueja(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        modeloTablaHoras = (DefaultTableModel)this.tblHoras.getModel();
     }
 
     public static FrmPantallaRegistrarQueja getInstance(java.awt.Frame parent) {
@@ -38,28 +48,48 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
             instancia = new FrmPantallaRegistrarQueja(parent, true);
             queja = new Queja();
         }
+        
         return instancia;
     }
-    
-    public void configuracionDatePicker(){
+
+    public void configuracionDatePicker() {
         int rowMultiplier = 4;
         int row = rowMultiplier;
         final LocalDate today = LocalDate.now();
         int pickerNumber = 0;
-        
+
         // Note: Veto policies can only be set after constructing the date picker.
         DatePickerSettings dateSettings = datePicker1.getSettings().copySettings();
         dateSettings.setAllowKeyboardEditing(false);
         datePicker1.setSettings(dateSettings);
-        
+
         //prueba forzada
         List<DayOfWeek> dias = Arrays.asList(DayOfWeek.FRIDAY, DayOfWeek.MONDAY);
-        
+
         dateSettings.setHighlightPolicy(new SampleHighlightPolicy(dias));
         dateSettings.setVetoPolicy(new SampleDateVetoPolicy(dias));
-        dateSettings.setDateRangeLimits(today.minusDays(20), today.plusDays(0));
+        dateSettings.setDateRangeLimits(today.minusDays(30), today.plusDays(0));
     }
-    
+
+    public void configuracionTimePicker() {
+        int rowMultiplier = 4;
+        int row = rowMultiplier;
+        final LocalDate today = LocalDate.now();
+        int pickerNumber = 0;
+
+        // Note: Veto policies can only be set after constructing the date picker.
+        DatePickerSettings dateSettings = datePicker1.getSettings().copySettings();
+        dateSettings.setAllowKeyboardEditing(false);
+        datePicker1.setSettings(dateSettings);
+
+        //prueba forzada
+        List<DayOfWeek> dias = Arrays.asList(DayOfWeek.FRIDAY, DayOfWeek.MONDAY);
+
+        dateSettings.setHighlightPolicy(new SampleHighlightPolicy(dias));
+        dateSettings.setVetoPolicy(new SampleDateVetoPolicy(dias));
+        dateSettings.setDateRangeLimits(today.minusDays(30), today.plusDays(0));
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,30 +101,29 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        btnExit = new javax.swing.JLabel();
         labelCabecera = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        pnlHoras = new javax.swing.JPanel();
-        scrlSeleccionados = new javax.swing.JScrollPane();
-        listHoras = new javax.swing.JList<>();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        pnlFechas = new javax.swing.JPanel();
-        scrlSeleccionados2 = new javax.swing.JScrollPane();
-        listFechas = new javax.swing.JList<>();
         datePicker1 = new com.github.lgooddatepicker.components.DatePicker();
+        cmbItinerarios = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtGuia = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblHoras = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jTextField4 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -105,19 +134,19 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
         jPanel2.setBackground(new java.awt.Color(23, 100, 191));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_cancel_32px_1.png"))); // NOI18N
+        jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel7MouseReleased(evt);
+            }
+        });
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 10, 30, 30));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Quejas");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 40));
-
-        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_cancel_40px.png"))); // NOI18N
-        btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                btnExitMouseReleased(evt);
-            }
-        });
-        jPanel2.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 10, 40, 40));
 
         labelCabecera.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         labelCabecera.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -137,85 +166,70 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
         jPanel3.setBackground(new java.awt.Color(49, 58, 73));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnlHoras.setBackground(new java.awt.Color(49, 58, 73));
-        pnlHoras.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Horas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 24), new java.awt.Color(255, 255, 255))); // NOI18N
-        pnlHoras.setForeground(new java.awt.Color(51, 51, 51));
-        pnlHoras.setFocusable(false);
-        pnlHoras.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-
-        listHoras.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Seleccione una", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 3, 14))); // NOI18N
-        listHoras.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        listHoras.setEnabled(false);
-        listHoras.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                listHorasclkBotonEliminarContinente(evt);
-            }
-        });
-        scrlSeleccionados.setViewportView(listHoras);
-
-        javax.swing.GroupLayout pnlHorasLayout = new javax.swing.GroupLayout(pnlHoras);
-        pnlHoras.setLayout(pnlHorasLayout);
-        pnlHorasLayout.setHorizontalGroup(
-            pnlHorasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlHorasLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(scrlSeleccionados, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pnlHorasLayout.setVerticalGroup(
-            pnlHorasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlHorasLayout.createSequentialGroup()
-                .addComponent(scrlSeleccionados, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jPanel3.add(pnlHoras, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 180, 300));
-
+        jLabel2.setText("Guia");
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Itinerarios");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel3.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 220, -1));
-
-        pnlFechas.setBackground(new java.awt.Color(49, 58, 73));
-        pnlFechas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fechas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 24), new java.awt.Color(255, 255, 255))); // NOI18N
-        pnlFechas.setForeground(new java.awt.Color(51, 51, 51));
-        pnlFechas.setFocusable(false);
-        pnlFechas.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-
-        listFechas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Seleccione una", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 3, 14))); // NOI18N
-        listFechas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        listFechas.setEnabled(false);
-        listFechas.addMouseListener(new java.awt.event.MouseAdapter() {
+        datePicker1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                listFechasclkBotonEliminarContinente(evt);
+                datePicker1MouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                datePicker1MouseReleased(evt);
             }
         });
-        scrlSeleccionados2.setViewportView(listFechas);
+        jPanel3.add(datePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 220, 30));
 
-        javax.swing.GroupLayout pnlFechasLayout = new javax.swing.GroupLayout(pnlFechas);
-        pnlFechas.setLayout(pnlFechasLayout);
-        pnlFechasLayout.setHorizontalGroup(
-            pnlFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlFechasLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(scrlSeleccionados2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pnlFechasLayout.setVerticalGroup(
-            pnlFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlFechasLayout.createSequentialGroup()
-                .addComponent(scrlSeleccionados2, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        cmbItinerarios.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbItinerariosItemStateChanged(evt);
+            }
+        });
+        jPanel3.add(cmbItinerarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 22, 220, 30));
 
-        jPanel3.add(pnlFechas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 200, -1));
-        jPanel3.add(datePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 210, 30));
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Itinerarios");
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 440, 510));
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Fecha");
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+
+        txtGuia.setEditable(false);
+        txtGuia.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jPanel3.add(txtGuia, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 208, -1));
+
+        tblHoras.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Horas"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblHoras);
+
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 170, 290));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 440, 550));
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -224,26 +238,26 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel3.setText("Descripción de la queja");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setText("Correo electrónico");
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel5.setText("Num de teléfono");
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
 
         jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel6.setText("Nombre (opcional)");
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
 
         jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jButton1.setText("Enviar queja");
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+
+        jTextField4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -254,38 +268,41 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel5))
-                                        .addGap(18, 18, 18))
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addGap(13, 13, 13)))
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel4)
+                                                .addComponent(jLabel5))
+                                            .addGap(18, 18, 18))
+                                        .addGroup(jPanel4Layout.createSequentialGroup()
+                                            .addComponent(jLabel6)
+                                            .addGap(13, 13, 13)))
+                                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel3)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(149, 149, 149)
                         .addComponent(jButton1)))
                 .addContainerGap(25, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                    .addContainerGap(257, Short.MAX_VALUE)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(15, 15, 15)))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(9, 9, 9)
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
+                .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -296,10 +313,15 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                    .addContainerGap(297, Short.MAX_VALUE)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(215, 215, 215)))
         );
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 480, 510));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 480, 550));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -311,16 +333,12 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(912, 570));
+        setSize(new java.awt.Dimension(912, 614));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnExitMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseReleased
-        System.exit(0);
-    }//GEN-LAST:event_btnExitMouseReleased
 
     private void labelCabeceraMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelCabeceraMouseDragged
         this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);
@@ -331,33 +349,136 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
         y = evt.getY();
     }//GEN-LAST:event_labelCabeceraMousePressed
 
-    private void listHorasclkBotonEliminarContinente(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listHorasclkBotonEliminarContinente
+    private void jLabel7MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseReleased
+        System.exit(0);
+    }//GEN-LAST:event_jLabel7MouseReleased
 
-    }//GEN-LAST:event_listHorasclkBotonEliminarContinente
+    private void cmbItinerariosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbItinerariosItemStateChanged
+        cargarListasDias();
+        muestraGuia();
+    }//GEN-LAST:event_cmbItinerariosItemStateChanged
 
-    private void listFechasclkBotonEliminarContinente(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listFechasclkBotonEliminarContinente
-        // TODO add your handling code here:
-    }//GEN-LAST:event_listFechasclkBotonEliminarContinente
+    private void datePicker1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_datePicker1MouseReleased
+        System.out.println("aaaaaaaaaaaaaaaaa");
+        cargarHoras();
+        
+    }//GEN-LAST:event_datePicker1MouseReleased
+
+    private void datePicker1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_datePicker1MouseClicked
+        System.out.println("aaaaaaaaaaaaaaaaa");
+        cargarHoras();
+    }//GEN-LAST:event_datePicker1MouseClicked
+
+    private void cargarListasDias() {
+        int rowMultiplier = 4;
+        int row = rowMultiplier;
+        final LocalDate today = LocalDate.now();
+        int pickerNumber = 0;
+
+        Itinerario itinerarioSeleccionado = ((Itinerario) cmbItinerarios.getSelectedItem());
+        List<DayOfWeek> dias = transformarDias(itinerarioSeleccionado);
+        
+        // Note: Veto policies can only be set after constructing the date picker.
+        DatePickerSettings dateSettings = datePicker1.getSettings().copySettings();
+        dateSettings.setAllowKeyboardEditing(false);
+        datePicker1.setSettings(dateSettings);
+
+        //prueba forzada
+        //List<DayOfWeek> dias = Arrays.asList(DayOfWeek.FRIDAY, DayOfWeek.MONDAY);
+        dateSettings.setHighlightPolicy(new SampleHighlightPolicy(dias));
+        dateSettings.setVetoPolicy(new SampleDateVetoPolicy(dias));
+        dateSettings.setDateRangeLimits(today.minusDays(30), today.plusDays(0));
+        cargarHoras();
+    }
+
+    private List<DayOfWeek> transformarDias(Itinerario itinerarioSeleccionado){
+        List<DayOfWeek> dias = new LinkedList<>();
+        for (Horario horario : itinerarioSeleccionado.getHorario()) {
+            switch (horario.getDia()) {
+                case MARTES:
+                    dias.add(DayOfWeek.TUESDAY);
+                    break;
+                case MIERCOLES:
+                    dias.add(DayOfWeek.WEDNESDAY);
+                    break;
+                case JUEVES:
+                    dias.add(DayOfWeek.THURSDAY);
+                    break;
+                case VIERNES:
+                    dias.add(DayOfWeek.FRIDAY);
+                    break;
+                case SABADO:
+                    dias.add(DayOfWeek.SATURDAY);
+                    break;
+                default:
+                    break;
+            }
+        }
+        return dias;
+    }
+    
+    private void cargarHoras() {
+        LocalDate date = datePicker1.getDate();
+        if (date == null) {
+            return;
+        }
+        DayOfWeek diaSeleccinado = date.getDayOfWeek();
+        
+        Itinerario itinerarioSeleccionado = ((Itinerario) cmbItinerarios.getSelectedItem());
+        
+        List<DayOfWeek> dias = transformarDias(itinerarioSeleccionado);
+        List<Horario> horarios = itinerarioSeleccionado.getHorario();
+            
+        for (DayOfWeek dia1 : dias) {
+            if (dia1 == diaSeleccinado) {
+                for (Horario horario : horarios) {
+                    DayOfWeek dia = null;
+                    switch(horario.getDia()){
+                        case MARTES: dia = DayOfWeek.TUESDAY;break;
+                        case MIERCOLES: dia = DayOfWeek.WEDNESDAY;break;
+                        case JUEVES: dia = DayOfWeek.THURSDAY;break;
+                        case VIERNES: dia = DayOfWeek.FRIDAY;break;
+                        case SABADO: dia = DayOfWeek.SATURDAY;break;
+                        case DOMINGO: dia = DayOfWeek.SUNDAY;break;
+                        default:break;
+                    }
+                    if (dia == dia1) {
+                        List<String> horas = horario.getHora();
+                        for (String hora : horas) {
+                            modeloTablaHoras.addRow(new Object[]{hora});
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+        
+    }
 
     
-     public void despliegaInformacion(List<List> datos, iNegocios iNegocios) throws Exception {
+
+    public void muestraGuia() {
+        txtGuia.setText(((Itinerario) cmbItinerarios.getSelectedItem()).getNombre());
+    }
+
+    public void despliegaInformacion(List<List> datos, iNegocios iNegocios) throws Exception {
         if (datos.isEmpty()) {
-            
+
             throw new Exception("No se pudo recuperar algun dato");
-        }else{
+        } else {
             for (List dato : datos) {
-                if(dato.isEmpty()){
+                if (dato.isEmpty()) {
                     throw new Exception("No se pudo recuperar un dato");
                 }
             }
         }
         this.iNegocios = iNegocios;
 
-        /*
         for (int i = 0; i < datos.size(); i++) {
-            if (datos.get(i).get(0).getClass() == Habitat.class) {
-                datos.get(i).forEach(habitat -> {
-                    this.cmbHabitat.addItem((Habitat) habitat);
+            if (datos.get(i).get(0).getClass() == Itinerario.class) {
+                datos.get(i).forEach(itinerario -> {
+                    this.cmbItinerarios.addItem((Itinerario) itinerario);
                 });
             }
             /*
@@ -368,38 +489,39 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
             }
             
         }*/
-        this.setVisible(true);
-        this.setLocationRelativeTo(null);
-        configuracionDatePicker();
+            //configuracionDatePicker();
+            this.setVisible(true);
+            this.setLocationRelativeTo(null);
+
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel btnExit;
+    private javax.swing.JComboBox<Itinerario> cmbItinerarios;
     private com.github.lgooddatepicker.components.DatePicker datePicker1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel labelCabecera;
-    private javax.swing.JList<String> listFechas;
-    private javax.swing.JList<String> listHoras;
-    private javax.swing.JPanel pnlFechas;
-    private javax.swing.JPanel pnlHoras;
-    private javax.swing.JScrollPane scrlSeleccionados;
-    private javax.swing.JScrollPane scrlSeleccionados2;
+    private javax.swing.JTable tblHoras;
+    private javax.swing.JTextField txtGuia;
     // End of variables declaration//GEN-END:variables
-    int y,x;
+
 }
