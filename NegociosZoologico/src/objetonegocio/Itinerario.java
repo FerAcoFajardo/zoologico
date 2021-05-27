@@ -5,6 +5,8 @@
 package objetonegocio;
 
 
+import exceptions.DAOException;
+import java.util.ArrayList;
 import java.util.List;
 import org.bson.types.ObjectId;
 
@@ -16,60 +18,75 @@ public class Itinerario {
 
     private ObjectId id;
     private String nombre;
+    private int duracion;
+    private float longitud;
     private List<ObjectId> quejas;
     private List<ObjectId> recorridos;
     private int maxVisitantes;
     private ObjectId guia;
-    private List<DiaSemana> fecha;
+    private List<Horario> horario;
 
     public Itinerario() {
+        this.horario = new ArrayList<>();
+        this.recorridos = new ArrayList<>();
+        this.quejas = new ArrayList<>();
     }
 
-    public Itinerario(ObjectId id, String nombre, List<ObjectId> quejas, List<ObjectId> recorridos, int maxVisitantes, ObjectId guia, List<DiaSemana> fecha) {
+    public Itinerario(ObjectId id, String nombre, List<ObjectId> quejas, List<ObjectId> recorridos, int maxVisitantes, ObjectId guia, List<Horario> fecha) {
         this.id = id;
         this.nombre = nombre;
         this.quejas = quejas;
         this.recorridos = recorridos;
         this.maxVisitantes = maxVisitantes;
         this.guia = guia;
-        this.fecha = fecha;
+        this.horario = fecha;
     }
 
-    public Itinerario(String nombre, int maxVisitantes, ObjectId guia, List<DiaSemana> fecha) {
+    public Itinerario(String nombre, int maxVisitantes, ObjectId guia, List<Horario> fecha) {
         this.nombre = nombre;
         this.maxVisitantes = maxVisitantes;
         this.guia = guia;
-        this.fecha = fecha;
+        this.horario = fecha;
     }
 
-    public Itinerario(String nombre, List<ObjectId> quejas, List<ObjectId> recorridos, int maxVisitantes, ObjectId guia, List<DiaSemana> fecha) {
+    public Itinerario(String nombre, List<ObjectId> quejas, List<ObjectId> recorridos, int maxVisitantes, ObjectId guia, List<Horario> fecha) {
         this.nombre = nombre;
         this.quejas = quejas;
         this.recorridos = recorridos;
         this.maxVisitantes = maxVisitantes;
         this.guia = guia;
-        this.fecha = fecha;
+        this.horario = fecha;
     }
 
     public Itinerario(ObjectId id) {
         this.id = id;
     }
 
-    public Itinerario(ObjectId id, String nombre, List<ObjectId> recorridos, int maxVisitantes, ObjectId guia, List<DiaSemana> fecha) {
+    public int getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
+    }
+
+    
+    
+    public Itinerario(ObjectId id, String nombre, List<ObjectId> recorridos, int maxVisitantes, ObjectId guia, List<Horario> fecha) {
         this.id = id;
         this.nombre = nombre;
         this.recorridos = recorridos;
         this.maxVisitantes = maxVisitantes;
         this.guia = guia;
-        this.fecha = fecha;
+        this.horario = fecha;
     }
 
-    public Itinerario(String nombre, List<ObjectId> recorridos, int maxVisitantes, ObjectId guia, List<DiaSemana> fecha) {
+    public Itinerario(String nombre, List<ObjectId> recorridos, int maxVisitantes, ObjectId guia, List<Horario> fecha) {
         this.nombre = nombre;
         this.recorridos = recorridos;
         this.maxVisitantes = maxVisitantes;
         this.guia = guia;
-        this.fecha = fecha;
+        this.horario = fecha;
     }
 
     public void setQuejas(List<ObjectId> quejas) {
@@ -139,19 +156,54 @@ public class Itinerario {
         this.nombre = nombre;
     }
 
-    public List<DiaSemana> getFecha() {
-        return fecha;
+    public List<Horario> getHorario() {
+        return horario;
     }
 
-    public void setFecha(List<DiaSemana> fecha) {
-        this.fecha = fecha;
+    public void setHorario(List<Horario> fecha) {
+        this.horario = fecha;
     }
+
+    public float getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(float longitud) {
+        this.longitud = longitud;
+    }
+    
+    public void addQueja(ObjectId queja){
+        this.quejas.add(queja);
+    }
+    
 
     @Override
     public String toString() {
-        return "Itinerario{" + "id=" + id + ", nombre=" + nombre + ", listaQuejas=" + quejas + ", recorridos=" + recorridos + ", maxVisitantes=" + maxVisitantes + ", guia=" + guia + ", fecha=" + fecha + '}';
+        return nombre;
     }
 
+    public void verificarCampos() throws DAOException{
+        if(this.horario.isEmpty()){
+            throw new DAOException("Error: debe incluir al menos 1 fecha");
+        }
+        if(this.duracion <= 0 || this.duracion > 90){
+            throw new DAOException("Error: Minimo 1 minuto de duracion");
+        }
+        if(this.maxVisitantes <= 0 ){
+            throw new DAOException("Error: Se deben de poder incluir visitantes");
+        }
+        if(this.longitud <= 0.0f || this.longitud > 1500.0f){
+            throw new DAOException("Error: Se La longitud debe de ser mayor");
+        }
+        if(this.nombre == null){
+            throw new DAOException("Error: Nombre no puede estar vacio");
+        }
+        if(this.recorridos.isEmpty()){
+            throw new DAOException("Error: Debe de seleccionar al menos una zona");
+        }
+    }
+    
+    
 }
 
 

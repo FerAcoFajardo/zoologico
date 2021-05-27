@@ -10,8 +10,12 @@ import java.util.List;
 import objetonegocio.Animal;
 import objetonegocio.Cuidador;
 import objetonegocio.Especie;
+import objetonegocio.Guia;
 import objetonegocio.Habitat;
+import objetonegocio.Itinerario;
+import objetonegocio.Queja;
 import objetonegocio.Vegetacion;
+import objetonegocio.Zona;
 import org.bson.types.ObjectId;
 
 
@@ -27,6 +31,10 @@ public class FachadaDatos implements iDatos{
     private final EspecieDAO espcieDAO;
     private final AnimalesDAO animalDAO;
     private final CuidadorDAO cuidadorDAO;
+    private final ItinerarioDAO itinerarioDAO;
+    private final QuejaDAO quejaDAO;
+    private final ZonaDAO zonasDAO;
+    private final GuiaDAO guiaDAO;
 
     public FachadaDatos() {
         habitatDAO = new HabitatDAO();
@@ -34,6 +42,10 @@ public class FachadaDatos implements iDatos{
         espcieDAO = new EspecieDAO();
         animalDAO = new AnimalesDAO();
         cuidadorDAO = new CuidadorDAO();
+        itinerarioDAO = new ItinerarioDAO();
+        quejaDAO = new QuejaDAO();
+        zonasDAO = new ZonaDAO();
+        guiaDAO = new GuiaDAO();
     }
 
     
@@ -82,5 +94,45 @@ public class FachadaDatos implements iDatos{
         return espcieDAO.buscarNombre(nombreComun);
     }
 
+    @Override
+    public List<Zona> recuperarZonas() throws DAOException {
+        return zonasDAO.buscar();
+    }
+
+    @Override
+    public List<Guia> recuperarGuias() throws DAOException {
+        return guiaDAO.buscar();
+    }
+
+    @Override
+    public List<Itinerario> recuperItinerario() throws DAOException {
+        return itinerarioDAO.buscar();
+    }
+
+    @Override
+    public Itinerario recuperarItinerario(ObjectId id) throws DAOException {
+        return itinerarioDAO.buscar(id);
+    }
+
+    @Override
+    public void guardarItinerario(Itinerario itinerario) throws DAOException {
+        itinerarioDAO.guardar(itinerario);
+    }
+
+    @Override
+    public void guardarQueja(Queja queja) throws DAOException {
+        quejaDAO.guardar(queja);
+    }
+
+    @Override
+    public Itinerario recuperarItinerario(String itinerario) throws DAOException {
+       return itinerarioDAO.buscarNombre(itinerario);
+    }
+
+    @Override
+    public Zona recuperarZonas(ObjectId objectId) throws DAOException{
+        return zonasDAO.buscar(objectId);
+
+    }
     
 }

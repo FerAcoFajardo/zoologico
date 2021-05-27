@@ -6,7 +6,21 @@
 package datos;
 
 import exceptions.DAOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import objetonegocio.Clima;
+import objetonegocio.Continente;
+import objetonegocio.DiaSemana;
+import objetonegocio.Guia;
+import objetonegocio.Habitat;
+import objetonegocio.Horario;
+import objetonegocio.Itinerario;
+import objetonegocio.Queja;
 import objetonegocio.Vegetacion;
+import objetonegocio.Zona;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -26,12 +40,12 @@ public class PruebasZoologico {
 //        habitat.setClima(Clima.CALIDO);
 //        habitat.setVegetacion(new Vegetacion("Pitaya", "Pitayus algo"));
 //        habitat.setContinentes(Arrays.asList(Continente.AMERICA));
-
+//        
 //       Habitat habitat = habitatDAO.buscar("60a190e8ef7a452446445430");
         //habitat.agregarContinente(Continente.AFRICA);
 //       habitat.agregarEspecie(new Especie("si", "si", "si"));
-//        habitatDAO.guardar(habitat);
-//        CuidadorDAO cuidadorDAO = new CuidadorDAO();
+//            habitatDAO.guardar(habitat);
+////        CuidadorDAO cuidadorDAO = new CuidadorDAO();
 //        
 //        Cuidador cuidador = new Cuidador("Pedro", "Su casa", "645648321", new Date());
 //        
@@ -56,20 +70,28 @@ public class PruebasZoologico {
 //        CuidadorDAO cuidadorDAO = new CuidadorDAO();
 //        
 //        Cuidador cuidador = new Cuidador("Pepe", "Su caso", "65498731", new Date());
+//        Cuidador cuidador2 = new Cuidador("Pepe2", "Su caso", "65498731", new Date());
+//        Cuidador cuidador3 = new Cuidador("Pepe3", "Su caso", "65498731", new Date());
 //        
-//        Cuidador cuidadorConsultado = cuidadorDAO.buscar("60a35c092b8faa63fd7b3c02");
+//        //Cuidador cuidadorConsultado = cuidadorDAO.buscar("60a35c092b8faa63fd7b3c02");
 //        
-//        cuidadorConsultado.setDireccion("su casas");
+//        //cuidadorConsultado.setDireccion("su casas");
 //        
-//        cuidadorDAO.eliminar("60a35c092b8faa63fd7b3c02");
+//        cuidadorDAO.guardar(cuidador);
+//        cuidadorDAO.guardar(cuidador2);
+//        cuidadorDAO.guardar(cuidador3);
 //        GuiaDAO guiaDAO = new GuiaDAO();
 //        
 //        Guia guia = new Guia("Pepe", "Su caso", "65498731", new Date());
+//        Guia guia2 = new Guia("Pepe", "Su caso", "65498731", new Date());
+//        Guia guia3 = new Guia("Pepe", "Su caso", "65498731", new Date());
 //        Guia guia = guiaDAO.buscar("60a361a124510e718111186d");
 //        
 //        
 //        guia.setNombre("Caballo Homosexual");
-//        guiaDAO.eliminar("60a361ba16903b3dbd5d0a2d");
+//        guiaDAO.guardar(guia);
+//        guiaDAO.guardar(guia2);
+//        guiaDAO.guardar(guia3);
 //    
 //    
 //        AnimalesDAO animalesDAO = new AnimalesDAO();
@@ -82,7 +104,6 @@ public class PruebasZoologico {
 //        for (Animal animal : animales) {
 //            System.out.println(animal);
 //        }
-    
 //        ItinerarioDAO itinerarioDAO = new ItinerarioDAO();
 //        QuejaDAO quejaDAO = new QuejaDAO();
 //
@@ -103,20 +124,17 @@ public class PruebasZoologico {
 //        Queja queja = quejaDAO.buscar("60a36fa931af584fb25c6b1c");
 //        
 //        itinerarioDAO.agregarQueja(itinerario.getId(), queja.getId());
-
 //        VegetacionDAO vegetacionDAO = new VegetacionDAO();
 //
 //        Vegetacion vegetacion = new Vegetacion("Pitaya", "Pitayus algo");
 //        
 //
-//        Vegetacion vegetacion = vegetacionDAO.buscar("60a3717af9b8845576b19fd7");
+//        //Vegetacion vegetacion = vegetacionDAO.buscar("60a3717af9b8845576b19fd7");
 //        
 //        vegetacion.setNombreCientifico("Stenocereus thurberi");
 //        vegetacionDAO.actualizar(vegetacion);
-        
 //        ZonasDAO zonaDAO = new ZonasDAO();
 //        EspecieDAO especieDAO = new EspecieDAO();
-        
 //        List<Especie> especies = especieDAO.buscar();
 //        
 //        List<ObjectId> especieses = new ArrayList();
@@ -128,7 +146,6 @@ public class PruebasZoologico {
 //        Zona zona = new Zona(especieses, "zona 1", 130.0f);
 //        
 //        zonaDAO.guardar(zona);
-
 //        Zona zona = zonaDAO.buscar("60a3755b457b0c36c46daa8b");
 //        
 //        zona.setNombre("Zona 1 remodelada");
@@ -148,8 +165,6 @@ public class PruebasZoologico {
 //        
 //        recorridoDAO.actualizar(recorrido);
 //recorridoDAO.guardar(recorrido);
-
-
 //        VegetacionDAO vegetacionDAO = new VegetacionDAO();
 //
 //        Vegetacion vegetacion1 = new Vegetacion("Arbusto enano", "Abutilon Enano");
@@ -162,8 +177,68 @@ public class PruebasZoologico {
 //        vegetacionDAO.guardar(vegetacion1);
 //        vegetacionDAO.guardar(vegetacion4);
 
+//        EspecieDAO especieDAO = new EspecieDAO();
+//
+//        List<ObjectId> especies = new ArrayList();
+//        
+//        List<Especie> especies1 = especieDAO.buscar();
+//        
+//        especies1.forEach(especie -> {
+//            especies.add(especie.getId());
+//        });
+//
+//        Zona zona0 = new Zona(especies, "Zona monos", 30);
+//        Zona zona1 = new Zona(especies, "Zona de puercos", 200);
+//        Zona zona2 = new Zona(especies, "Zona de caballos", 300);
+//        Zona zona3 = new Zona(especies, "Zona de Felinos", 50);
+//        
+//        ZonaDAO zonaDAO = new ZonaDAO();
+//        
+//        zonaDAO.guardar(zona0);
+//        zonaDAO.guardar(zona1);
+//        zonaDAO.guardar(zona2);
+//        zonaDAO.guardar(zona3);
+
+//
+//        QuejaDAO quejaDAO = new QuejaDAO();
+//        ItinerarioDAO itinerarioDAO = new ItinerarioDAO();
+//        GuiaDAO guiaDAO = new GuiaDAO();
+//        ZonaDAO zonaDAO = new ZonaDAO();
+//        
+//        //Itinerario itinerario = itinerarioDAO.buscar(new ObjectId("60aead5c1abaaf346d1bf594"));
+//        List<Zona> recorridos = zonaDAO.buscar();
+//        
+////        System.out.println(itinerario);
+//        
+//        List<ObjectId> idsZona = new ArrayList<>();
+//        for (Zona recorrido : recorridos) {
+//            idsZona.add(recorrido.getId());
+//        }
+//        
+//        Guia guia = guiaDAO.buscar("60add84391040e42a0f4c688");
+//        
+//        Queja queja = new Queja(new Itinerario( "Mañanero", idsZona,3,guia.getId() ,Arrays.asList(new Horario(Arrays.asList("2:30"), DiaSemana.SABADO))), new Date(), "644520825", "algo@algo.com", "Fernando A");
+//        Queja queja2 = new Queja(new Itinerario( "Mañanero", idsZona,3,guia.getId() ,Arrays.asList(new Horario(Arrays.asList("2:30"), DiaSemana.SABADO))), new Date(), "644520825", "algo@algo.com", "Fernando A");
+//        Queja queja3 = new Queja(new Itinerario( "Mañanero", idsZona,3,guia.getId() ,Arrays.asList(new Horario(Arrays.asList("2:30"), DiaSemana.SABADO))), new Date(), "644520825", "algo@algo.com", "Fernando A");
+//        Queja queja4 = new Queja(new Itinerario( "Mañanero", idsZona,3,guia.getId() ,Arrays.asList(new Horario(Arrays.asList("2:30"), DiaSemana.SABADO))), new Date(), "644520825", "algo@algo.com", "Fernando A");
+//        
+//        System.out.println(queja);
+////        
+//        quejaDAO.guardar(queja);
+//        quejaDAO.guardar(queja2);
+//        quejaDAO.guardar(queja3);
+//        quejaDAO.guardar(queja4);
+
+
+//        queja = quejaDAO.buscar(id)
+//        
+//
+//        itinerario.addQueja(queja.getId());
+//        itinerario.addQueja(queja2.getId());
+//        itinerario.addQueja(queja3.getId());
+//        itinerario.addQueja(queja4.getId());
+
+
     }
-    
-    
 
 }

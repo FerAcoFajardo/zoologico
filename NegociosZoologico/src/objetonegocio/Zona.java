@@ -53,8 +53,10 @@ public class Zona {
      */
     @Override    
     public String toString() {
-        return "Zona{" + "nombre=" + nombre + ", extension=" + extension + '}';
+        return nombre;
     }
+    
+    
 
     /**
      * Método que regresa la extensión

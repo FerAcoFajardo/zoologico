@@ -20,7 +20,7 @@ import org.bson.types.ObjectId;
  *
  * @author fernando
  */
-public class ZonasDAO extends BaseDAO<Zona> {
+public class ZonaDAO extends BaseDAO<Zona> {
 
     @Override
     public Zona buscar(ObjectId id) throws DAOException {

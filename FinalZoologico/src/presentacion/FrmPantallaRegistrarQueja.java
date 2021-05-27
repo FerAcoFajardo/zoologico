@@ -5,6 +5,12 @@
  */
 package presentacion;
 
+import datePolicy.SampleDateVetoPolicy;
+import datePolicy.SampleHighlightPolicy;
+import com.github.lgooddatepicker.components.DatePickerSettings;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import objetonegocio.Queja;
 import reglas_negocio.iNegocios;
@@ -35,6 +41,25 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
         return instancia;
     }
     
+    public void configuracionDatePicker(){
+        int rowMultiplier = 4;
+        int row = rowMultiplier;
+        final LocalDate today = LocalDate.now();
+        int pickerNumber = 0;
+        
+        // Note: Veto policies can only be set after constructing the date picker.
+        DatePickerSettings dateSettings = datePicker1.getSettings().copySettings();
+        dateSettings.setAllowKeyboardEditing(false);
+        datePicker1.setSettings(dateSettings);
+        
+        //prueba forzada
+        List<DayOfWeek> dias = Arrays.asList(DayOfWeek.FRIDAY, DayOfWeek.MONDAY);
+        
+        dateSettings.setHighlightPolicy(new SampleHighlightPolicy(dias));
+        dateSettings.setVetoPolicy(new SampleDateVetoPolicy(dias));
+        dateSettings.setDateRangeLimits(today.minusDays(20), today.plusDays(0));
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,6 +83,7 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
         pnlFechas = new javax.swing.JPanel();
         scrlSeleccionados2 = new javax.swing.JScrollPane();
         listFechas = new javax.swing.JList<>();
+        datePicker1 = new com.github.lgooddatepicker.components.DatePicker();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -187,6 +213,7 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
         );
 
         jPanel3.add(pnlFechas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 200, -1));
+        jPanel3.add(datePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 210, 30));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 440, 510));
 
@@ -343,54 +370,12 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
         }*/
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-
-    }
-     
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmPantallaRegistrarQueja.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmPantallaRegistrarQueja.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmPantallaRegistrarQueja.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmPantallaRegistrarQueja.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                FrmPantallaRegistrarQueja dialog = new FrmPantallaRegistrarQueja(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
+        configuracionDatePicker();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnExit;
+    private com.github.lgooddatepicker.components.DatePicker datePicker1;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;

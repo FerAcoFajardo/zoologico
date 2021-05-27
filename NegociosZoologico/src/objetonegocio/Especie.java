@@ -15,17 +15,20 @@ import org.bson.types.ObjectId;
  */
 public class Especie {
     private ObjectId id;
-    private ObjectId habitat;
+    private List<ObjectId> habitat;
     private List<Animal> animales;
     private String            nombreNormal;
     private String            nombreCientifico;
     private String            descripcion;
     private List<CuidadorEspecie> listaCuidadoresEspecie;
     
-    public Especie() {}
+    public Especie() {
+        this.animales = new ArrayList<Animal>();
+    }
 
     public Especie(ObjectId id) {
         this.id = id;
+        this.animales = new ArrayList<Animal>();
     }
 
     public Especie(ObjectId id, List<Animal> animales, String nombreNormal, String nombreCientifico, String descripcion, ArrayList<CuidadorEspecie> listaCuidadoresEspecie) {
@@ -51,6 +54,7 @@ public class Especie {
         this.nombreNormal = nombreNormal;
         this.nombreCientifico = nombreCientifico;
         this.descripcion = descripcion;
+        this.animales = new ArrayList<Animal>();
     }
 
     /**
@@ -75,11 +79,14 @@ public class Especie {
         return descripcion;
     }
 
-    public ObjectId getHabitat() {
+    
+    
+    
+    public List<ObjectId> getHabitat() {
         return habitat;
     }
 
-    public void setHabitat(ObjectId habitat) {
+    public void setHabitat(List<ObjectId> habitat) {
         this.habitat = habitat;
     }
     

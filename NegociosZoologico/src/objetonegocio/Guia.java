@@ -16,7 +16,7 @@ import org.bson.types.ObjectId;
  */
 public class Guia extends Empleado {
     
-    private List<Itinerario> listaItinerario;
+    
     
     public Guia() {}
     
@@ -39,16 +39,6 @@ public class Guia extends Empleado {
         super(id, nombre, direccion, telefono, fecha);
     }
 
-    public List<Itinerario> getListaItinerario() {
-        return listaItinerario;
-    }
-
-    public void setListaItinerario(List<Itinerario> listaItinerario) {
-        this.listaItinerario = listaItinerario;
-    }
-
-    
-    
         
     /**
      * Método que regresa todos los datos del guia
@@ -56,7 +46,7 @@ public class Guia extends Empleado {
      */
     @Override
     public String toString() {
-        return "Guia{" + super.toString() + '}';
+        return super.toString();
     }
 }
 
