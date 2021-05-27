@@ -1,0 +1,22 @@
+[
+  {
+    "_id": {"$oid": "60add29f6526a11dce1faa9e"},
+    "nombre": "Sahuaro",
+    "nombreCientifico": "Carnegiea gigantea"
+  },
+  {
+    "_id": {"$oid": "60add29f6526a11dce1faaa0"},
+    "nombre": "Pochote",
+    "nombreCientifico": "Pachira quinata"
+  },
+  {
+    "_id": {"$oid": "60add29f6526a11dce1faaa2"},
+    "nombre": "Arbusto enano",
+    "nombreCientifico": "Abutilon Enano"
+  },
+  {
+    "_id": {"$oid": "60add29f6526a11dce1faaa4"},
+    "nombre": "Pitaya",
+    "nombreCientifico": "Stenocereus thurberi"
+  }
+]

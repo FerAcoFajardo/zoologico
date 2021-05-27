@@ -1,0 +1,34 @@
+[
+  {
+    "_id": {"$oid": "60ae0ee7cc19973bf6e4dc90"},
+    "especies": [
+      {"$oid": "60ae09aa2123043bbe12e98e"}
+    ],
+    "extension": 30,
+    "nombre": "Zona monos"
+  },
+  {
+    "_id": {"$oid": "60ae0ee7cc19973bf6e4dc92"},
+    "especies": [
+      {"$oid": "60ae09aa2123043bbe12e98e"}
+    ],
+    "extension": 200,
+    "nombre": "Zona de puercos"
+  },
+  {
+    "_id": {"$oid": "60ae0ee7cc19973bf6e4dc94"},
+    "especies": [
+      {"$oid": "60ae09aa2123043bbe12e98e"}
+    ],
+    "extension": 300,
+    "nombre": "Zona de caballos"
+  },
+  {
+    "_id": {"$oid": "60ae0ee7cc19973bf6e4dc96"},
+    "especies": [
+      {"$oid": "60ae09aa2123043bbe12e98e"}
+    ],
+    "extension": 50,
+    "nombre": "Zona de Felinos"
+  }
+]

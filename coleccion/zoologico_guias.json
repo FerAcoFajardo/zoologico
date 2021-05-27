@@ -1,0 +1,23 @@
+[
+  {
+    "_id": {"$oid": "60add84391040e42a0f4c688"},
+    "direccion": "Su caso",
+    "fecha": {"$date": "2021-05-26T05:10:27.706Z"},
+    "nombre": "Pepe",
+    "telefono": "65498731"
+  },
+  {
+    "_id": {"$oid": "60add84391040e42a0f4c68a"},
+    "direccion": "Su caso",
+    "fecha": {"$date": "2021-05-26T05:10:27.706Z"},
+    "nombre": "Pepe",
+    "telefono": "65498731"
+  },
+  {
+    "_id": {"$oid": "60add84391040e42a0f4c68c"},
+    "direccion": "Su caso",
+    "fecha": {"$date": "2021-05-26T05:10:27.706Z"},
+    "nombre": "Pepe",
+    "telefono": "65498731"
+  }
+]

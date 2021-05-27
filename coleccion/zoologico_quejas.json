@@ -1,0 +1,134 @@
+[
+  {
+    "_id": {"$oid": "60aeadc4f31f486e478c303c"},
+    "correo": "algo@algo.com",
+    "fecha": {"$date": "2021-05-26T20:21:24.783Z"},
+    "nombreCompleto": "Fernando A",
+    "telefono": "644520825"
+  },
+  {
+    "_id": {"$oid": "60aeadc4f31f486e478c303e"},
+    "correo": "algo@algo.com",
+    "fecha": {"$date": "2021-05-26T20:21:24.783Z"},
+    "nombreCompleto": "Fernando A",
+    "telefono": "644520825"
+  },
+  {
+    "_id": {"$oid": "60aeadc4f31f486e478c3040"},
+    "correo": "algo@algo.com",
+    "fecha": {"$date": "2021-05-26T20:21:24.783Z"},
+    "nombreCompleto": "Fernando A",
+    "telefono": "644520825"
+  },
+  {
+    "_id": {"$oid": "60aeadc4f31f486e478c3042"},
+    "correo": "algo@algo.com",
+    "fecha": {"$date": "2021-05-26T20:21:24.783Z"},
+    "nombreCompleto": "Fernando A",
+    "telefono": "644520825"
+  },
+  {
+    "_id": {"$oid": "60aeb0667b26b83c5dc78f58"},
+    "correo": "algo@algo.com",
+    "fecha": {"$date": "2021-05-26T20:32:38.929Z"},
+    "nombreCompleto": "Fernando A",
+    "telefono": "644520825",
+    "itinerario": {
+      "duracion": 0,
+      "guia": {"$oid": "60add84391040e42a0f4c688"},
+      "horario": [
+        {
+          "dia": "SABADO",
+          "hora": ["2:30"]
+        }
+      ],
+      "longitud": 0,
+      "maxVisitantes": 3,
+      "nombre": "Mañanero",
+      "recorridos": [
+        {"$oid": "60ae0ee7cc19973bf6e4dc90"},
+        {"$oid": "60ae0ee7cc19973bf6e4dc92"},
+        {"$oid": "60ae0ee7cc19973bf6e4dc94"},
+        {"$oid": "60ae0ee7cc19973bf6e4dc96"}
+      ]
+    }
+  },
+  {
+    "_id": {"$oid": "60aeb0667b26b83c5dc78f5a"},
+    "correo": "algo@algo.com",
+    "fecha": {"$date": "2021-05-26T20:32:38.929Z"},
+    "nombreCompleto": "Fernando A",
+    "telefono": "644520825",
+    "itinerario": {
+      "duracion": 0,
+      "guia": {"$oid": "60add84391040e42a0f4c688"},
+      "horario": [
+        {
+          "dia": "SABADO",
+          "hora": ["2:30"]
+        }
+      ],
+      "longitud": 0,
+      "maxVisitantes": 3,
+      "nombre": "Mañanero",
+      "recorridos": [
+        {"$oid": "60ae0ee7cc19973bf6e4dc90"},
+        {"$oid": "60ae0ee7cc19973bf6e4dc92"},
+        {"$oid": "60ae0ee7cc19973bf6e4dc94"},
+        {"$oid": "60ae0ee7cc19973bf6e4dc96"}
+      ]
+    }
+  },
+  {
+    "_id": {"$oid": "60aeb0667b26b83c5dc78f5c"},
+    "correo": "algo@algo.com",
+    "fecha": {"$date": "2021-05-26T20:32:38.929Z"},
+    "nombreCompleto": "Fernando A",
+    "telefono": "644520825",
+    "itinerario": {
+      "duracion": 0,
+      "guia": {"$oid": "60add84391040e42a0f4c688"},
+      "horario": [
+        {
+          "dia": "SABADO",
+          "hora": ["2:30"]
+        }
+      ],
+      "longitud": 0,
+      "maxVisitantes": 3,
+      "nombre": "Mañanero",
+      "recorridos": [
+        {"$oid": "60ae0ee7cc19973bf6e4dc90"},
+        {"$oid": "60ae0ee7cc19973bf6e4dc92"},
+        {"$oid": "60ae0ee7cc19973bf6e4dc94"},
+        {"$oid": "60ae0ee7cc19973bf6e4dc96"}
+      ]
+    }
+  },
+  {
+    "_id": {"$oid": "60aeb0667b26b83c5dc78f5e"},
+    "correo": "algo@algo.com",
+    "fecha": {"$date": "2021-05-26T20:32:38.929Z"},
+    "nombreCompleto": "Fernando A",
+    "telefono": "644520825",
+    "itinerario": {
+      "duracion": 0,
+      "guia": {"$oid": "60add84391040e42a0f4c688"},
+      "horario": [
+        {
+          "dia": "SABADO",
+          "hora": ["2:30"]
+        }
+      ],
+      "longitud": 0,
+      "maxVisitantes": 3,
+      "nombre": "Mañanero",
+      "recorridos": [
+        {"$oid": "60ae0ee7cc19973bf6e4dc90"},
+        {"$oid": "60ae0ee7cc19973bf6e4dc92"},
+        {"$oid": "60ae0ee7cc19973bf6e4dc94"},
+        {"$oid": "60ae0ee7cc19973bf6e4dc96"}
+      ]
+    }
+  }
+]

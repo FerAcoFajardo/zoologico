@@ -1,0 +1,43 @@
+[
+  {
+    "_id": {"$oid": "60aead5c1abaaf346d1bf594"},
+    "duracion": 60,
+    "guia": {"$oid": "60add84391040e42a0f4c688"},
+    "horario": [
+      {
+        "dia": "MARTES",
+        "hora": [""]
+      },
+      {
+        "dia": "MIERCOLES",
+        "hora": ["7:00", "9:00"]
+      },
+      {
+        "dia": "JUEVES",
+        "hora": [""]
+      },
+      {
+        "dia": "VIERNES",
+        "hora": [""]
+      },
+      {
+        "dia": "SABADO",
+        "hora": [""]
+      },
+      {
+        "dia": "DOMINGO",
+        "hora": [""]
+      }
+    ],
+    "longitud": 2000,
+    "maxVisitantes": 45,
+    "nombre": "Matutino",
+    "quejas": [],
+    "recorridos": [
+      {"$oid": "60ae0ee7cc19973bf6e4dc90"},
+      {"$oid": "60ae0ee7cc19973bf6e4dc92"},
+      {"$oid": "60ae0ee7cc19973bf6e4dc94"},
+      {"$oid": "60ae0ee7cc19973bf6e4dc96"}
+    ]
+  }
+]

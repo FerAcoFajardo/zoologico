@@ -1,0 +1,24 @@
+[
+  {
+    "_id": {"$oid": "60add4b130d2c433e8867b8b"},
+    "clima": "FRIO",
+    "continentes": ["AMERICA", "ASIA", "EUROPA"],
+    "nombre": "Tundra",
+    "vegetacion": {
+      "_id": {"$oid": "60add29f6526a11dce1faaa2"},
+      "nombre": "Arbusto enano",
+      "nombreCientifico": "Abutilon Enano"
+    }
+  },
+  {
+    "_id": {"$oid": "60ae0435990abd550447510f"},
+    "clima": "TEMPLADO",
+    "continentes": ["AMERICA", "EUROPA", "OCEANIA"],
+    "nombre": "Montaña",
+    "vegetacion": {
+      "_id": {"$oid": "60add29f6526a11dce1faaa2"},
+      "nombre": "Arbusto enano",
+      "nombreCientifico": "Abutilon Enano"
+    }
+  }
+]

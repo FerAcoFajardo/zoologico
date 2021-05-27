@@ -1,0 +1,33 @@
+[
+  {
+    "_id": {"$oid": "60ae09aa2123043bbe12e98e"},
+    "animales": [
+      {
+        "_id": {"$oid": "60ae09a92123043bbe12e98c"},
+        "edad": 9,
+        "nombre": "Caballo Homosexual",
+        "sexo": "HEMBRA"
+      }
+    ],
+    "descripcion": "Es un caballo que vive en las montañas",
+    "habitat": [
+      {"$oid": "60ae0435990abd550447510f"}
+    ],
+    "listaCuidadoresEspecie": [
+      {
+        "conocimiento": "EXPERTO",
+        "cuidador": {"$oid": "60add84391040e42a0f4c682"}
+      },
+      {
+        "conocimiento": "BASICO",
+        "cuidador": {"$oid": "60add84391040e42a0f4c684"}
+      },
+      {
+        "conocimiento": "BASICO",
+        "cuidador": {"$oid": "60add84391040e42a0f4c686"}
+      }
+    ],
+    "nombreCientifico": "Equus",
+    "nombreNormal": "Caballo"
+  }
+]

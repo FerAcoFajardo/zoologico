@@ -15,6 +15,8 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.table.DefaultTableModel;
 import objetonegocio.DiaSemana;
 import objetonegocio.Horario;
@@ -113,17 +115,18 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
         txtGuia = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblHoras = new javax.swing.JTable();
+        btnGetDates = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtPhone = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jTextField4 = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -169,7 +172,7 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
         jLabel2.setText("Guia");
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
         datePicker1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -177,6 +180,13 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 datePicker1MouseReleased(evt);
+            }
+        });
+        datePicker1.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                datePicker1InputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jPanel3.add(datePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 220, 30));
@@ -229,13 +239,22 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
 
         jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 170, 290));
 
+        btnGetDates.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnGetDates.setText("Consultar Horarios");
+        btnGetDates.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGetDatesMouseClicked(evt);
+            }
+        });
+        jPanel3.add(btnGetDates, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, -1, 40));
+
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 440, 550));
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
 
         jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jTextArea1.setRows(5);
+        jTextArea1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jScrollPane1.setViewportView(jTextArea1);
 
         jLabel3.setText("Descripción de la queja");
@@ -247,7 +266,7 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
         jLabel5.setText("Num de teléfono");
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        txtPhone.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jLabel6.setText("Nombre (opcional)");
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -256,8 +275,13 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
 
         jButton1.setText("Enviar queja");
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
-        jTextField4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -268,31 +292,23 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel4)
-                                                .addComponent(jLabel5))
-                                            .addGap(18, 18, 18))
-                                        .addGroup(jPanel4Layout.createSequentialGroup()
-                                            .addComponent(jLabel6)
-                                            .addGap(13, 13, 13)))
-                                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(149, 149, 149)
-                        .addComponent(jButton1)))
-                .addContainerGap(25, Short.MAX_VALUE))
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                    .addContainerGap(257, Short.MAX_VALUE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(15, 15, 15)))
+                        .addComponent(jButton1))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,23 +318,20 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
-                .addComponent(jLabel4)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(57, Short.MAX_VALUE))
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                    .addContainerGap(297, Short.MAX_VALUE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(215, 215, 215)))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 480, 550));
@@ -359,15 +372,46 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
     }//GEN-LAST:event_cmbItinerariosItemStateChanged
 
     private void datePicker1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_datePicker1MouseReleased
-        System.out.println("aaaaaaaaaaaaaaaaa");
+        System.out.println("first");
         cargarHoras();
         
     }//GEN-LAST:event_datePicker1MouseReleased
 
     private void datePicker1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_datePicker1MouseClicked
-        System.out.println("aaaaaaaaaaaaaaaaa");
-        cargarHoras();
+
     }//GEN-LAST:event_datePicker1MouseClicked
+
+    private void datePicker1InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_datePicker1InputMethodTextChanged
+
+    }//GEN-LAST:event_datePicker1InputMethodTextChanged
+
+    private void btnGetDatesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGetDatesMouseClicked
+        cargarHoras();
+    }//GEN-LAST:event_btnGetDatesMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        //Email regex confirmation
+        String regex = "^(.+)@(.+)$";
+ 
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(txtEmail.getText());
+        
+        if(matcher.matches() == false){
+            System.out.println("Correo invalido");
+            return;
+        }
+        //Phone
+        regex = "^((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$";
+        
+        pattern = Pattern.compile(regex);
+        matcher = pattern.matcher(txtPhone.getText());
+        
+        if(matcher.matches() == false){
+            System.out.println("Telefono invalido");
+            return;
+        }
+
+    }//GEN-LAST:event_jButton1MouseClicked
 
     private void cargarListasDias() {
         int rowMultiplier = 4;
@@ -418,6 +462,8 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
     }
     
     private void cargarHoras() {
+        modeloTablaHoras.setRowCount(0);
+        
         LocalDate date = datePicker1.getDate();
         if (date == null) {
             return;
@@ -497,6 +543,7 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGetDates;
     private javax.swing.JComboBox<Itinerario> cmbItinerarios;
     private com.github.lgooddatepicker.components.DatePicker datePicker1;
     private javax.swing.JButton jButton1;
@@ -516,12 +563,12 @@ public class FrmPantallaRegistrarQueja extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel labelCabecera;
     private javax.swing.JTable tblHoras;
+    private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtGuia;
+    private javax.swing.JTextField txtPhone;
     // End of variables declaration//GEN-END:variables
 
 }
