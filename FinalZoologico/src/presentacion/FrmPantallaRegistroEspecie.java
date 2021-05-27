@@ -10,6 +10,8 @@ import exceptions.DAOException;
 import java.awt.event.KeyEvent;
 import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -352,9 +354,9 @@ public class FrmPantallaRegistroEspecie extends javax.swing.JDialog {
             for (int i = 0; i < tblCuidadorEspecie.getRowCount(); i++) {
                 if (tblCuidadorEspecie.getValueAt(i, 2).equals(true)) {
                     if (tblCuidadorEspecie.getValueAt(i, 1).equals(true)) {
-                        cuidadorEspecie.add(new CuidadorEspecie(((Cuidador) tblCuidadorEspecie.getValueAt(i, 0)).getId(), Conocimiento.EXPERTO));
+                        cuidadorEspecie.add(new CuidadorEspecie(((Cuidador) tblCuidadorEspecie.getValueAt(i, 0)).getId(), Conocimiento.EXPERTO, new GregorianCalendar().getTime()));
                     } else {
-                        cuidadorEspecie.add(new CuidadorEspecie(((Cuidador) tblCuidadorEspecie.getValueAt(i, 0)).getId(), Conocimiento.BASICO));
+                        cuidadorEspecie.add(new CuidadorEspecie(((Cuidador) tblCuidadorEspecie.getValueAt(i, 0)).getId(), Conocimiento.BASICO, new GregorianCalendar().getTime()));
                     }
 
                 }

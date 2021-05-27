@@ -22,10 +22,26 @@ public class CuidadorEspecie {
         this.cuidador = cuidador;
     }
 
+    public CuidadorEspecie(ObjectId cuidador, Conocimiento conocimiento, Date fecha) {
+        this.cuidador = cuidador;
+        this.conocimiento = conocimiento;
+        this.fecha = fecha;
+    }
+    
+    
+
     public CuidadorEspecie(ObjectId cuidador, Conocimiento conocimiento) {
         this.cuidador = cuidador;
         this.conocimiento = conocimiento;
         this.fecha = new Date();
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
     
 

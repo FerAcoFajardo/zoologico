@@ -70,6 +70,7 @@ public class FrmEditarAnimales extends javax.swing.JDialog {
         btnCerrarVentana = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        btnVerificarExistencia = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar especies");
@@ -180,6 +181,14 @@ public class FrmEditarAnimales extends javax.swing.JDialog {
             }
         });
 
+        btnVerificarExistencia.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        btnVerificarExistencia.setText("Verificar");
+        btnVerificarExistencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clkBotonVerificarExistencia(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -196,7 +205,9 @@ public class FrmEditarAnimales extends javax.swing.JDialog {
                     .addComponent(spinEdad)
                     .addComponent(txtNombre))
                 .addGap(34, 34, 34)
-                .addComponent(jButton2)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnVerificarExistencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(34, 34, 34))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -207,7 +218,7 @@ public class FrmEditarAnimales extends javax.swing.JDialog {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(94, 94, 94)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,7 +231,8 @@ public class FrmEditarAnimales extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(spinEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spinEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVerificarExistencia, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -231,7 +243,7 @@ public class FrmEditarAnimales extends javax.swing.JDialog {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCerrarVentana)
                     .addComponent(btnEliminar))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 520, -1));
@@ -284,6 +296,10 @@ public class FrmEditarAnimales extends javax.swing.JDialog {
     private void btnExitMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseReleased
         System.exit(0);
     }//GEN-LAST:event_btnExitMouseReleased
+
+    private void clkBotonVerificarExistencia(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clkBotonVerificarExistencia
+        // TODO add your handling code here:
+    }//GEN-LAST:event_clkBotonVerificarExistencia
 
     public void cerrarVentana(){
         List<Animal> listaAnimales = new ArrayList();
@@ -392,6 +408,7 @@ public class FrmEditarAnimales extends javax.swing.JDialog {
     private javax.swing.JButton btnCerrarVentana;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JLabel btnExit;
+    private javax.swing.JButton btnVerificarExistencia;
     private javax.swing.JComboBox<Sexo> cmbSexo;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
