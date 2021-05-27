@@ -39,8 +39,7 @@ public class Horario {
 
     public void setHora(List<String> hora) {
         
-        this.hora.set(Calendar.HOUR, hora.get(Calendar.HOUR));
-        this.hora.set(Calendar.MINUTE, hora.get(Calendar.MINUTE));
+        this.hora = hora;
     }
 
     public DiaSemana getDia() {

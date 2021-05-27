@@ -10,11 +10,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import objetonegocio.Clima;
+import objetonegocio.Continente;
 import objetonegocio.DiaSemana;
 import objetonegocio.Guia;
+import objetonegocio.Habitat;
 import objetonegocio.Horario;
 import objetonegocio.Itinerario;
 import objetonegocio.Queja;
+import objetonegocio.Vegetacion;
 import objetonegocio.Zona;
 import org.bson.types.ObjectId;
 
@@ -36,12 +40,12 @@ public class PruebasZoologico {
 //        habitat.setClima(Clima.CALIDO);
 //        habitat.setVegetacion(new Vegetacion("Pitaya", "Pitayus algo"));
 //        habitat.setContinentes(Arrays.asList(Continente.AMERICA));
-
+//        
 //       Habitat habitat = habitatDAO.buscar("60a190e8ef7a452446445430");
         //habitat.agregarContinente(Continente.AFRICA);
 //       habitat.agregarEspecie(new Especie("si", "si", "si"));
-//        habitatDAO.guardar(habitat);
-//        CuidadorDAO cuidadorDAO = new CuidadorDAO();
+//            habitatDAO.guardar(habitat);
+////        CuidadorDAO cuidadorDAO = new CuidadorDAO();
 //        
 //        Cuidador cuidador = new Cuidador("Pedro", "Su casa", "645648321", new Date());
 //        
@@ -195,35 +199,35 @@ public class PruebasZoologico {
 //        zonaDAO.guardar(zona2);
 //        zonaDAO.guardar(zona3);
 
-
-        QuejaDAO quejaDAO = new QuejaDAO();
-        ItinerarioDAO itinerarioDAO = new ItinerarioDAO();
-        GuiaDAO guiaDAO = new GuiaDAO();
-        ZonaDAO zonaDAO = new ZonaDAO();
-        
-        //Itinerario itinerario = itinerarioDAO.buscar(new ObjectId("60aead5c1abaaf346d1bf594"));
-        List<Zona> recorridos = zonaDAO.buscar();
-        
-//        System.out.println(itinerario);
-        
-        List<ObjectId> idsZona = new ArrayList<>();
-        for (Zona recorrido : recorridos) {
-            idsZona.add(recorrido.getId());
-        }
-        
-        Guia guia = guiaDAO.buscar("60add84391040e42a0f4c688");
-        
-        Queja queja = new Queja(new Itinerario( "Mañanero", idsZona,3,guia.getId() ,Arrays.asList(new Horario(Arrays.asList("2:30"), DiaSemana.SABADO))), new Date(), "644520825", "algo@algo.com", "Fernando A");
-        Queja queja2 = new Queja(new Itinerario( "Mañanero", idsZona,3,guia.getId() ,Arrays.asList(new Horario(Arrays.asList("2:30"), DiaSemana.SABADO))), new Date(), "644520825", "algo@algo.com", "Fernando A");
-        Queja queja3 = new Queja(new Itinerario( "Mañanero", idsZona,3,guia.getId() ,Arrays.asList(new Horario(Arrays.asList("2:30"), DiaSemana.SABADO))), new Date(), "644520825", "algo@algo.com", "Fernando A");
-        Queja queja4 = new Queja(new Itinerario( "Mañanero", idsZona,3,guia.getId() ,Arrays.asList(new Horario(Arrays.asList("2:30"), DiaSemana.SABADO))), new Date(), "644520825", "algo@algo.com", "Fernando A");
-        
-        System.out.println(queja);
+//
+//        QuejaDAO quejaDAO = new QuejaDAO();
+//        ItinerarioDAO itinerarioDAO = new ItinerarioDAO();
+//        GuiaDAO guiaDAO = new GuiaDAO();
+//        ZonaDAO zonaDAO = new ZonaDAO();
 //        
-        quejaDAO.guardar(queja);
-        quejaDAO.guardar(queja2);
-        quejaDAO.guardar(queja3);
-        quejaDAO.guardar(queja4);
+//        //Itinerario itinerario = itinerarioDAO.buscar(new ObjectId("60aead5c1abaaf346d1bf594"));
+//        List<Zona> recorridos = zonaDAO.buscar();
+//        
+////        System.out.println(itinerario);
+//        
+//        List<ObjectId> idsZona = new ArrayList<>();
+//        for (Zona recorrido : recorridos) {
+//            idsZona.add(recorrido.getId());
+//        }
+//        
+//        Guia guia = guiaDAO.buscar("60add84391040e42a0f4c688");
+//        
+//        Queja queja = new Queja(new Itinerario( "Mañanero", idsZona,3,guia.getId() ,Arrays.asList(new Horario(Arrays.asList("2:30"), DiaSemana.SABADO))), new Date(), "644520825", "algo@algo.com", "Fernando A");
+//        Queja queja2 = new Queja(new Itinerario( "Mañanero", idsZona,3,guia.getId() ,Arrays.asList(new Horario(Arrays.asList("2:30"), DiaSemana.SABADO))), new Date(), "644520825", "algo@algo.com", "Fernando A");
+//        Queja queja3 = new Queja(new Itinerario( "Mañanero", idsZona,3,guia.getId() ,Arrays.asList(new Horario(Arrays.asList("2:30"), DiaSemana.SABADO))), new Date(), "644520825", "algo@algo.com", "Fernando A");
+//        Queja queja4 = new Queja(new Itinerario( "Mañanero", idsZona,3,guia.getId() ,Arrays.asList(new Horario(Arrays.asList("2:30"), DiaSemana.SABADO))), new Date(), "644520825", "algo@algo.com", "Fernando A");
+//        
+//        System.out.println(queja);
+////        
+//        quejaDAO.guardar(queja);
+//        quejaDAO.guardar(queja2);
+//        quejaDAO.guardar(queja3);
+//        quejaDAO.guardar(queja4);
 
 
 //        queja = quejaDAO.buscar(id)

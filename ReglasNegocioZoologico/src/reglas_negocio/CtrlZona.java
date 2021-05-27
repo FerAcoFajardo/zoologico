@@ -27,7 +27,7 @@ public class CtrlZona {
         return iDatos.recuperarZonas();
     }
 
-    public Zona recuperarZona(ObjectId objectId) {
+    public Zona recuperarZona(ObjectId objectId) throws DAOException{
         return iDatos.recuperarZonas(objectId);
     }
     

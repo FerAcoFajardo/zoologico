@@ -403,7 +403,6 @@ public class FrmPantallaRegistrarHabitat extends javax.swing.JDialog {
 
     public void verificarExistencia() throws DAOException {
         String nombre = this.txtNombreHabitat.getText();
-
         for (Habitat habitatNuevo : iNegocios.buscaHabitat()) {
             if (habitatNuevo.getNombre().equals(nombre)) {
                 muestraMsjExistencia();
